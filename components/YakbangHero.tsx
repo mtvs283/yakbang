@@ -15,12 +15,8 @@ export default function YakbangHero() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/8 via-black/5 to-black/48" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
 
-      <p className="animate-prescription-fade absolute left-1/2 top-[0.9%] z-10 -translate-x-1/2 whitespace-nowrap font-sans text-[9px] font-black uppercase tracking-[0.16em] text-[#050505] sm:text-xl">
-        Purchase a prescription
-      </p>
-
       <section className="absolute inset-x-4 bottom-0 rounded-sm border border-yakbangGold/70 px-5 pb-8 pt-10 text-right shadow-[0_0_56px_rgba(212,175,55,0.18)] sm:inset-x-auto sm:bottom-0 sm:right-[1.4%] sm:top-[8.5%] sm:w-[49vw] sm:px-8 sm:pb-12 sm:pt-6">
-        <p className="absolute right-5 top-5 font-sans text-xs font-bold uppercase tracking-[0.22em] text-white/86 sm:right-8 sm:top-6 sm:text-2xl">
+        <p className="absolute right-5 top-2 font-sans text-xs font-bold uppercase tracking-[0.22em] text-white/86 sm:right-8 sm:top-4 sm:text-2xl">
           YAKBANG GWANGGAETO
         </p>
         <Link
@@ -37,7 +33,7 @@ export default function YakbangHero() {
               ↓
             </span>
           </span>
-          <span className="absolute bottom-3 right-5 inline-flex items-baseline justify-end gap-3 whitespace-nowrap sm:bottom-4 sm:right-8 sm:gap-4">
+          <span className="absolute bottom-20 right-5 inline-flex items-baseline justify-end gap-3 whitespace-nowrap sm:bottom-16 sm:right-8 sm:gap-4">
             <span className="font-shilla text-xl font-medium text-yakbangPaper/95 sm:text-4xl">
               약 드시고 한국어에 밝아지시오~
             </span>
