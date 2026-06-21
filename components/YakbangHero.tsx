@@ -33,7 +33,7 @@ className="absolute right-5 top-1/2 z-10 -translate-y-1/2 text-right transition 
             </span>
           </span>
         </Link>
-        <p className="absolute bottom-9 right-5 inline-flex items-baseline justify-end gap-3 whitespace-nowrap sm:bottom-8 sm:right-8 sm:gap-4">
+        <p className="absolute bottom-28 right-5 inline-flex items-baseline justify-end gap-3 whitespace-nowrap sm:bottom-24 sm:right-8 sm:gap-4">
           <span className="font-shilla text-xl font-medium text-yakbangPaper/95 sm:text-4xl">
             약 드시고 한국어에 밝아지시오~
           </span>
