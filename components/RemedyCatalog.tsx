@@ -48,7 +48,7 @@ export default function RemedyCatalog() {
             약방 처방 목록
           </h2>
           <p className="mt-2 text-sm text-yakbangPaper/70">
-            약을 골라 처방전을 받으시오. 빈칸을 채우면 그대의 것이 되오.
+            약을 골라 약방문을 받으시오. 빈칸을 채우면 그대의 것이 되오.
           </p>
         </header>
 

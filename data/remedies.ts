@@ -1,4 +1,4 @@
-export type RemedyCategory =
+﻿export type RemedyCategory =
   | "royal"
   | "pronunciation"
   | "phonological-rule"
@@ -123,7 +123,7 @@ export const remedies: Remedy[] = [
       info: "ㅎ은 한국어에서 가장 약한 자음 — 첫소리에선 살짝 입김, 받침에선 거의 안 들림.",
       quiz: [
         { question: "'하늘'에서 ㅎ은 어디에 있나요?", answer: "첫소리", options: ["첫소리", "받침", "없음"] },
-        { question: "'좋아요' → [ ]", answer: "조아요", hint: "받침 ㅎ은 사라짐" }
+        { question: "'좋아요' → [______]", answer: "조아요", hint: "받침 ㅎ은 사라짐" }
       ],
       callback: { label: "더 자세히는 → 광개토 자음 앱에서", url: "TBD: hangul-consonants" }
     }
@@ -174,9 +174,9 @@ export const remedies: Remedy[] = [
       diagnosis: "그대는 경음화 발음에 어려움을 겪고 있소.",
       info: "받침 ㄱㄷㅂ 다음에 오는 평음(ㄱㄷㅂㅈㅅ)은 경음(ㄲㄸㅃㅉㅆ)으로 발음.",
       quiz: [
-        { question: "'학교' → [ ]", answer: "학꾜" },
-        { question: "'먹다' → [ ]", answer: "먹따" },
-        { question: "'국밥' → [ ]", answer: "국빱" }
+        { question: "'학교' → [______]", answer: "학꾜" },
+        { question: "'먹다' → [______]", answer: "먹따" },
+        { question: "'국밥' → [______]", answer: "국빱" }
       ],
       callback: { label: "더 자세히는 → 광개토 음운변동 앱에서", url: "TBD" }
     }
@@ -211,9 +211,9 @@ export const remedies: Remedy[] = [
       diagnosis: "그대는 겹받침 ㄺ 발음에 어려움을 겪고 있소.",
       info: "단독/자음 앞은 [ㄱ] (닭→[닥]), 모음 앞은 [ㄹㄱ] (닭이→[달기]).",
       quiz: [
-        { question: "'닭' → [ ]", answer: "닥" },
-        { question: "'닭이' → [ ]", answer: "달기" },
-        { question: "'흙' → [ ]", answer: "흑" }
+        { question: "'닭' → [______]", answer: "닥" },
+        { question: "'닭이' → [______]", answer: "달기" },
+        { question: "'흙' → [______]", answer: "흑" }
       ],
       callback: { label: "더 자세히는 → 광개토 복합받침 앱에서", url: "TBD: hangul-complex" }
     }
@@ -229,9 +229,9 @@ export const remedies: Remedy[] = [
       diagnosis: "그대는 ㅎ 약화에 어려움을 겪고 있소.",
       info: "ㅎ이 받침이면 사라지오 (좋아요 → 조아요). ㄴㄹㅁㅇ 받침 다음 ㅎ이면 작아지오 (전화 → 저놔).",
       quiz: [
-        { question: "좋아요 → [ ]", answer: "조아요", hint: "ㅎ이 사라짐" },
-        { question: "전화 → [ ]", answer: "저놔", hint: "ㄴ + ㅎ" },
-        { question: "은행 → [ ]", answer: "으냉", hint: "ㄴ + ㅎ" }
+        { question: "좋아요 → [______]", answer: "조아요", hint: "ㅎ이 사라짐" },
+        { question: "전화 → [______]", answer: "저놔", hint: "ㄴ + ㅎ" },
+        { question: "은행 → [______]", answer: "으냉", hint: "ㄴ + ㅎ" }
       ],
       callback: { label: "더 자세히는 → 광개토 ㅎ 약화 앱에서", url: "TBD" }
     }
@@ -247,9 +247,9 @@ export const remedies: Remedy[] = [
       diagnosis: "그대는 연음법칙 발음에 어려움을 겪고 있소.",
       info: "받침 + 모음 시작 음절 = 받침이 다음 음절 첫소리로 넘어감.",
       quiz: [
-        { question: "'한국이' → [ ]", answer: "한구기" },
-        { question: "'책을' → [ ]", answer: "채글" },
-        { question: "'음악이' → [ ]", answer: "으마기" }
+        { question: "'한국이' → [______]", answer: "한구기" },
+        { question: "'책을' → [______]", answer: "채글" },
+        { question: "'음악이' → [______]", answer: "으마기" }
       ],
       callback: { label: "더 자세히는 → 광개토 음운변동 앱에서", url: "TBD" }
     }
@@ -265,9 +265,9 @@ export const remedies: Remedy[] = [
       diagnosis: "그대는 비음화 발음에 어려움을 겪고 있소.",
       info: "받침 ㄱㄷㅂ + ㄴㅁ = 받침이 비음(ㅇㄴㅁ)으로 변함.",
       quiz: [
-        { question: "'국물' → [ ]", answer: "궁물" },
-        { question: "'먹는' → [ ]", answer: "멍는" },
-        { question: "'입니다' → [ ]", answer: "임니다" }
+        { question: "'국물' → [______]", answer: "궁물" },
+        { question: "'먹는' → [______]", answer: "멍는" },
+        { question: "'입니다' → [______]", answer: "임니다" }
       ],
       callback: { label: "더 자세히는 → 광개토 음운변동 앱에서", url: "TBD" }
     }
