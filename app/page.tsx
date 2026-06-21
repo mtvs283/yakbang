@@ -1,5 +1,5 @@
-import YakbangIllustration from "../components/YakbangIllustration";
+import YakbangHero from "../components/YakbangHero";
 
 export default function HomePage() {
-  return <YakbangIllustration />;
+  return <YakbangHero />;
 }
