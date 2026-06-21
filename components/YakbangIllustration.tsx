@@ -9,20 +9,20 @@ const titleHotspots = [
   {
     id: "h-pronunciation",
     label: "ㅎ 발음약",
-    menu: "ㅎ 발음약 처방전",
+    menu: "ㅎ 발음약 약방문",
     left: "40.5%",
     top: "58%",
-    width: "8.5%",
-    height: "5.5%"
+    width: "10.5%",
+    height: "8.5%"
   },
   {
     id: "batchim-random",
     label: "랜덤 7대표 받침음절",
-    menu: "받침음절 처방전",
+    menu: "받침음절 약방문",
     left: "49.5%",
     top: "58%",
-    width: "13.5%",
-    height: "5.5%"
+    width: "15.5%",
+    height: "8.5%"
   },
   {
     id: "royal-remedy",
