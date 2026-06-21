@@ -1,6 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import { heroStrings } from "../data/i18n/hero";
+import { useLocale } from "./LocaleProvider";
 
 export default function YakbangHero() {
+  const { locale } = useLocale();
+  const hero = heroStrings[locale];
+
+  // 첫 물음표 기준으로 두 줄로 나눔 (?, ？, ؟ 모두 처리)
+  const qIndex = hero.tagline.search(/[?？؟]/);
+  const taglineLine1 =
+    qIndex >= 0 ? hero.tagline.slice(0, qIndex + 1) : hero.tagline;
+  const taglineLine2 =
+    qIndex >= 0 ? hero.tagline.slice(qIndex + 1).trim() : "";
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-yakbangPaper">
       <video
@@ -34,14 +48,24 @@ export default function YakbangHero() {
             </span>
           </span>
         </Link>
-        <p className="absolute bottom-28 right-5 inline-flex items-baseline justify-end gap-3 whitespace-nowrap sm:bottom-24 sm:right-8 sm:gap-4">
-          <span className="font-shilla text-xl font-medium text-yakbangPaper/95 sm:text-4xl">
-            약 드시고 한국어에 밝아지시오~
-          </span>
-          <span className="inline-block rotate-[-12deg] font-sans text-4xl font-black text-white sm:text-6xl">
-            엔터!!
-          </span>
-        </p>
+        <div className="absolute bottom-16 right-5 flex flex-col items-end gap-1 text-right sm:bottom-20 sm:right-8">
+          <p className="font-shilla text-xl font-medium leading-snug text-yakbangPaper/95 sm:text-3xl">
+            {taglineLine1}
+          </p>
+          {taglineLine2 ? (
+            <p className="font-shilla text-xl font-medium leading-snug text-yakbangPaper/95 sm:text-3xl">
+              {taglineLine2}
+            </p>
+          ) : null}
+          <p className="mt-1 inline-flex items-baseline gap-2 whitespace-nowrap sm:gap-3">
+            <span className="font-shilla text-xl font-medium text-yakbangPaper/95 sm:text-3xl">
+              {hero.write}
+            </span>
+            <span className="animate-stamp-slam inline-block rounded-md border-2 border-[#e23b3b] px-2 py-0.5 font-sans text-4xl font-black text-[#e23b3b] drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] sm:text-6xl">
+              {hero.enter}
+            </span>
+          </p>
+        </div>
       </section>
     </main>
   );

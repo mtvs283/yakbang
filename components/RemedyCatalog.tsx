@@ -127,13 +127,9 @@ export default function RemedyCatalog() {
             {t.footerLead}
           </p>
           <a
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-xl border-2 border-yakbangGold bg-gradient-to-b from-[#262017] to-black px-10 py-5 text-xl font-black tracking-wide text-yakbangGold shadow-[0_0_30px_rgba(212,175,55,0.45)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_52px_rgba(212,175,55,0.85)] focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07] sm:text-2xl"
+            className="inline-flex items-center gap-3 rounded-xl bg-yakbangGold px-10 py-5 text-xl font-bold tracking-wide text-[#1a1206] shadow-[0_4px_20px_rgba(212,175,55,0.35)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#e6c34d] hover:shadow-[0_6px_28px_rgba(212,175,55,0.55)] focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07] sm:text-2xl"
             href={GWANGGAETO_URL}
           >
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-yakbangGold/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-            />
             <span aria-hidden="true" className="text-2xl">
               ⚜
             </span>

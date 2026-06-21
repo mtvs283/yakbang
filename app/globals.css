@@ -93,3 +93,38 @@ input {
 .animate-stamp {
   animation: stampIn 0.45s ease-out both;
 }
+
+@keyframes stampSlam {
+  0% {
+    opacity: 0;
+    transform: rotate(-12deg) scale(3);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(-12deg) scale(0.86);
+  }
+  80% {
+    transform: rotate(-12deg) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-12deg) scale(1);
+  }
+}
+
+@keyframes stampBounce {
+  0%,
+  100% {
+    transform: rotate(-12deg) scale(1) translateY(0);
+  }
+  50% {
+    transform: rotate(-9deg) scale(1.06) translateY(-6px);
+  }
+}
+
+/* 1초 뒤 도장처럼 쾅 → 그 뒤 계속 까딱까딱 */
+.animate-stamp-slam {
+  animation:
+    stampSlam 0.5s ease-out 1s both,
+    stampBounce 1.3s ease-in-out 1.6s infinite;
+}

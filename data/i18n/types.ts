@@ -1,4 +1,29 @@
-export type Locale = "ko" | "en" | "vi" | "zh-CN" | "zh-TW";
+export type Locale =
+  | "ko"
+  | "en"
+  | "ja"
+  | "zh-CN"
+  | "zh-TW"
+  | "vi"
+  | "th"
+  | "id"
+  | "mn"
+  | "ru"
+  | "uz"
+  | "kk"
+  | "ky"
+  | "ne"
+  | "my"
+  | "km"
+  | "fil"
+  | "hi"
+  | "bn"
+  | "ar"
+  | "es"
+  | "fr"
+  | "de"
+  | "sw"
+  | "ha";
 
 export interface UIMessages {
   catalogTitle: string;

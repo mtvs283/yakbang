@@ -1,6 +1,26 @@
 import type { Remedy } from "../remedies";
+import { ar } from "./ar";
+import { bn } from "./bn";
+import { de } from "./de";
 import { en } from "./en";
+import { es } from "./es";
+import { fil } from "./fil";
+import { fr } from "./fr";
+import { ha } from "./ha";
+import { hi } from "./hi";
+import { id } from "./id";
+import { ja } from "./ja";
+import { kk } from "./kk";
+import { km } from "./km";
 import { ko } from "./ko";
+import { ky } from "./ky";
+import { mn } from "./mn";
+import { my } from "./my";
+import { ne } from "./ne";
+import { ru } from "./ru";
+import { sw } from "./sw";
+import { th } from "./th";
+import { uz } from "./uz";
 import { vi } from "./vi";
 import { zhCN } from "./zh-CN";
 import { zhTW } from "./zh-TW";
@@ -8,31 +28,95 @@ import type { Locale, LocaleData, RemedyText, UIMessages } from "./types";
 
 export type { Locale, LocaleData, RemedyText, UIMessages } from "./types";
 
-export const LOCALES: Locale[] = ["ko", "en", "vi", "zh-CN", "zh-TW"];
+// 토글에 보이는 순서
+export const LOCALES: Locale[] = [
+  "ko",
+  "en",
+  "ja",
+  "zh-CN",
+  "zh-TW",
+  "vi",
+  "th",
+  "id",
+  "mn",
+  "ru",
+  "uz",
+  "kk",
+  "ky",
+  "ne",
+  "my",
+  "km",
+  "fil",
+  "hi",
+  "bn",
+  "ar",
+  "es",
+  "fr",
+  "de",
+  "sw",
+  "ha"
+];
+
 export const LOCALE_LABELS: Record<Locale, string> = {
   ko: "한국어",
   en: "English",
-  vi: "Tiếng Việt",
+  ja: "日本語",
   "zh-CN": "中文(简体)",
-  "zh-TW": "中文(繁體)"
+  "zh-TW": "中文(繁體)",
+  vi: "Tiếng Việt",
+  th: "ไทย",
+  id: "Bahasa Indonesia",
+  mn: "Монгол",
+  ru: "Русский",
+  uz: "Oʻzbekcha",
+  kk: "Қазақша",
+  ky: "Кыргызча",
+  ne: "नेपाली",
+  my: "မြန်မာ",
+  km: "ខ្មែរ",
+  fil: "Filipino",
+  hi: "हिन्दी",
+  bn: "বাংলা",
+  ar: "العربية",
+  es: "Español",
+  fr: "Français",
+  de: "Deutsch",
+  sw: "Kiswahili",
+  ha: "Hausa"
 };
 
-// 언어 추가 = 위에서 import 한 줄 + 여기 등록 한 줄 + types.ts의 Locale에 코드 추가.
+// 언어 추가 = 위에서 import 한 줄 + 아래 두 곳 등록 + types.ts의 Locale에 코드 추가.
 const DATA: Record<Locale, LocaleData> = {
   ko,
   en,
-  vi,
+  ja,
   "zh-CN": zhCN,
-  "zh-TW": zhTW
+  "zh-TW": zhTW,
+  vi,
+  th,
+  id,
+  mn,
+  ru,
+  uz,
+  kk,
+  ky,
+  ne,
+  my,
+  km,
+  fil,
+  hi,
+  bn,
+  ar,
+  es,
+  fr,
+  de,
+  sw,
+  ha
 };
 
-export const messages: Record<Locale, UIMessages> = {
-  ko: ko.ui,
-  en: en.ui,
-  vi: vi.ui,
-  "zh-CN": zhCN.ui,
-  "zh-TW": zhTW.ui
-};
+export const messages: Record<Locale, UIMessages> = Object.fromEntries(
+  (Object.keys(DATA) as Locale[]).map((locale) => [locale, DATA[locale].ui])
+) as Record<Locale, UIMessages>;
 
 export function getRemedyText(remedy: Remedy, locale: Locale): RemedyText {
   const translated = DATA[locale].remedies[remedy.id];
