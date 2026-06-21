@@ -1,4 +1,4 @@
-export type Locale = "ko" | "en";
+export type Locale = "ko" | "en" | "vi" | "zh-CN" | "zh-TW";
 
 export interface UIMessages {
   catalogTitle: string;
