@@ -15,7 +15,7 @@ export default function YakbangHero() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/8 via-black/5 to-black/48" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
 
-      <p className="animate-prescription-fade absolute left-1/2 top-[4.5%] z-10 -translate-x-1/2 whitespace-nowrap font-sans text-[10px] font-black uppercase tracking-[0.16em] text-black/82 sm:text-2xl">
+      <p className="animate-prescription-fade absolute left-1/2 top-[1.2%] z-10 -translate-x-1/2 whitespace-nowrap font-sans text-[10px] font-black uppercase tracking-[0.16em] text-black/88 sm:text-2xl">
         Purchase a prescription
       </p>
 
@@ -37,9 +37,9 @@ export default function YakbangHero() {
               ↓
             </span>
           </span>
-          <span className="mt-16 inline-flex items-baseline justify-end gap-4 whitespace-nowrap sm:mt-20">
+          <span className="absolute bottom-8 right-5 inline-flex items-baseline justify-end gap-3 whitespace-nowrap sm:bottom-7 sm:right-8 sm:gap-4">
             <span className="font-shilla text-xl font-medium text-yakbangPaper/95 sm:text-4xl">
-              약드시고 한국어에 밝아지시오~
+              약 드시고 한국어에 밝아지시오~
             </span>
             <span className="inline-block rotate-[-12deg] font-sans text-4xl font-black text-white sm:text-6xl">
               엔터!!
