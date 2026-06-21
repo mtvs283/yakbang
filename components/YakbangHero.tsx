@@ -21,20 +21,20 @@ export default function YakbangHero() {
         </p>
         <Link
           aria-label="약방으로 들어가기"
-          className="absolute left-1/2 bottom-[14%] z-10 -translate-x-1/2 text-center transition duration-200 ease-in-out hover:-translate-x-1/2 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black sm:bottom-[16%]"
+          className="absolute right-5 top-1/2 z-10 -translate-y-1/2 text-right transition duration-200 ease-in-out hover:-translate-y-[calc(50%+0.25rem)] focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black sm:right-8"
           href="/shop"
         >
           <span className="relative inline-block font-shilla text-6xl font-bold leading-none text-white drop-shadow-[0_0_24px_rgba(255,255,255,0.18)] sm:text-8xl">
             집현전 약방
             <span
               aria-hidden="true"
-              className="absolute left-1/2 top-full mt-3 -translate-x-1/2 font-sans text-5xl font-black leading-none text-yakbangGold sm:text-7xl"
+              className="absolute right-[0.18em] top-full mt-3 font-sans text-5xl font-black leading-none text-yakbangGold sm:text-7xl"
             >
               ↓
             </span>
           </span>
         </Link>
-        <p className="absolute bottom-6 right-5 inline-flex items-baseline justify-end gap-3 whitespace-nowrap sm:bottom-5 sm:right-8 sm:gap-4">
+        <p className="absolute bottom-9 right-5 inline-flex items-baseline justify-end gap-3 whitespace-nowrap sm:bottom-8 sm:right-8 sm:gap-4">
           <span className="font-shilla text-xl font-medium text-yakbangPaper/95 sm:text-4xl">
             약 드시고 한국어에 밝아지시오~
           </span>
