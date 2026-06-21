@@ -7,13 +7,24 @@ export default function ShopPage() {
       <div className="relative">
         <YakbangIllustration />
         <a
-          className="absolute bottom-6 left-1/2 z-30 inline-flex -translate-x-1/2 items-center gap-2 rounded-full border border-yakbangGold/70 bg-yakbangBlack/75 px-5 py-3 text-sm font-bold text-yakbangGold shadow-[0_0_24px_rgba(212,175,55,0.22)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black"
+          aria-label="처방 목록으로 이동"
+          className="group absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 items-stretch drop-shadow-[0_10px_28px_rgba(0,0,0,0.6)] transition duration-200 hover:-translate-y-0.5"
           href="#remedy-catalog"
         >
-          처방 목록 보기
-          <span aria-hidden="true" className="animate-bounce">
-            ↓
+          <span
+            aria-hidden="true"
+            className="w-5 rounded-full bg-gradient-to-b from-[#9a6a33] via-[#6f4824] to-[#4a2f17] shadow-[inset_0_0_6px_rgba(0,0,0,0.5)]"
+          />
+          <span className="flex items-center gap-3 border-y-2 border-[#7a4f28] bg-[#f5e6c8] px-9 py-5 font-sanskr text-xl font-bold text-[#3d2b1a] sm:text-2xl">
+            처방 목록 펼치기
+            <span aria-hidden="true" className="animate-bounce text-[#8a3a1a]">
+              ↓
+            </span>
           </span>
+          <span
+            aria-hidden="true"
+            className="w-5 rounded-full bg-gradient-to-b from-[#9a6a33] via-[#6f4824] to-[#4a2f17] shadow-[inset_0_0_6px_rgba(0,0,0,0.5)]"
+          />
         </a>
       </div>
       <RemedyCatalog />

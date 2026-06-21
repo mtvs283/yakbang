@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   formatPrice,
   remedies,
@@ -9,6 +10,9 @@ import {
   type RemedyCategory
 } from "../data/remedies";
 import PrescriptionModal from "./PrescriptionModal";
+
+// TODO: 광개토 홈 실제 배포 URL로 교체
+const GWANGGAETO_URL = "#";
 
 const categoryGroups: { category: RemedyCategory; title: string; blurb: string }[] =
   [
@@ -34,8 +38,22 @@ const categoryGroups: { category: RemedyCategory; title: string; blurb: string }
     }
   ];
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 export default function RemedyCatalog() {
   const [selected, setSelected] = useState<Remedy | null>(null);
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    function onScroll() {
+      setShowTop(window.scrollY > 500);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <section
@@ -112,7 +130,7 @@ export default function RemedyCatalog() {
                           {formatPrice(remedy.price)}
                         </span>
                         <span className="text-sm font-bold text-yakbangPaper/70 transition group-hover:text-yakbangGold">
-                          처방 받기 →
+                          약방문 받기 →
                         </span>
                       </div>
                     </button>
@@ -122,7 +140,56 @@ export default function RemedyCatalog() {
             </div>
           );
         })}
+
+        {/* 광개토 진입 + 네비 */}
+        <div className="mt-6 border-t border-yakbangGold/20 pt-12 text-center">
+          <p className="mb-6 font-script text-lg text-yakbangPaper/75">
+            약방을 나서면, 더 넓은 광개토가 그대를 기다리오.
+          </p>
+          <a
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-xl border-2 border-yakbangGold bg-gradient-to-b from-[#262017] to-black px-10 py-5 text-xl font-black tracking-wide text-yakbangGold shadow-[0_0_30px_rgba(212,175,55,0.45)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_52px_rgba(212,175,55,0.85)] focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07] sm:text-2xl"
+            href={GWANGGAETO_URL}
+          >
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-yakbangGold/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+            />
+            <span aria-hidden="true" className="text-2xl">
+              ⚜
+            </span>
+            광개토로 들어가기
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <button
+              className="inline-flex items-center gap-1 rounded-full border border-yakbangGold/50 px-5 py-2.5 text-sm font-bold text-yakbangPaper/85 transition hover:border-yakbangGold hover:text-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
+              onClick={scrollToTop}
+              type="button"
+            >
+              ↑ 맨 위로
+            </button>
+            <Link
+              className="inline-flex items-center gap-1 rounded-full border border-yakbangGold/50 px-5 py-2.5 text-sm font-bold text-yakbangPaper/85 transition hover:border-yakbangGold hover:text-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
+              href="/"
+            >
+              홈으로
+            </Link>
+          </div>
+        </div>
       </div>
+
+      {/* 스크롤 시 떠오르는 맨 위로 화살표 */}
+      {showTop ? (
+        <button
+          aria-label="맨 위로"
+          className="fixed bottom-5 left-5 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-yakbangGold/70 bg-yakbangBlack/80 text-xl font-bold text-yakbangGold shadow-[0_0_20px_rgba(212,175,55,0.3)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold"
+          onClick={scrollToTop}
+          type="button"
+        >
+          ↑
+        </button>
+      ) : null}
 
       {selected ? (
         <PrescriptionModal
