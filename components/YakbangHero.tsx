@@ -21,9 +21,8 @@ export default function YakbangHero() {
         </p>
         <Link
           aria-label="약방으로 들어가기"
-          className="absolute right-5 top-1/2 z-10 -translate-y-1/2 text-right transition duration-200 ease-in-out hover:-translate-y-[calc(50%+0.25rem)] focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black sm:right-8"
-          href="/shop"
-        >
+className="absolute right-5 top-1/2 z-10 -translate-y-1/2 text-right transition duration-200 ease-in-out hover:-translate-y-[calc(50%+0.25rem)] focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black sm:right-8"
+          >
           <span className="relative inline-block font-shilla text-6xl font-bold leading-none text-white drop-shadow-[0_0_24px_rgba(255,255,255,0.18)] sm:text-8xl">
             집현전 약방
             <span
