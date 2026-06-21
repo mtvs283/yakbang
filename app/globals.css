@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "KimjungchulScript";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/KimjungchulScript-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --font-script: "KimjungchulScript";
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  background: #080604;
+}
+
+body {
+  font-family: var(--font-script), serif;
+}
+
+button,
+input {
+  font: inherit;
+}
