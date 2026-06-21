@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { formatPrice, statusLabel, type Remedy } from "../data/remedies";
+import { getRemedyText } from "../data/i18n";
+import { formatPrice, type Remedy } from "../data/remedies";
+import { useLocale } from "./LocaleProvider";
 
 interface PrescriptionModalProps {
   remedy: Remedy;
@@ -20,10 +22,12 @@ export default function PrescriptionModal({
   remedy,
   onClose
 }: PrescriptionModalProps) {
+  const { locale, t } = useLocale();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [hintsShown, setHintsShown] = useState<Record<number, boolean>>({});
 
+  const text = getRemedyText(remedy, locale);
   const quiz = remedy.prescription.quiz;
   const isUnavailable = remedy.status === "unavailable";
 
@@ -79,7 +83,7 @@ export default function PrescriptionModal({
         }}
       >
         <button
-          aria-label="약방문 닫기"
+          aria-label={t.closeAria}
           className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#7a4f28]/60 text-xl leading-none text-[#7a4f28] transition hover:bg-[#7a4f28] hover:text-[#f5e6c8] focus:outline-none focus:ring-2 focus:ring-[#7a4f28]"
           onClick={onClose}
           ref={closeButtonRef}
@@ -93,17 +97,17 @@ export default function PrescriptionModal({
             aria-hidden="true"
             className="animate-stamp pointer-events-none absolute right-6 top-16 rotate-[-14deg] rounded-md border-4 border-red-700 px-4 py-2 text-2xl font-black tracking-[0.2em] text-red-700 sm:text-3xl"
           >
-            처방 완료
+            {t.stamp}
           </div>
         ) : null}
 
         <header className="mb-5 border-b-2 border-dashed border-[#7a4f28]/40 pb-4 pr-12">
           <p className="mb-2 text-sm font-bold tracking-[0.24em] text-[#7a4f28]">
-            약 방 문 · 藥房廣開土
+            {t.modalLabel}
           </p>
           <div className="flex flex-wrap items-end justify-between gap-2">
             <h1 className="font-sanskr text-4xl font-bold leading-tight sm:text-5xl">
-              {remedy.name}
+              {text.name}
             </h1>
             <span className="text-2xl font-black text-[#8a3a1a]">
               {formatPrice(remedy.price)}
@@ -111,11 +115,11 @@ export default function PrescriptionModal({
           </div>
           <div className="mt-2 flex items-center gap-2">
             <span className="rounded-full border border-[#7a4f28]/50 bg-[#7a4f28]/10 px-3 py-0.5 text-xs font-bold text-[#7a4f28]">
-              {statusLabel(remedy.status)}
+              {t.status[remedy.status]}
             </span>
             {remedy.status === "limited" && remedy.stock !== undefined ? (
               <span className="text-sm font-semibold text-[#8a3a1a]">
-                남은 수량 {remedy.stock}첩
+                {t.stockLabel(remedy.stock)}
               </span>
             ) : null}
           </div>
@@ -124,45 +128,42 @@ export default function PrescriptionModal({
         {/* 진단 */}
         <div className="mb-4">
           <p className="mb-1 text-sm font-bold tracking-[0.2em] text-[#7a4f28]">
-            진단
+            {t.diagnosis}
           </p>
-          <p className="font-script text-xl leading-relaxed">
-            {remedy.prescription.diagnosis}
-          </p>
+          <p className="font-script text-xl leading-relaxed">{text.diagnosis}</p>
         </div>
 
         {/* 인포 */}
         <div className="mb-5 rounded-md bg-[#7a4f28]/8 p-3">
           <p className="mb-1 text-sm font-bold tracking-[0.2em] text-[#7a4f28]">
-            약 설명
+            {t.info}
           </p>
-          <p className="text-base leading-8">{remedy.prescription.info}</p>
+          <p className="text-base leading-8">{text.info}</p>
         </div>
 
         {isUnavailable ? (
-          /* 왕실 비방 — 거절 */
           <div className="mb-5 rounded-md border-2 border-dashed border-[#8a3a1a]/50 bg-[#8a3a1a]/8 p-4 text-center">
             <p className="font-script text-2xl font-bold text-[#8a3a1a]">
-              이 약은 그대의 손이 닿지 않소
+              {t.royalReject}
             </p>
           </div>
         ) : (
-          /* 처방 — 미니 퀴즈 */
           <div className="mb-5">
             <p className="mb-3 text-sm font-bold tracking-[0.2em] text-[#7a4f28]">
-              처방 (빈칸을 채우시오)
+              {t.prescription}
             </p>
             <ol className="space-y-4">
               {quiz.map((item, index) => {
                 const result = correctness[index];
                 const given = answers[index] ?? "";
+                const question = text.quizQuestions[index] ?? item.question;
                 return (
                   <li
                     className="rounded-md border border-[#7a4f28]/30 bg-white/40 p-3"
                     key={index}
                   >
                     <p className="mb-2 text-base font-semibold leading-7">
-                      {index + 1}. {item.question}
+                      {index + 1}. {question}
                     </p>
 
                     {item.options ? (
@@ -202,7 +203,7 @@ export default function PrescriptionModal({
                     ) : (
                       <div className="flex flex-wrap items-center gap-2">
                         <input
-                          aria-label={`${index + 1}번 답 입력`}
+                          aria-label={`${index + 1}`}
                           className={`w-44 rounded-md border bg-[#f5e6c8] px-3 py-1.5 text-base font-semibold outline-none transition focus:ring-2 focus:ring-[#7a4f28] ${
                             result === true
                               ? "border-green-700"
@@ -216,18 +217,18 @@ export default function PrescriptionModal({
                               [index]: event.target.value
                             }))
                           }
-                          placeholder="답을 적으시오"
+                          placeholder={t.answerPlaceholder}
                           type="text"
                           value={given}
                         />
                         {result === true ? (
                           <span className="text-base font-bold text-green-700">
-                            ✓ 정답이오
+                            {t.correct}
                           </span>
                         ) : null}
                         {result === false ? (
                           <span className="text-base font-bold text-red-700">
-                            ✗ 다시 보시오
+                            {t.wrong}
                           </span>
                         ) : null}
                       </div>
@@ -237,7 +238,8 @@ export default function PrescriptionModal({
                       <div className="mt-2">
                         {hintsShown[index] ? (
                           <p className="text-sm italic text-[#7a4f28]">
-                            힌트: {item.hint}
+                            {t.hintPrefix}
+                            {item.hint}
                           </p>
                         ) : (
                           <button
@@ -250,7 +252,7 @@ export default function PrescriptionModal({
                             }
                             type="button"
                           >
-                            힌트 보기
+                            {t.showHint}
                           </button>
                         )}
                       </div>
@@ -262,13 +264,12 @@ export default function PrescriptionModal({
 
             {allCorrect ? (
               <p className="mt-4 text-center font-script text-xl font-bold text-[#8a3a1a]">
-                처방을 모두 익혔소. 이 약, 그대의 것이오.
+                {t.allDone}
               </p>
             ) : null}
           </div>
         )}
 
-        {/* 콜백 링크 */}
         {callbackIsLive ? (
           <a
             className="block w-full rounded-md border border-[#7a4f28] bg-[#7a4f28] px-4 py-3 text-center text-base font-bold text-[#f5e6c8] transition hover:bg-[#8a3a1a] focus:outline-none focus:ring-2 focus:ring-[#7a4f28]"
@@ -276,12 +277,12 @@ export default function PrescriptionModal({
             rel="noopener noreferrer"
             target="_blank"
           >
-            {callback.label}
+            {text.callbackLabel}
           </a>
         ) : (
           <div className="w-full rounded-md border border-dashed border-[#7a4f28]/50 bg-[#7a4f28]/8 px-4 py-3 text-center text-base font-bold text-[#7a4f28]">
-            {callback.label}
-            <span className="ml-1 font-normal opacity-70">(연결 준비 중)</span>
+            {text.callbackLabel}
+            <span className="ml-1 font-normal opacity-70">{t.callbackPending}</span>
           </div>
         )}
       </section>
