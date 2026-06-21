@@ -18,7 +18,7 @@ const titleHotspots = [
   {
     id: "batchim-random",
     label: "랜덤 7대표 받침음절",
-    menu: "받침음절 약방문",
+    menu: "랜덤 7대표 받침음절 약방문",
     left: "49.5%",
     top: "58%",
     width: "15.5%",
@@ -27,7 +27,7 @@ const titleHotspots = [
   {
     id: "royal-remedy",
     label: "왕실 비방",
-    menu: "왕실 비방 구매하기",
+    menu: "왕실 비방 약방문",
     left: "72.5%",
     top: "12.5%",
     width: "21%",
