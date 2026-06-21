@@ -1,4 +1,8 @@
-export type RemedyCategory = "royal" | "pronunciation" | "grammar";
+export type RemedyCategory =
+  | "royal"
+  | "pronunciation"
+  | "phonological-rule"
+  | "grammar";
 export type RemedyStatus = "available" | "limited" | "unavailable";
 
 export interface RemedyPrice {
@@ -212,6 +216,60 @@ export const remedies: Remedy[] = [
         { question: "'흙' → [ ]", answer: "흑" }
       ],
       callback: { label: "더 자세히는 → 광개토 복합받침 앱에서", url: "TBD: hangul-complex" }
+    }
+  },
+  {
+    id: "h-weakening-soothing",
+    name: "ㅎ 약화 진정제",
+    category: "phonological-rule",
+    price: { amount: 8000, currency: "won" },
+    status: "available",
+    description: '"좋아요"를 "조아요"로 자연스럽게',
+    prescription: {
+      diagnosis: "그대는 ㅎ 약화에 어려움을 겪고 있소.",
+      info: "ㅎ이 받침이면 사라지오 (좋아요 → 조아요). ㄴㄹㅁㅇ 받침 다음 ㅎ이면 작아지오 (전화 → 저놔).",
+      quiz: [
+        { question: "좋아요 → [ ]", answer: "조아요", hint: "ㅎ이 사라짐" },
+        { question: "전화 → [ ]", answer: "저놔", hint: "ㄴ + ㅎ" },
+        { question: "은행 → [ ]", answer: "으냉", hint: "ㄴ + ㅎ" }
+      ],
+      callback: { label: "더 자세히는 → 광개토 ㅎ 약화 앱에서", url: "TBD" }
+    }
+  },
+  {
+    id: "liaison-patch",
+    name: "연음법칙 자동작동 패치",
+    category: "phonological-rule",
+    price: { amount: 15000, currency: "won" },
+    status: "available",
+    description: '"한국이"를 "한구기"로 자동 연음',
+    prescription: {
+      diagnosis: "그대는 연음법칙 발음에 어려움을 겪고 있소.",
+      info: "받침 + 모음 시작 음절 = 받침이 다음 음절 첫소리로 넘어감.",
+      quiz: [
+        { question: "'한국이' → [ ]", answer: "한구기" },
+        { question: "'책을' → [ ]", answer: "채글" },
+        { question: "'음악이' → [ ]", answer: "으마기" }
+      ],
+      callback: { label: "더 자세히는 → 광개토 음운변동 앱에서", url: "TBD" }
+    }
+  },
+  {
+    id: "nasalization-inhaler",
+    name: "비음화 흡입기",
+    category: "phonological-rule",
+    price: { amount: 12000, currency: "won" },
+    status: "available",
+    description: '"국물"을 "궁물"로 코로 흡입',
+    prescription: {
+      diagnosis: "그대는 비음화 발음에 어려움을 겪고 있소.",
+      info: "받침 ㄱㄷㅂ + ㄴㅁ = 받침이 비음(ㅇㄴㅁ)으로 변함.",
+      quiz: [
+        { question: "'국물' → [ ]", answer: "궁물" },
+        { question: "'먹는' → [ ]", answer: "멍는" },
+        { question: "'입니다' → [ ]", answer: "임니다" }
+      ],
+      callback: { label: "더 자세히는 → 광개토 음운변동 앱에서", url: "TBD" }
     }
   },
   {

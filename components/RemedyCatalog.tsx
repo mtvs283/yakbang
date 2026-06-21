@@ -18,6 +18,11 @@ const categoryGroups: { category: RemedyCategory; title: string; blurb: string }
       blurb: "혀끝과 입술을 다스리는 처방"
     },
     {
+      category: "phonological-rule",
+      title: "음운 규칙약",
+      blurb: "소리가 변하는 규칙을 다스리는 처방"
+    },
+    {
       category: "grammar",
       title: "문법 조제약",
       blurb: "조사와 어미의 다툼을 잠재우는 처방"
