@@ -9,6 +9,12 @@ export default function YakbangIllustration() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showHotspotGuide, setShowHotspotGuide] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
+  const [replayKey, setReplayKey] = useState(0);
+
+  function replayIntro() {
+    setVideoEnded(false);
+    setReplayKey((currentKey) => currentKey + 1);
+  }
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#100b07] text-yakbangPaper">
@@ -25,6 +31,7 @@ export default function YakbangIllustration() {
             <video
               autoPlay
               className="h-full w-full object-cover"
+              key={replayKey}
               muted
               onEnded={() => setVideoEnded(true)}
               onError={() => setVideoEnded(true)}
@@ -57,6 +64,16 @@ export default function YakbangIllustration() {
           </button>
         </div>
       </div>
+
+      {videoEnded ? (
+        <button
+          className="fixed bottom-5 right-5 z-20 rounded-full border border-yakbangGold/70 bg-yakbangBlack/75 px-5 py-3 text-sm font-bold text-yakbangGold shadow-[0_0_24px_rgba(212,175,55,0.22)] backdrop-blur transition duration-200 ease-in-out hover:-translate-y-0.5 hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black"
+          onClick={replayIntro}
+          type="button"
+        >
+          다시 보기
+        </button>
+      ) : null}
 
       {showDevTools ? (
         <label className="fixed bottom-4 left-4 z-10 flex select-none items-center gap-2 rounded-full border border-yakbangGold/50 bg-black/70 px-4 py-2 text-xs font-semibold text-yakbangPaper shadow-lg backdrop-blur">
