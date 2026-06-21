@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { royalRemedies } from "../data/remedies";
+import { formatPrice, royalRemedies, statusLabel } from "../data/remedies";
 
 interface RoyalRemedyModalProps {
   open: boolean;
@@ -81,12 +81,12 @@ export default function RoyalRemedyModal({
                   {remedy.name}
                 </h2>
                 <span className="rounded-full bg-zinc-700/80 px-3 py-1 text-xs font-semibold text-zinc-200">
-                  {remedy.status}
+                  {statusLabel(remedy.status)}
                 </span>
               </div>
 
               <p className="mb-3 text-lg font-black text-yakbangGold">
-                {remedy.price}
+                {formatPrice(remedy.price)}
               </p>
               <p className="mb-4 min-h-12 text-sm leading-7 text-yakbangPaper/88">
                 {remedy.description}

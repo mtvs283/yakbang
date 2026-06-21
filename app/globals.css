@@ -70,3 +70,22 @@ input {
 .animate-prescription-fade {
   animation: prescriptionFade 3.2s ease-out both;
 }
+
+@keyframes stampIn {
+  0% {
+    opacity: 0;
+    transform: rotate(-14deg) scale(2.4);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(-14deg) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-14deg) scale(1);
+  }
+}
+
+.animate-stamp {
+  animation: stampIn 0.45s ease-out both;
+}
