@@ -5,7 +5,7 @@ export default function YakbangHero() {
     <main className="relative min-h-screen overflow-hidden bg-black text-yakbangPaper">
       <video
         autoPlay
-        className="absolute inset-0 h-full w-full object-cover object-[42%_center]"
+                className="absolute inset-0 h-full w-full object-cover object-[42%_center] sm:object-[42%_top]"
         loop
         muted
         playsInline
