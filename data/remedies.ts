@@ -14,7 +14,7 @@ export const royalRemedies: Remedy[] = [
     price: "5억 냥",
     status: "절판",
     description: "임금이 친히 쓰신 교본이오. 영의정도 한 권 못 구함.",
-    category: "royal"
+    category: "royal",
     prescription: {
     diagnosis: '이 약은 그대의 손이 닿지 않는 곳에 있소.',
     info: '절판되어 더 이상 빚지 않소. 광개토 일반 약방에서 차근차근 시작하시오.',
