@@ -38,7 +38,10 @@ export default function RemedyCatalog() {
   const [selected, setSelected] = useState<Remedy | null>(null);
 
   return (
-    <section className="relative z-10 bg-[#100b07] px-5 py-14 text-yakbangPaper sm:px-10">
+    <section
+      className="relative z-10 scroll-mt-4 bg-[#100b07] px-5 py-14 text-yakbangPaper sm:px-10"
+      id="remedy-catalog"
+    >
       <div className="mx-auto max-w-6xl">
         <header className="mb-10 text-center">
           <h2 className="font-script text-4xl font-bold text-yakbangGold sm:text-5xl">
