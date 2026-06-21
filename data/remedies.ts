@@ -15,39 +15,82 @@ export const royalRemedies: Remedy[] = [
     status: "절판",
     description: "임금이 친히 쓰신 교본이오. 영의정도 한 권 못 구함.",
     category: "royal"
+    prescription: {
+    diagnosis: '이 약은 그대의 손이 닿지 않는 곳에 있소.',
+    info: '절판되어 더 이상 빚지 않소. 광개토 일반 약방에서 차근차근 시작하시오.',
+    quiz: [],
+    callback: { label: '대신 → 광개토 일반 약방으로', url: 'TBD' }
   },
   {
-    id: "hunminjeongeum-haerye",
-    name: "훈민정음 해례본",
-    price: "1억 냥",
-    status: "어전회의 결재 대기 중",
-    description: "원본 한 부, 천 년의 기다림.",
-    category: "royal"
-  },
-  {
-    id: "friend-patience-booster",
-    name: "한국인 친구 인내심 부스터",
-    price: "가격 미정",
-    status: "영의정도 못 구함",
-    description: "그대의 발음을 끝까지 들어줄 친구의 마음.",
-    category: "royal"
-  },
-  {
-    id: "hangeul-creation-remedy",
-    name: "한글창제 비방",
-    price: "3억 냥",
-    status: "한정 1부",
-    description: "세종이 학자들과 4년 걸려 빚은 비밀의 처방.",
-    category: "royal"
-  },
-  {
-    id: "chief-scholar-capsule",
-    name: "영의정 추천 한정 캡슐",
-    price: "7천만 냥",
-    status: "추천서 필요",
-    description: "영의정의 친필 추천서 없이는 살 수 없소.",
-    category: "royal"
+  id: 'sejong-manuscript',
+  name: '세종대왕 친필 한글 교본',
+  category: 'royal',
+  price: { amount: 500000000, currency: 'nyang' },
+  status: 'unavailable',
+  description: '임금이 친히 쓰신 교본이오. 영의정도 한 권 못 구함.',
+  prescription: {
+    diagnosis: '이 약은 그대의 손이 닿지 않는 곳에 있소.',
+    info: '절판되어 더 이상 빚지 않소. 광개토 일반 약방에서 차근차근 시작하시오.',
+    quiz: [],
+    callback: { label: '대신 → 광개토 일반 약방으로', url: 'TBD' }
   }
+},
+{
+  id: 'hunminjeongeum',
+  name: '훈민정음 해례본',
+  category: 'royal',
+  price: { amount: 100000000, currency: 'nyang' },
+  status: 'unavailable',
+  description: '원본 한 부, 천 년의 기다림',
+  prescription: {
+    diagnosis: '이 약은 그대의 손이 닿지 않는 곳에 있소.',
+    info: '어전회의 결재 대기 중이오. 천 년을 기다려도 결재가 안 나니 광개토 일반 약방에서.',
+    quiz: [],
+    callback: { label: '대신 → 광개토 일반 약방으로', url: 'TBD' }
+  }
+},
+{
+  id: 'korean-friend-patience',
+  name: '한국인 친구 인내심 부스터',
+  category: 'royal',
+  price: { amount: 0, currency: 'nyang' },
+  status: 'unavailable',
+  description: '그대의 발음을 끝까지 들어줄 친구의 마음',
+  prescription: {
+    diagnosis: '이 약은 그대의 손이 닿지 않는 곳에 있소.',
+    info: '영의정도 못 구함. 광개토 약방에서 학습하시면 친구의 마음도 점점 너그러워지오.',
+    quiz: [],
+    callback: { label: '대신 → 광개토 일반 약방으로', url: 'TBD' }
+  }
+},
+{
+  id: 'hangul-creation-secret',
+  name: '한글창제 비방',
+  category: 'royal',
+  price: { amount: 300000000, currency: 'nyang' },
+  status: 'unavailable',
+  description: '세종이 학자들과 4년 걸려 빚은 비밀의 처방',
+  prescription: {
+    diagnosis: '이 약은 그대의 손이 닿지 않는 곳에 있소.',
+    info: '한정 1부, 이미 어딘가 봉인됨. 광개토 일반 약방에서 한글의 비밀을 한 첩씩.',
+    quiz: [],
+    callback: { label: '대신 → 광개토 일반 약방으로', url: 'TBD' }
+  }
+},
+{
+  id: 'prime-minister-capsule',
+  name: '영의정 추천 한정 캡슐',
+  category: 'royal',
+  price: { amount: 70000000, currency: 'nyang' },
+  status: 'unavailable',
+  description: '영의정의 친필 추천서 없이는 살 수 없소',
+  prescription: {
+    diagnosis: '이 약은 그대의 손이 닿지 않는 곳에 있소.',
+    info: '추천서 필요. 광개토 일반 약방에서 꾸준히 학습하시면 영의정이 알아서 추천하실지도.',
+    quiz: [],
+    callback: { label: '대신 → 광개토 일반 약방으로', url: 'TBD' }
+  }
+}
   {
   id: 'h-pronunciation',
   name: 'ㅎ 발음약',
