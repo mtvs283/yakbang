@@ -57,10 +57,7 @@ export default function YakbangHero() {
               {taglineLine2}
             </p>
           ) : null}
-          <p className="mt-1 inline-flex items-baseline gap-2 whitespace-nowrap sm:gap-3">
-            <span className="font-shilla text-xl font-medium text-yakbangPaper/95 sm:text-3xl">
-              {hero.write}
-            </span>
+          <p className="mt-1 inline-flex whitespace-nowrap">
             <span className="animate-stamp-slam inline-block rounded-md border-2 border-[#e23b3b] px-2 py-0.5 font-sans text-4xl font-black text-[#e23b3b] drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] sm:text-6xl">
               {hero.enter}
             </span>

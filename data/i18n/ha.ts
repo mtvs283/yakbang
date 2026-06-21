@@ -2,237 +2,262 @@ import type { LocaleData } from "./types";
 
 export const ha: LocaleData = {
   ui: {
-    "catalogTitle": "Jerin takardun maganin kantin magani",
-    "catalogSubtitle": "Zaɓi maganin koyon Koriya da ya dace da matsalarka.",
-    "cardAction": "Karɓi takardar magani",
-    "diagnosis": "Bincike",
-    "info": "Bayanin magani",
-    "prescription": "Takardar magani",
-    "scrollCue": "Gungura ƙasa don ganin duk magunguna",
-    "groups": {
-      "pronunciation": {
-        "title": "Magungunan lafazi",
-        "blurb": "Don sautukan Koriya masu kama da juna da suke da wahalar furtawa.",
+    catalogTitle: "Jerin takardun magani na kantin magani",
+    catalogSubtitle:
+      "Zaɓi maganin da ya dace da wahalar Koreanci taka ka karɓi takardar maganinka. Cika gurabe, sai ya zama naka.",
+    scrollCue: "Duba jerin takardun magani",
+    groups: {
+      pronunciation: {
+        title: "Maganin furuci",
+        blurb: "Hori harshe da leɓɓa"
       },
       "phonological-rule": {
-        "title": "Magungunan canjin sauti",
-        "blurb": "Yana nuna yadda sauti ke canzawa idan gaɓoɓi sun haɗu.",
+        title: "Maganin ƙaʼidodin sauyin sauti",
+        blurb: "Ƙware ƙaʼidodin da sauti ke sauyawa"
       },
-      "grammar": {
-        "title": "Magungunan nahawu",
-        "blurb": "Yana taimakawa wajen amfani da particles da ƙarshen jimla.",
+      grammar: {
+        title: "Maganin nahawu",
+        blurb: "Kwantar da gardamar ƙaʼidoji da kari"
       },
-      "royal": {
-        "title": "Takardun maganin sarauta",
-        "blurb": "Magungunan barkwanci masu wuya: a gani kawai, ba a saya ba.",
-      },
+      royal: {
+        title: "Asirin magungunan fada",
+        blurb: "Kyaututtuka iyakantattu da hannunka ba zai kai ba"
+      }
     },
-    "status": {
-      "available": "Akwai",
-      "limited": "Ƙalilan",
-      "unavailable": "Babu",
+    status: {
+      available: "Akwai",
+      limited: "Iyakantacce",
+      unavailable: "Ba a iya samu"
     },
-    "footerLead": "Kana son ci gaba da atisaye?",
-    "enterGwanggaeto": "Shiga Gwanggaeto",
-    "toTop": "Sama",
-    "home": "Farko",
-    "modalLabel": "Cikakken bayanin takardar magani",
-    "royalReject": "Wannan takardar magani ta yi wuya sosai, ba za a saya ba.",
-    "stamp": "Hatimin takardar magani",
-    "allDone": "An gama!",
-    "correct": "Daidai!",
-    "wrong": "Bai yi ba tukuna",
-    "showHint": "Nuna alama",
-    "hintPrefix": "Alama",
-    "answerPlaceholder": "Rubuta amsa a nan",
-    "callbackPending": "Ana shiryawa",
-    "closeAria": "Rufe wannan taga",
-    stockLabel: (stock: number) => `An rage saiti ${stock}`,
+    cardAction: "Karɓi takardar magani",
+    footerLead: "Idan ka fita daga kantin magani, faɗaɗɗen Gwanggaeto na jiranka.",
+    enterGwanggaeto: "Shiga Gwanggaeto",
+    toTop: "Sama",
+    home: "Gida",
+    modalLabel: "TAKARDAR MAGANI · 藥房廣開土",
+    diagnosis: "Bincike",
+    info: "Game da wannan magani",
+    prescription: "Takardar magani (cika gurabe)",
+    royalReject: "Wannan magani hannunka ba zai kai ba.",
+    stamp: "AN BAYAR",
+    allDone: "Ka ƙware takardar maganin. Wannan magani yanzu naka ne.",
+    correct: "✓ Daidai",
+    wrong: "✗ Sake gwadawa",
+    showHint: "Nuna alama",
+    hintPrefix: "Alama: ",
+    answerPlaceholder: "Rubuta amsarka",
+    callbackPending: "(hanyar haɗi nan ba da jimawa ba)",
+    closeAria: "Rufe takardar magani",
+    stockLabel: (count) => `Saura ${count}`
   },
   remedies: {
     "sejong-manuscript": {
-      "name": "Takardar maganin sarauta: King Sejong / Hangul textbook",
-      "description": "Abin yana da matuƙar wuya a samu. Ka fara a hankali a kantin magani na Gwanggaeto na gama-gari.",
-      "diagnosis": "Wannan takardar magani ba ta isa hannunka ba yanzu",
-      "info": "Abin yana da matuƙar wuya a samu. Ka fara a hankali a kantin magani na Gwanggaeto na gama-gari.",
-      "quizQuestions": [],
-      "callbackLabel": "Maimakon haka → kantin magani na Gwanggaeto na gama-gari",
+      name: "Littafin Hangeul da Sarki Sejong ya rubuta da hannu",
+      description: "Sarki da kansa ya rubuta. Ko firaminista bai sami kwafi ɗaya ba.",
+      diagnosis: "Wannan magani hannunka ba zai kai ba.",
+      info: "An gama bugawa, ba za a ƙara yi ba. Fara mataki-mataki a kantin magani na yau da kullum na Gwanggaeto.",
+      quizQuestions: [],
+      callbackLabel: "Maimakon haka → zuwa kantin magani na yau da kullum na Gwanggaeto"
     },
-    "hunminjeongeum": {
-      "name": "Takardar maganin sarauta: Hunminjeongeum Haeryebon",
-      "description": "Abin yana da matuƙar wuya a samu. Ka fara a hankali a kantin magani na Gwanggaeto na gama-gari.",
-      "diagnosis": "Wannan takardar magani ba ta isa hannunka ba yanzu",
-      "info": "Abin yana da matuƙar wuya a samu. Ka fara a hankali a kantin magani na Gwanggaeto na gama-gari.",
-      "quizQuestions": [],
-      "callbackLabel": "Maimakon haka → kantin magani na Gwanggaeto na gama-gari",
+    hunminjeongeum: {
+      name: "Hunminjeongeum Haeryebon (asali)",
+      description: "Kwafi asali ɗaya kawai, jiran shekaru dubu.",
+      diagnosis: "Wannan magani hannunka ba zai kai ba.",
+      info: "Yana jiran amincewar majalisar fada. Ko shekaru dubu ba za a amince ba, don haka ka je kantin magani na yau da kullum na Gwanggaeto.",
+      quizQuestions: [],
+      callbackLabel: "Maimakon haka → zuwa kantin magani na yau da kullum na Gwanggaeto"
     },
     "korean-friend-patience": {
-      "name": "Takardar maganin sarauta: Korean friend patience booster",
-      "description": "Abin yana da matuƙar wuya a samu. Ka fara a hankali a kantin magani na Gwanggaeto na gama-gari.",
-      "diagnosis": "Wannan takardar magani ba ta isa hannunka ba yanzu",
-      "info": "Abin yana da matuƙar wuya a samu. Ka fara a hankali a kantin magani na Gwanggaeto na gama-gari.",
-      "quizQuestions": [],
-      "callbackLabel": "Maimakon haka → kantin magani na Gwanggaeto na gama-gari",
+      name: "Mai ƙara haƙurin abokin Koriya",
+      description: "Zuciyar abokin da zai saurari furucinka har ƙarshe.",
+      diagnosis: "Wannan magani hannunka ba zai kai ba.",
+      info: "Ko firaminista ba ya samu. Idan ka yi karatu a kantin magani na Gwanggaeto, haƙurin abokinka ma zai ƙara faɗaɗa.",
+      quizQuestions: [],
+      callbackLabel: "Maimakon haka → zuwa kantin magani na yau da kullum na Gwanggaeto"
     },
     "hangul-creation-secret": {
-      "name": "Takardar maganin sarauta: Hangul creation secret",
-      "description": "Abin yana da matuƙar wuya a samu. Ka fara a hankali a kantin magani na Gwanggaeto na gama-gari.",
-      "diagnosis": "Wannan takardar magani ba ta isa hannunka ba yanzu",
-      "info": "Abin yana da matuƙar wuya a samu. Ka fara a hankali a kantin magani na Gwanggaeto na gama-gari.",
-      "quizQuestions": [],
-      "callbackLabel": "Maimakon haka → kantin magani na Gwanggaeto na gama-gari",
+      name: "Asirin girke-girken ƙirƙirar Hangeul",
+      description: "Maganin asiri da Sarki Sejong ya ɗauki shekaru huɗu yana yi tare da malamai.",
+      diagnosis: "Wannan magani hannunka ba zai kai ba.",
+      info: "Kwafi ɗaya kawai, an riga an rufe shi a wani wuri. A kantin magani na yau da kullum na Gwanggaeto, koyi asiran Hangeul ɗaya-ɗaya.",
+      quizQuestions: [],
+      callbackLabel: "Maimakon haka → zuwa kantin magani na yau da kullum na Gwanggaeto"
     },
     "prime-minister-capsule": {
-      "name": "Takardar maganin sarauta: prime minister limited capsule",
-      "description": "Abin yana da matuƙar wuya a samu. Ka fara a hankali a kantin magani na Gwanggaeto na gama-gari.",
-      "diagnosis": "Wannan takardar magani ba ta isa hannunka ba yanzu",
-      "info": "Abin yana da matuƙar wuya a samu. Ka fara a hankali a kantin magani na Gwanggaeto na gama-gari.",
-      "quizQuestions": [],
-      "callbackLabel": "Maimakon haka → kantin magani na Gwanggaeto na gama-gari",
+      name: "Kwaya iyakantacce da firaminista ya ba da shawara",
+      description: "Ba za a iya saya ba sai da takardar shawarar firaminista da hannu.",
+      diagnosis: "Wannan magani hannunka ba zai kai ba.",
+      info: "Ana buƙatar shawara. Idan ka yi karatu akai-akai a kantin Gwanggaeto, wataƙila firaminista da kansa zai ba da shawararka.",
+      quizQuestions: [],
+      callbackLabel: "Maimakon haka → zuwa kantin magani na yau da kullum na Gwanggaeto"
     },
     "h-pronunciation": {
-      "name": "Magani: ㅎ 발음",
-      "description": "Gajeren atisaye don ㅎ 발음.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: ㅎ 발음.",
-      "info": "Duba wannan ka’ida: 하늘, 좋아요 → 조아요",
-      "quizQuestions": ["'하늘'에서 ㅎ은 어디에 있나요?", "'좋아요' → [______]"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Maganin furucin ㅎ",
+      description: "Yana sa ㅎ ya ɓace a hankali a cikin baki.",
+      diagnosis: "Kana fama da furucin ㅎ.",
+      info: "ㅎ ita ce baƙin mafi rauni a Koreanci — ƙaramar numfashi a farkon sigar, kusan ba a ji ta a matsayin batchim (baƙi na ƙarshe).",
+      quizQuestions: ["A cikin '하늘', ina ㅎ take?", "'좋아요' → [______]"],
+      callbackLabel: "Ƙarin bayani → a manhajar baƙaƙe ta Gwanggaeto"
     },
     "korean-ear": {
-      "name": "Magani: ㅓ / ㅗ 듣기",
-      "description": "Gajeren atisaye don ㅓ / ㅗ 듣기.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: ㅓ / ㅗ 듣기.",
-      "info": "Duba wannan ka’ida: 어머니 = ㅓ / 오빠 = ㅗ",
-      "quizQuestions": ["'어머니'에서 첫 모음은?", "'오빠'에서 첫 모음은?", "'버스'와 '보스' — 어느 게 ㅓ?"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Kunnen Bakorea",
+      description: "Bambanta ㅓ da ㅗ nan take.",
+      diagnosis: "Kana fama da bambanta ㅓ da ㅗ.",
+      info: "ㅓ: baki a buɗe kaɗan kuma faɗaɗɗe. ㅗ: leɓɓa a zagaye.",
+      quizQuestions: [
+        "Wace wasali ce ta farko a '어머니'?",
+        "Wace wasali ce ta farko a '오빠'?",
+        "'버스' ko '보스' — wanne ne da ㅓ?"
+      ],
+      callbackLabel: "Ƙarin bayani → a manhajar wasula ta Gwanggaeto"
     },
     "three-tier-taste": {
-      "name": "Magani: 평음·격음·경음",
-      "description": "Gajeren atisaye don 평음·격음·경음.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 평음·격음·경음.",
-      "info": "Duba wannan ka’ida: 바보 / 파보 / 딸",
-      "quizQuestions": ["'바보'와 '파보' — 어느 게 격음?", "경음 ㄸ가 들어간 단어는?"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Ɗanɗano: sauƙi · mai numfashi · mai ƙarfi",
+      description: "Ji ㅈ ㅊ ㅉ da bakin harshe.",
+      diagnosis: "Kana fama da bambanta baƙaƙe masu sauƙi, masu numfashi, da masu ƙarfi.",
+      info: "Ƙarfi uku a wuri ɗaya — sauƙi (ㅂㄷㄱㅈ) na halitta, mai numfashi (ㅍㅌㅋㅊ) da numfashi mai ƙarfi, mai ƙarfi (ㅃㄸㄲㅉ) gajere da tsauri.",
+      quizQuestions: [
+        "'바보' ko '파보' — wanne ne mai numfashi?",
+        "Wace kalma ce da ㄸ mai ƙarfi?"
+      ],
+      callbackLabel: "Ƙarin bayani → a manhajar baƙaƙe ta Gwanggaeto"
     },
     "fortification-chip": {
-      "name": "Magani: 경음화: 학교 → 학꾜",
-      "description": "Gajeren atisaye don 경음화: 학교 → 학꾜.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 경음화: 학교 → 학꾜.",
-      "info": "Duba wannan ka’ida: 학교 → 학꾜, 먹다 → 먹따, 국밥 → 국빱",
-      "quizQuestions": ["'학교' → [______]", "'먹다' → [______]", "'국밥' → [______]"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Guntun ƙarfafawa kai tsaye",
+      description: "Yana furta '학교' a matsayin '학꾜' kai tsaye.",
+      diagnosis: "Kana fama da ƙarfafawa.",
+      info: "Baƙin sauƙi (ㄱㄷㅂㅈㅅ) bayan batchim ㄱㄷㅂ yana zama mai ƙarfi (ㄲㄸㅃㅉㅆ).",
+      quizQuestions: ["'학교' → [______]", "'먹다' → [______]", "'국밥' → [______]"],
+      callbackLabel: "Ƙarin bayani → a manhajar sauyin sauti ta Gwanggaeto"
     },
     "final-7-capsule": {
-      "name": "Magani: 받침 7소리: ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ",
-      "description": "Gajeren atisaye don 받침 7소리: ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 받침 7소리: ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ.",
-      "info": "Duba wannan ka’ida: 꽃 = ㄷ, 낯 = ㄷ, 밖 = ㄱ",
-      "quizQuestions": ["'꽃' 받침은 어떻게 발음?", "'낯' 받침은 어떻게 발음?", "'밖' 받침은 어떻게 발음?"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Kwayar sautukan ƙarshe 7 wakilai",
+      description: "ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ a cikin kwaya ɗaya.",
+      diagnosis: "Kana fama da sautukan ƙarshe 7 wakilai.",
+      info: "Koreanci na da batchim 27, amma ana furta su a cikin sautuka 7 kawai — ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ.",
+      quizQuestions: [
+        "Yaya ake furta batchim na '꽃'?",
+        "Yaya ake furta batchim na '낯'?",
+        "Yaya ake furta batchim na '밖'?"
+      ],
+      callbackLabel: "Ƙarin bayani → a manhajar batchim ta Gwanggaeto"
     },
     "rk-special-capsule": {
-      "name": "Magani: 겹받침 ㄺ",
-      "description": "Gajeren atisaye don 겹받침 ㄺ.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 겹받침 ㄺ.",
-      "info": "Duba wannan ka’ida: 닭 → 닥, 닭이 → 달기, 흙 → 흑",
-      "quizQuestions": ["'닭' → [______]", "'닭이' → [______]", "'흙' → [______]"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Kwaya ta musamman don batchim ㄺ",
+      description: "닭, 흙, 굵다 — don rukunin ㄺ mai wahala.",
+      diagnosis: "Kana fama da rukunin baƙaƙe ㄺ.",
+      info: "Shi kaɗai ko gaban baƙi [ㄱ] (닭→[닥]); gaban wasali [ㄹㄱ] (닭이→[달기]).",
+      quizQuestions: ["'닭' → [______]", "'닭이' → [______]", "'흙' → [______]"],
+      callbackLabel: "Ƙarin bayani → a manhajar batchim haɗaɗɗe ta Gwanggaeto"
     },
     "h-weakening-soothing": {
-      "name": "Magani: ㅎ 약화: 좋아요 → 조아요",
-      "description": "Gajeren atisaye don ㅎ 약화: 좋아요 → 조아요.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: ㅎ 약화: 좋아요 → 조아요.",
-      "info": "Duba wannan ka’ida: 좋아요 → 조아요, 전화 → 저놔, 은행 → 으냉",
-      "quizQuestions": ["좋아요 → [______]", "전화 → [______]", "은행 → [______]"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Mai kwantar da rauni na ㅎ",
+      description: "Yana furta '좋아요' a matsayin '조아요' a dabiʼance.",
+      diagnosis: "Kana fama da raunin ㅎ.",
+      info: "ㅎ na ƙarshe yana ɓacewa (좋아요 → 조아요). Bayan batchim ㄴㄹㅁㅇ, ㅎ yana raunana (전화 → 저놔).",
+      quizQuestions: ["좋아요 → [______]", "전화 → [______]", "은행 → [______]"],
+      callbackLabel: "Ƙarin bayani → a manhajar raunin ㅎ ta Gwanggaeto"
     },
     "liaison-patch": {
-      "name": "Magani: 연음: 한국이 → 한구기",
-      "description": "Gajeren atisaye don 연음: 한국이 → 한구기.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 연음: 한국이 → 한구기.",
-      "info": "Duba wannan ka’ida: 한국이 → 한구기, 책을 → 채글, 음악이 → 으마기",
-      "quizQuestions": ["'한국이' → [______]", "'책을' → [______]", "'음악이' → [______]"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Faci na haɗa sauti kai tsaye",
+      description: "Yana haɗa '한국이' ya zama '한구기' kai tsaye.",
+      diagnosis: "Kana fama da haɗa sauti (liaison).",
+      info: "Idan batchim ya biyo bayan sigar da ta fara da wasali, batchim ɗin yana zama sautin farko na sigar gaba.",
+      quizQuestions: ["'한국이' → [______]", "'책을' → [______]", "'음악이' → [______]"],
+      callbackLabel: "Ƙarin bayani → a manhajar sauyin sauti ta Gwanggaeto"
     },
     "nasalization-inhaler": {
-      "name": "Magani: 비음화: 국물 → 궁물",
-      "description": "Gajeren atisaye don 비음화: 국물 → 궁물.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 비음화: 국물 → 궁물.",
-      "info": "Duba wannan ka’ida: 국물 → 궁물, 먹는 → 멍는, 입니다 → 임니다",
-      "quizQuestions": ["'국물' → [______]", "'먹는' → [______]", "'입니다' → [______]"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Naʼurar shaƙar sautin hanci",
+      description: "Shaƙa '국물' ta hanci ya zama '궁물'.",
+      diagnosis: "Kana fama da sautin hanci.",
+      info: "Batchim ㄱㄷㅂ da ㄴㅁ ya biyo baya yana zama sautin hanci (ㅇㄴㅁ).",
+      quizQuestions: ["'국물' → [______]", "'먹는' → [______]", "'입니다' → [______]"],
+      callbackLabel: "Ƙarin bayani → a manhajar sauyin sauti ta Gwanggaeto"
     },
     "e-vs-eseo-syrup": {
-      "name": "Magani: 에 / 에서",
-      "description": "Gajeren atisaye don 에 / 에서.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 에 / 에서.",
-      "info": "Duba wannan ka’ida: 학교에 가요 / 학교에서 공부해요",
-      "quizQuestions": ["학교___ 공부해요.", "학교___ 가요.", "집___ 있어요."],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Maganin rarrabe '에' da '에서'",
+      description: "Wurin zuwa ko wurin aiki — a cikin shan ɗaya.",
+      diagnosis: "Kana fama da rarrabe '에' da '에서'.",
+      info: "에 = wurin zuwa/wuri (학교에 가다). 에서 = wurin aiki (학교에서 공부하다).",
+      quizQuestions: ["학교___ 공부해요.", "학교___ 가요.", "집___ 있어요."],
+      callbackLabel: "Ƙarin bayani → a manhajar nahawu ta Gwanggaeto (nan ba da jimawa ba)"
     },
     "eun-i-chip": {
-      "name": "Magani: 은/는 / 이/가",
-      "description": "Gajeren atisaye don 은/는 / 이/가.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 은/는 / 이/가.",
-      "info": "Duba wannan ka’ida: 저는 학생이에요 / 누가 왔어요?",
-      "quizQuestions": ["저___ 학생이에요.", "누___ 왔어요?", "날씨___ 좋아요."],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Guntun gane '은/는' da '이/가' kai tsaye",
+      description: "Yana kawo ƙarshen gardamar dawwama tsakanin jigo da faʼili.",
+      diagnosis: "Kana fama da rarrabe '은/는' da '이/가'.",
+      info: "은/는 = jigo (bayanin da aka sani, gaba da juna). 이/가 = faʼili (sabon bayani, jaddadawa).",
+      quizQuestions: [
+        "저___ 학생이에요. (gabatar da kai)",
+        "누___ 왔어요?",
+        "날씨___ 좋아요."
+      ],
+      callbackLabel: "Ƙarin bayani → a manhajar nahawu ta Gwanggaeto (nan ba da jimawa ba)"
     },
     "do-man-separator": {
-      "name": "Magani: 도 / 만",
-      "description": "Gajeren atisaye don 도 / 만.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 도 / 만.",
-      "info": "Duba wannan ka’ida: 저도 가요 / 저만 가요",
-      "quizQuestions": ["저___ 좋아해요. (나도 같이)", "저___ 좋아해요. (나 혼자)"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Mai raba '도/만'",
+      description: "Yana raba 도 na ƙari da 만 na iyakancewa a shan ɗaya.",
+      diagnosis: "Kana fama da rarrabe '도' da '만'.",
+      info: "도 = ma/haɗe da (저도 가요). 만 = kawai (저만 가요).",
+      quizQuestions: ["저___ 좋아해요. (ni ma)", "저___ 좋아해요. (ni kaɗai)"],
+      callbackLabel: "Ƙarin bayani → a manhajar nahawu ta Gwanggaeto (nan ba da jimawa ba)"
     },
     "buteo-kkaji-syrup": {
-      "name": "Magani: 부터 / 까지",
-      "description": "Gajeren atisaye don 부터 / 까지.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 부터 / 까지.",
-      "info": "Duba wannan ka’ida: 월요일부터 금요일까지",
-      "quizQuestions": ["월요일___ 금요일까지 일해요.", "아침부터 저녁___ 공부해요."],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Maganin iyaka '부터-까지'",
+      description: "Anka biyu na farko da ƙarshe.",
+      diagnosis: "Kana fama da alamomin iyaka '부터' da '까지'.",
+      info: "부터 = wurin farawa, 까지 = wurin ƙarewa. Yawanci ana amfani da su biyu.",
+      quizQuestions: ["월요일___ 금요일까지 일해요.", "아침부터 저녁___ 공부해요."],
+      callbackLabel: "Ƙarin bayani → a manhajar nahawu ta Gwanggaeto (nan ba da jimawa ba)"
     },
     "nikka-ni-separator": {
-      "name": "Magani: -(으)니까 / -(으)니",
-      "description": "Gajeren atisaye don -(으)니까 / -(으)니.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: -(으)니까 / -(으)니.",
-      "info": "Duba wannan ka’ida: 비가 오니까 / 가 보니",
-      "quizQuestions": ["비가 오___ 우산 가져가요. (이유)", "가___ 사람이 많았어요. (가서 보니)"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Mai raba '-(으)니까' da '-(으)니'",
+      description: "Yana fayyace ko dalili ne ko ganowa yayin aikatawa.",
+      diagnosis: "Kana fama da rarrabe '-(으)니까' da '-(으)니'.",
+      info: "(으)니까 = dalili/sanadi. (으)니 = ganowa yayin aikatawa.",
+      quizQuestions: [
+        "비가 오___ 우산 가져가요. (dalili)",
+        "가___ 사람이 많았어요. (da na je na gani)"
+      ],
+      callbackLabel: "Ƙarin bayani → a manhajar nahawu ta Gwanggaeto (nan ba da jimawa ba)"
     },
     "lge-l-geoyeyo-separator": {
-      "name": "Magani: -(으)ㄹ게요 / -(으)ㄹ 거예요",
-      "description": "Gajeren atisaye don -(으)ㄹ게요 / -(으)ㄹ 거예요.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: -(으)ㄹ게요 / -(으)ㄹ 거예요.",
-      "info": "Duba wannan ka’ida: 제가 할게요 / 비가 올 거예요",
-      "quizQuestions": ["제가 도와___. (약속)", "내일 비가 ___. (예측)"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Mai raba '-(으)ㄹ게요' da '-(으)ㄹ 거예요'",
+      description: "Layin sirara tsakanin alkawari da gaba.",
+      diagnosis: "Kana fama da rarrabe '-(으)ㄹ게요' da '-(으)ㄹ 거예요'.",
+      info: "(으)ㄹ게요 = niyya/alkawarin mai magana (제가 할게요). (으)ㄹ 거예요 = gaba mai sauƙi/hasashe (비가 올 거예요).",
+      quizQuestions: ["제가 도와___. (alkawari)", "내일 비가 ___. (hasashe)"],
+      callbackLabel: "Ƙarin bayani → a manhajar nahawu ta Gwanggaeto (nan ba da jimawa ba)"
     },
     "aseo-a-aligner": {
-      "name": "Magani: -아서/어서 / -아/어",
-      "description": "Gajeren atisaye don -아서/어서 / -아/어.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: -아서/어서 / -아/어.",
-      "info": "Duba wannan ka’ida: 피곤해서 잤어요 / 집에 가서 봤어요",
-      "quizQuestions": ["피곤___ 잤어요. (이유)", "집에 가___ 봤어요. (순차)"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Mai daidaita '-아서/어서' da '-아/어'",
+      description: "Yana daidaita hanyoyi biyu na bayyana dalili.",
+      diagnosis: "Kana fama da amfani da '-아서/어서' da '-아/어'.",
+      info: "아서/어서 = dalili + sakamako (피곤해서 잤어요). 아/어 = ayyuka jere (가서 봤어요).",
+      quizQuestions: ["피곤___ 잤어요. (dalili)", "집에 가___ 봤어요. (jere)"],
+      callbackLabel: "Ƙarin bayani → a manhajar nahawu ta Gwanggaeto (nan ba da jimawa ba)"
     },
     "causative-passive-syrup": {
-      "name": "Magani: 사동 / 피동",
-      "description": "Gajeren atisaye don 사동 / 피동.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 사동 / 피동.",
-      "info": "Duba wannan ka’ida: 먹이다 / 물리다",
-      "quizQuestions": ["엄마가 아기에게 밥을 ___. (먹게 함)", "모기가 사람에게 ___. (피동)"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
+      name: "Maganin sauya sa-aikatawa/karɓa kai tsaye",
+      description: "먹이다 da 먹히다, a shan ɗaya.",
+      diagnosis: "Kana fama da rarrabe sa-aikatawa da karɓa.",
+      info: "Sa-aikatawa = sa wani ya yi (밥을 먹이다). Karɓa = a yi maka aiki (모기에 물리다). Kari: 이/히/리/기.",
+      quizQuestions: [
+        "엄마가 아기에게 밥을 ___. (ciyarwa)",
+        "모기가 사람에게 ___. (karɓa)"
+      ],
+      callbackLabel: "Ƙarin bayani → a manhajar nahawu ta Gwanggaeto (nan ba da jimawa ba)"
     },
     "honorific-converter": {
-      "name": "Magani: 존댓말",
-      "description": "Gajeren atisaye don 존댓말.",
-      "diagnosis": "Wannan ɓangaren har yanzu yana ɗan wahala a gare ka: 존댓말.",
-      "info": "Duba wannan ka’ida: 먹습니다 / 가요",
-      "quizQuestions": ["'먹다' 격식체는?", "'가다' 두루높임은?"],
-      "callbackLabel": "Ƙarin bayani → a manhajar Gwanggaeto",
-    },
+      name: "Mai sauya zuwa harshen girmamawa kai tsaye",
+      description: "Yana sauya magana ta yau da kullum zuwa salon ladabi kai tsaye.",
+      diagnosis: "Kana fama da harshen girmamawa.",
+      info: "Na yau da kullum + -요 = mai ladabi (해요). Na yau da kullum + -습니다/ㅂ니다 = na hukuma (합니다).",
+      quizQuestions: [
+        "Menene salon hukuma na '먹다'?",
+        "Menene salon ladabi (해요) na '가다'?"
+      ],
+      callbackLabel: "Ƙarin bayani → a manhajar nahawu ta Gwanggaeto (nan ba da jimawa ba)"
+    }
   }
 };
