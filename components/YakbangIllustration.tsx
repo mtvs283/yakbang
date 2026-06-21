@@ -8,17 +8,31 @@ const showDevTools = process.env.NODE_ENV === "development";
 export default function YakbangIllustration() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showHotspotGuide, setShowHotspotGuide] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false);
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#100b07] text-yakbangPaper">
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="relative h-screen w-screen overflow-hidden bg-[#100b07]">
-          <img
-            alt="약방광개토 일러스트"
-            className="h-full w-full object-cover"
-            draggable={false}
-            src="/yakbang-bg.png"
-          />
+          {videoEnded ? (
+            <img
+              alt="약방광개토 일러스트"
+              className="h-full w-full object-cover"
+              draggable={false}
+              src="/yakbang-bg.png"
+            />
+          ) : (
+            <video
+              autoPlay
+              className="h-full w-full object-cover"
+              muted
+              onEnded={() => setVideoEnded(true)}
+              onError={() => setVideoEnded(true)}
+              playsInline
+              poster="/yakbang-bg.png"
+              src="/yakbang-bg.mp4"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/24" />
 
           <button
