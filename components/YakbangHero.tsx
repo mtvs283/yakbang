@@ -12,26 +12,32 @@ export default function YakbangHero() {
         poster="/yakbang-hero-poster.png"
         src="/yakbang-hero.mp4"
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/15 via-black/10 to-black/62" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/8 via-black/5 to-black/48" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
 
-      <section className="absolute inset-x-5 bottom-8 rounded-lg border border-yakbangGold/55 bg-black/34 px-5 py-6 text-right shadow-[0_0_48px_rgba(212,175,55,0.16)] backdrop-blur-[2px] sm:inset-x-auto sm:bottom-auto sm:right-[5%] sm:top-1/2 sm:w-[40rem] sm:max-w-[44vw] sm:-translate-y-1/2 sm:px-8 sm:py-10">
-        <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-yakbangGold/80 sm:text-sm">
+      <p className="animate-prescription-fade absolute left-1/2 top-5 z-10 -translate-x-1/2 whitespace-nowrap font-sans text-[11px] font-black uppercase tracking-[0.14em] text-black/80 sm:top-7 sm:text-4xl">
+        Purchase a prescription
+      </p>
+
+      <section className="absolute inset-x-4 bottom-7 rounded-sm border border-yakbangGold/70 px-5 pb-6 pt-10 text-right shadow-[0_0_56px_rgba(212,175,55,0.18)] sm:inset-x-auto sm:bottom-auto sm:right-[3.2%] sm:top-1/2 sm:h-[82vh] sm:w-[45vw] sm:-translate-y-1/2 sm:px-8 sm:pb-10 sm:pt-16">
+        <p className="mb-8 font-sans text-xs font-bold uppercase tracking-[0.22em] text-white/86 sm:text-2xl">
           YAKBANG GWANGGAETO
         </p>
-        <h1 className="text-5xl font-black leading-none text-white drop-shadow-[0_0_22px_rgba(255,255,255,0.14)] sm:text-7xl">
+        <h1 className="font-shilla text-6xl font-bold leading-none text-white drop-shadow-[0_0_24px_rgba(255,255,255,0.18)] sm:mt-[18vh] sm:text-8xl">
           집현전 약방
         </h1>
-        <p className="mt-5 text-lg font-bold leading-8 text-yakbangPaper/90 sm:text-2xl">
-          약 드시고 한국어에 밝아지시오
+        <p className="mt-8 font-shilla text-2xl font-medium leading-8 text-yakbangPaper/95 sm:text-4xl">
+          약드시고 한국어에 밝아지시오
         </p>
         <Link
           aria-label="약방으로 들어가기"
-          className="mt-7 inline-flex items-center gap-3 rounded-full border border-yakbangGold/70 bg-yakbangGold px-7 py-3 text-lg font-black text-yakbangBlack shadow-[0_0_30px_rgba(212,175,55,0.34)] transition duration-200 ease-in-out hover:-translate-y-0.5 hover:bg-[#f0cf68] focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black"
+          className="mt-8 inline-flex rotate-[-12deg] items-center gap-3 font-sans text-5xl font-black text-white transition duration-200 ease-in-out hover:-translate-y-1 hover:text-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black sm:mt-12 sm:text-8xl"
           href="/shop"
         >
-          <span>약방문 받기</span>
-          <span aria-hidden="true">→</span>
+          <span aria-hidden="true" className="text-yakbangGold">
+            ↓
+          </span>
+          <span>엔터!!</span>
         </Link>
       </section>
     </main>

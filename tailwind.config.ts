@@ -10,6 +10,8 @@ const config: Config = {
         yakbangPaper: "#f5e6c8"
       },
       fontFamily: {
+        sans: ["Arial", "Helvetica", "sans-serif"],
+        shilla: ["var(--font-shilla)", "serif"],
         script: ["var(--font-script)", "serif"],
         serif: ["var(--font-script)", "serif"]
       },

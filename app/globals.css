@@ -10,8 +10,25 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "ShillaCulture";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/Shilla_Culture-Medium.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ShillaCulture";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/Shilla_Culture-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
 :root {
   --font-script: "KimjungchulScript";
+  --font-shilla: "ShillaCulture";
   color-scheme: dark;
 }
 
@@ -33,4 +50,23 @@ body {
 button,
 input {
   font: inherit;
+}
+
+@keyframes prescriptionFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  42% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+.animate-prescription-fade {
+  animation: prescriptionFade 3.2s ease-out both;
 }
