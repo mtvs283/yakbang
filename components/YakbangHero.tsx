@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function YakbangHero() {
   return (
-    <main className="flex min-h-screen items-center justify-center overflow-hidden bg-black text-yakbangPaper">
-      <div className="relative aspect-video w-screen max-h-screen max-w-[177.777vh]">
+    <main className="relative min-h-screen overflow-hidden bg-black text-yakbangPaper">
+      <div className="absolute right-0 top-1/2 aspect-video h-[100dvh] -translate-y-1/2 sm:left-1/2 sm:right-auto sm:h-auto sm:max-h-screen sm:w-screen sm:max-w-[177.777vh] sm:-translate-x-1/2">
         <video
           autoPlay
           className="absolute inset-0 h-full w-full object-cover"

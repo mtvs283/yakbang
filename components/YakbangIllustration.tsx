@@ -48,8 +48,8 @@ export default function YakbangIllustration() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#100b07] text-yakbangPaper">
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative h-screen w-screen overflow-hidden bg-[#100b07]">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute right-0 top-1/2 aspect-[4/3] h-[100dvh] -translate-y-1/2 overflow-hidden bg-[#100b07] md:left-1/2 md:right-auto md:h-auto md:max-h-screen md:w-screen md:max-w-[133.333vh] md:-translate-x-1/2">
           {videoEnded ? (
             <img
               alt="약방광개토 일러스트"
