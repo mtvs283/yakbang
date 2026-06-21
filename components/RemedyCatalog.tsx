@@ -11,8 +11,7 @@ import {
 } from "../data/remedies";
 import PrescriptionModal from "./PrescriptionModal";
 
-// TODO: 광개토 홈 실제 배포 URL로 교체
-const GWANGGAETO_URL = "#";
+const GWANGGAETO_URL = "https://gwanggaeto-home.vercel.app/";
 
 const categoryGroups: { category: RemedyCategory; title: string; blurb: string }[] =
   [
