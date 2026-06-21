@@ -9,7 +9,7 @@ const titleHotspots = [
   {
     id: "h-pronunciation",
     label: "ㅎ 발음약",
-    menu: "ㅎ 발음약 살펴보기",
+    menu: "ㅎ 발음약 처방전",
     left: "40.5%",
     top: "58%",
     width: "8.5%",
@@ -18,7 +18,7 @@ const titleHotspots = [
   {
     id: "batchim-random",
     label: "랜덤 7대표 받침음절",
-    menu: "받침음절 처방 보기",
+    menu: "받침음절 처방전",
     left: "49.5%",
     top: "58%",
     width: "13.5%",
@@ -27,7 +27,7 @@ const titleHotspots = [
   {
     id: "royal-remedy",
     label: "왕실 비방",
-    menu: "왕실 비방 열기",
+    menu: "왕실 비방 구매하기",
     left: "72.5%",
     top: "12.5%",
     width: "21%",
