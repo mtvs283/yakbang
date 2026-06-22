@@ -28,19 +28,19 @@ export const pharmacyScene: { background: string; hotspots: Hotspot[] } = {
   background: "/images/pharmacy-scene-bg.png",
   hotspots: [
     {
-      // 책상(카운터) 전면에 한국어만 박음 (번역 X — 모든 언어에서 ko로 표시)
+      // 상단 간판: 한국어만 (번역 X), 검정 글씨. 모든 언어에서 ko로 표시
       id: "sign",
       x: "50%",
-      y: "80%",
+      y: "11.1%",
       mobileX: "50%",
-      mobileY: "82%",
+      mobileY: "11.1%",
       style: "calligraphy-gold",
       text: { ko: "집현전약방" }
     },
     {
       id: "greeting",
-      x: "50%",
-      y: "44%",
+      x: "59.5%",
+      y: "44.9%",
       style: "speech-bubble",
       text: {
         ko: "어서오시오~ 어디가 아프오?",
@@ -72,32 +72,32 @@ export const pharmacyScene: { background: string; hotspots: Hotspot[] } = {
     },
     {
       id: "pronunciation-shelf",
-      x: "14%",
-      y: "60%",
+      x: "9.5%",
+      y: "45%",
       style: "category-marker",
       action: "open-catalog/pronunciation",
       category: "pronunciation"
     },
     {
       id: "phonological-shelf",
-      x: "30%",
-      y: "60%",
+      x: "21.4%",
+      y: "45%",
       style: "category-marker",
       action: "open-catalog/phonological-rule",
       category: "phonological-rule"
     },
     {
       id: "grammar-shelf",
-      x: "70%",
-      y: "60%",
+      x: "38.5%",
+      y: "45%",
       style: "category-marker",
       action: "open-catalog/grammar",
       category: "grammar"
     },
     {
       id: "royal-stand",
-      x: "88%",
-      y: "60%",
+      x: "90.1%",
+      y: "79.2%",
       style: "royal-marker",
       action: "open-royal",
       category: "royal"

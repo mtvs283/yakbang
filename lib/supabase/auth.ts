@@ -15,11 +15,17 @@ export async function ensureAnonymousUser() {
 }
 
 // 환자 등록: 익명 유저에 이메일 정보만 붙이고 프로필 갱신 (비밀번호는 격상 때)
-export async function registerPatient(displayName: string, email: string) {
+// 성별·연세는 auth 유저 메타데이터에 저장 (진료증 항목)
+export async function registerPatient(
+  displayName: string,
+  email: string,
+  gender?: string,
+  age?: number
+) {
   const supabase = createClient();
   const { error: updateError } = await supabase.auth.updateUser({
     email,
-    data: { display_name: displayName }
+    data: { display_name: displayName, gender, age }
   });
   if (updateError) throw updateError;
 }

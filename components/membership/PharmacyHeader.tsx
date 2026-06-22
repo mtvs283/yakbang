@@ -22,11 +22,14 @@ export default function PharmacyHeader() {
   const name = profile?.display_name ?? "";
 
   return (
-    <header className="relative z-20 flex w-full items-center gap-3 border-b border-yakbangGold/20 bg-[#100b07] px-4 py-2 text-yakbangPaper sm:px-6">
+    <>
+      {/* 책상 위에 떠 있는 진료등록/회원 표시. transform이 걸려 있으므로
+          모달(fixed)은 이 박스 밖(아래)에 둬야 화면 기준으로 정상 표시됨 */}
+      <div className="absolute left-1/2 top-[80%] z-30 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-3 text-yakbangPaper">
       {loading ? (
         <span className="font-script text-sm text-yakbangPaper/50">…</span>
       ) : isRegistered ? (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 rounded-full border border-yakbangGold/40 bg-black/70 px-4 py-1.5 backdrop-blur-sm">
           <StageBadge size={22} tier={tier} />
           {name ? (
             <span className="font-script text-sm text-yakbangPaper/90">
@@ -46,13 +49,14 @@ export default function PharmacyHeader() {
         </div>
       ) : (
         <button
-          className="rounded-full border border-yakbangGold/70 px-4 py-1.5 font-script text-sm font-bold text-yakbangGold transition hover:bg-yakbangGold hover:text-black"
+          className="rounded-full border-2 border-yakbangGold bg-yakbangGold px-10 py-4 font-script text-[42px] font-bold text-black shadow-[0_4px_16px_rgba(0,0,0,0.55)] transition hover:brightness-110"
           onClick={() => setShowRegister(true)}
           type="button"
         >
           진료 등록
         </button>
       )}
+      </div>
 
       {showRegister ? (
         <RegisterModal
@@ -85,6 +89,6 @@ export default function PharmacyHeader() {
           toTier={notif.to}
         />
       ) : null}
-    </header>
+    </>
   );
 }

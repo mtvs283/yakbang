@@ -37,7 +37,7 @@ export default function KoreanTermTooltip({ term, children }: Props) {
   return (
     <span className="relative inline-block" ref={ref}>
       <span
-        className="cursor-help border-b border-dashed border-amber-600/70 text-amber-200/90 transition hover:text-amber-100"
+        className="cursor-help border-b border-dashed border-[#7a4f28]/70 font-bold text-[#3d2b1a] transition hover:text-[#8a3a1a]"
         onClick={
           canHover
             ? undefined

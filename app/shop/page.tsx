@@ -8,8 +8,10 @@ import RemedyCatalog from "../../components/RemedyCatalog";
 export default function ShopPage() {
   return (
     <>
-      <PharmacyHeader />
-      <PharmacyScene />
+      <div className="relative">
+        <PharmacyScene />
+        <PharmacyHeader />
+      </div>
       {/* 기존 뭉치 영상 (AI가 엉터리 한글을 넣어 정적 장면으로 대체). 롤백 시 복원:
       <div className="relative">
         <YakbangIllustration />

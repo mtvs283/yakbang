@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { registerPatient } from "../../lib/supabase/auth";
 import { createClient } from "../../lib/supabase/client";
 import KoreanTermTooltip from "../KoreanTermTooltip";
@@ -12,17 +13,24 @@ interface Props {
 
 export default function RegisterModal({ onClose, onDone }: Props) {
   const [name, setName] = useState("");
+  const [gender, setGender] = useState<"남" | "여" | "">("");
+  const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) return;
+    if (!name.trim() || !gender || !age.trim() || !email.trim()) return;
     setLoading(true);
     setError(null);
     try {
-      await registerPatient(name.trim(), email.trim());
+      await registerPatient(
+        name.trim(),
+        email.trim(),
+        gender,
+        Number(age) || undefined
+      );
       const supabase = createClient();
       const { error: rpcError } = await supabase.rpc("claim_patient_bonus");
       if (rpcError) throw rpcError;
@@ -36,10 +44,10 @@ export default function RegisterModal({ onClose, onDone }: Props) {
     }
   }
 
-  return (
+  return createPortal(
     <div
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/72 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/72 px-4 py-6 backdrop-blur-sm"
       onMouseDown={onClose}
       role="dialog"
     >
@@ -81,6 +89,45 @@ export default function RegisterModal({ onClose, onDone }: Props) {
               value={name}
             />
           </label>
+
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <span className="mb-1 block font-script text-sm font-bold text-[#7a4f28]">
+                성별
+              </span>
+              <div className="flex gap-2">
+                {(["남", "여"] as const).map((g) => (
+                  <button
+                    className={`flex-1 rounded-md border-2 px-3 py-2 font-script text-base font-bold transition ${
+                      gender === g
+                        ? "border-[#7a4f28] bg-[#7a4f28] text-[#f5e6c8]"
+                        : "border-[#7a4f28]/40 bg-white/70 text-[#7a4f28] hover:border-[#7a4f28]"
+                    }`}
+                    key={g}
+                    onClick={() => setGender(g)}
+                    type="button"
+                  >
+                    {g}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <label className="block w-28">
+              <span className="mb-1 block font-script text-sm font-bold text-[#7a4f28]">
+                연세
+              </span>
+              <input
+                className="w-full rounded-md border-2 border-[#7a4f28]/40 bg-white/70 px-3 py-2 text-base outline-none focus:border-[#7a4f28] focus:ring-2 focus:ring-[#7a4f28]/40"
+                inputMode="numeric"
+                min={1}
+                onChange={(e) => setAge(e.target.value)}
+                placeholder="나이"
+                type="number"
+                value={age}
+              />
+            </label>
+          </div>
+
           <label className="block">
             <span className="mb-1 block font-script text-sm font-bold text-[#7a4f28]">
               <KoreanTermTooltip term="서신">서신</KoreanTermTooltip> 받을 거처
@@ -107,6 +154,7 @@ export default function RegisterModal({ onClose, onDone }: Props) {
           </button>
         </form>
       </section>
-    </div>
+    </div>,
+    document.body
   );
 }

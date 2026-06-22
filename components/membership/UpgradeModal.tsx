@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { formatStageMessage, stageMessages } from "../../data/membership";
 import { useUpgrade } from "../../lib/hooks/useUpgrade";
 
@@ -35,10 +36,10 @@ export default function UpgradeModal({ name, onClose, onDone }: Props) {
     }
   }
 
-  return (
+  return createPortal(
     <div
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/72 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/72 px-4 py-6 backdrop-blur-sm"
       onMouseDown={onClose}
       role="dialog"
     >
@@ -111,6 +112,7 @@ export default function UpgradeModal({ name, onClose, onDone }: Props) {
           {formatStageMessage(stageMessages.upgradeTo.nangdo, name || "그대")}
         </p>
       </section>
-    </div>
+    </div>,
+    document.body
   );
 }

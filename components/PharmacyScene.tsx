@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { pharmacyScene, type Hotspot } from "../data/pharmacy-scene";
 import { useLocale } from "./LocaleProvider";
 
@@ -15,14 +15,72 @@ export default function PharmacyScene() {
   const [isMobile, setIsMobile] = useState(false);
   const [dev, setDev] = useState(false);
 
+  // dev 모드 드래그: 핫스팟을 마우스로 끌어 위치 조정 (좌표는 화면 라벨에 %로 표시)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const draggingRef = useRef<string | null>(null);
+  const [overrides, setOverrides] = useState<
+    Record<string, { x: string; y: string }>
+  >({});
+
+  function pctFromEvent(e: React.PointerEvent) {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return null;
+    const x = Math.round(((e.clientX - rect.left) / rect.width) * 1000) / 10;
+    const y = Math.round(((e.clientY - rect.top) / rect.height) * 1000) / 10;
+    return { x: `${x}%`, y: `${y}%` };
+  }
+
+  function onHotspotDown(e: React.PointerEvent, id: string) {
+    if (!dev) return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    draggingRef.current = id;
+  }
+
+  function onHotspotMove(e: React.PointerEvent, id: string) {
+    if (!dev || draggingRef.current !== id) return;
+    const p = pctFromEvent(e);
+    if (!p) return;
+    setOverrides((o) => {
+      const next = { ...o, [id]: p };
+      try {
+        localStorage.setItem("pharmacy-dev-overrides", JSON.stringify(next));
+      } catch {
+        /* noop */
+      }
+      return next;
+    });
+  }
+
+  function onHotspotUp(e: React.PointerEvent, id: string) {
+    if (!dev || draggingRef.current !== id) return;
+    draggingRef.current = null;
+    e.currentTarget.releasePointerCapture?.(e.pointerId);
+    const p = overrides[id];
+    if (p) {
+      // eslint-disable-next-line no-console
+      console.log(`[hotspot] ${id} → x:"${p.x}", y:"${p.y}"`);
+    }
+  }
+
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
     const update = () => setIsMobile(mq.matches);
     update();
     mq.addEventListener("change", update);
-    setDev(
-      new URLSearchParams(window.location.search).get("dev") === "true"
-    );
+    const isDev =
+      new URLSearchParams(window.location.search).get("dev") === "true";
+    setDev(isDev);
+    if (isDev) {
+      // 드래그 위치를 localStorage에서 복원 (HMR/새로고침에도 유지)
+      try {
+        const saved = localStorage.getItem("pharmacy-dev-overrides");
+        if (saved) setOverrides(JSON.parse(saved));
+      } catch {
+        /* noop */
+      }
+    }
     return () => mq.removeEventListener("change", update);
   }, []);
 
@@ -42,12 +100,13 @@ export default function PharmacyScene() {
   // 카탈로그/모달은 DO NOT TOUCH이므로 현재 모든 액션은 카탈로그로 스크롤.
   // (카테고리 활성화·왕실 모달 열기는 카탈로그 수정이 필요해 추후 별도 처리)
   function handleAction(_h: Hotspot) {
+    if (dev) return; // dev 모드에선 드래그 편집이 우선 (네비게이션 비활성)
     scrollToCatalog();
   }
 
   return (
     <section className="relative flex w-full justify-center overflow-hidden bg-[#100b07]">
-      <div className="relative w-fit">
+      <div className="relative w-fit" ref={containerRef}>
         <img
           src={pharmacyScene.background}
           alt={t.catalogTitle}
@@ -56,34 +115,41 @@ export default function PharmacyScene() {
         />
 
       {pharmacyScene.hotspots.map((h) => {
-        const left = isMobile ? h.mobileX ?? h.x : h.x;
-        const top = isMobile ? h.mobileY ?? h.y : h.y;
+        const ov = overrides[h.id];
+        const left = ov ? ov.x : isMobile ? h.mobileX ?? h.x : h.x;
+        const top = ov ? ov.y : isMobile ? h.mobileY ?? h.y : h.y;
         const label = hotspotText(h);
 
         return (
           <div
-            className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
+            className={`absolute z-10 -translate-x-1/2 -translate-y-1/2 ${
+              dev ? "cursor-move touch-none" : ""
+            }`}
             key={h.id}
+            onPointerDown={dev ? (e) => onHotspotDown(e, h.id) : undefined}
+            onPointerMove={dev ? (e) => onHotspotMove(e, h.id) : undefined}
+            onPointerUp={dev ? (e) => onHotspotUp(e, h.id) : undefined}
             style={{ left, top }}
           >
             {dev ? (
-              <div className="pointer-events-none absolute left-1/2 top-1/2 flex min-h-[44px] min-w-[88px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-0.5 rounded border-2 border-dashed border-red-500 bg-red-500/10 px-2 py-1 text-center">
-                <span className="text-[11px] font-bold text-red-300">
+              <div className="pointer-events-none absolute left-1/2 top-full z-30 mt-1 flex -translate-x-1/2 flex-col items-center gap-0.5 whitespace-nowrap rounded bg-black/85 px-2 py-1 text-center">
+                <span className="text-[13px] font-bold text-red-300">
                   {h.id}
                 </span>
-                <span className="text-[10px] text-red-300/90">
+                <span className="text-[14px] font-bold text-amber-200">
                   x:{left} y:{top}
                 </span>
               </div>
             ) : null}
 
             {h.style === "calligraphy-gold" ? (
+              // 집현전약방 간판: 검정 글씨, 기존 대비 20% 키움 (43px / 86px)
               <span
-                className="whitespace-nowrap font-shilla text-4xl font-bold sm:text-7xl"
+                className="whitespace-nowrap font-shilla text-[43px] font-bold sm:text-[86px]"
                 style={{
-                  color: "#D4AF37",
-                  WebkitTextStroke: "1px rgba(0,0,0,0.65)",
-                  textShadow: "0 2px 6px rgba(0,0,0,0.85)"
+                  color: "#111111",
+                  WebkitTextStroke: "1px rgba(255,255,255,0.55)",
+                  textShadow: "0 2px 8px rgba(255,255,255,0.5)"
                 }}
               >
                 {label}
@@ -141,6 +207,27 @@ export default function PharmacyScene() {
         );
       })}
       </div>
+
+      {dev ? (
+        <div className="fixed left-2 top-24 z-50 rounded-lg bg-black/90 p-3 font-mono text-[14px] leading-6 text-amber-200 shadow-2xl">
+          <div className="mb-1 font-bold text-amber-400">
+            현재 좌표 (초록=옮김)
+          </div>
+          {pharmacyScene.hotspots.map((h) => {
+            const ov = overrides[h.id];
+            const x = ov ? ov.x : isMobile ? h.mobileX ?? h.x : h.x;
+            const y = ov ? ov.y : isMobile ? h.mobileY ?? h.y : h.y;
+            return (
+              <div
+                className={ov ? "text-lime-300" : "text-amber-200/60"}
+                key={h.id}
+              >
+                {h.id}: {x} , {y}
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
     </section>
   );
 }
