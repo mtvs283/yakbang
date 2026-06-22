@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LocaleProvider } from "../components/LocaleProvider";
+import SupabaseProvider from "../components/membership/SupabaseProvider";
 
 export const metadata: Metadata = {
   title: "약방광개토",
@@ -19,7 +20,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <LocaleProvider>{children}</LocaleProvider>
+        <SupabaseProvider>
+          <LocaleProvider>{children}</LocaleProvider>
+        </SupabaseProvider>
       </body>
     </html>
   );
