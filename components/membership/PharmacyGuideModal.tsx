@@ -49,7 +49,7 @@ export default function PharmacyGuideModal({ onClose }: Props) {
           />
 
           <div
-            className="absolute flex flex-col items-start justify-start overflow-hidden px-[0.25em] pt-[0.1em] font-script font-bold text-[#2a1810]"
+            className="pointer-events-auto absolute overflow-y-auto overscroll-y-contain px-[0.25em] pb-[0.15em] pt-[0.1em] font-script font-bold text-[#2a1810] [scrollbar-color:rgba(42,24,16,0.35)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#2a1810]/35"
             dir={isRtl ? "rtl" : "ltr"}
             style={{
               left: "35.5%",
@@ -57,11 +57,12 @@ export default function PharmacyGuideModal({ onClose }: Props) {
               width: "48%",
               height: "36%",
               fontSize: "clamp(1.12rem, 3.33vw, 1.84rem)",
-              lineHeight: 1.22
+              lineHeight: 1.22,
+              WebkitOverflowScrolling: "touch"
             }}
           >
             <p
-              className="mb-[0.2em] w-full text-center"
+              className="mb-[0.2em] w-full shrink-0 text-center"
               id="pharmacy-guide-title"
               style={{
                 fontSize: "clamp(1.4rem, 4.23vw, 2.2rem)",
@@ -71,7 +72,7 @@ export default function PharmacyGuideModal({ onClose }: Props) {
               {g.title}
             </p>
             <ul className="m-0 w-full list-none space-y-[0.08em] p-0">
-              <li className="w-full break-keep text-start">
+              <li className="w-full break-words text-start">
                 {g.step1}
                 <span
                   className="mt-[0.05em] block ps-[0.45em] text-[0.82em] font-semibold opacity-90"
@@ -80,9 +81,9 @@ export default function PharmacyGuideModal({ onClose }: Props) {
                   {g.step1Note}
                 </span>
               </li>
-              <li className="w-full break-keep text-start">{g.step2}</li>
-              <li className="w-full break-keep text-start">{g.step3}</li>
-              <li className="w-full break-keep text-start">{g.step4}</li>
+              <li className="w-full break-words text-start">{g.step2}</li>
+              <li className="w-full break-words text-start">{g.step3}</li>
+              <li className="w-full break-words text-start">{g.step4}</li>
             </ul>
           </div>
         </div>
