@@ -21,18 +21,24 @@ export default function RegisterModal({
   const [gender, setGender] = useState<"남" | "여" | "">("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim() || !gender || !age.trim() || !email.trim()) return;
+    if (password.length < 6) {
+      setError("비밀번호는 6자 이상이어야 하오. (재방문 입장에 쓰임)");
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
       await registerPatient(
         name.trim(),
         email.trim(),
+        password,
         gender,
         Number(age) || undefined
       );
@@ -156,6 +162,18 @@ export default function RegisterModal({
               placeholder="이메일을 적으시오"
               type="email"
               value={email}
+            />
+          </label>
+          <label className="block">
+            <span className="mb-1 block font-script text-sm font-bold text-[#7a4f28]">
+              비밀번호 <span className="font-normal">(6자 이상, 재방문 입장에 쓰임)</span>
+            </span>
+            <input
+              className="w-full rounded-md border-2 border-[#7a4f28]/40 bg-white/70 px-3 py-2 text-base outline-none focus:border-[#7a4f28] focus:ring-2 focus:ring-[#7a4f28]/40"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="비밀번호를 정하시오"
+              type="password"
+              value={password}
             />
           </label>
 
