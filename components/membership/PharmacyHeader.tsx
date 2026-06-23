@@ -74,7 +74,7 @@ export default function PharmacyHeader() {
           onClick={handleEnter}
           type="button"
         >
-          진료 등록
+          입원 안내
         </button>
       </div>
       ) : null}
