@@ -52,11 +52,11 @@ export default function PharmacyGuideModal({ onClose }: Props) {
             className="absolute flex flex-col items-start justify-start overflow-hidden px-[0.25em] pt-[0.1em] font-script font-bold text-[#2a1810]"
             dir={isRtl ? "rtl" : "ltr"}
             style={{
-              left: "45.5%",
+              left: "35.5%",
               top: "31.5%",
-              width: "50%",
+              width: "48%",
               height: "36%",
-              fontSize: "clamp(1.24rem, 3.7vw, 2.04rem)",
+              fontSize: "clamp(1.12rem, 3.33vw, 1.84rem)",
               lineHeight: 1.22
             }}
           >
@@ -64,7 +64,7 @@ export default function PharmacyGuideModal({ onClose }: Props) {
               className="mb-[0.2em] w-full text-center"
               id="pharmacy-guide-title"
               style={{
-                fontSize: "clamp(1.56rem, 4.7vw, 2.44rem)",
+                fontSize: "clamp(1.4rem, 4.23vw, 2.2rem)",
                 lineHeight: 1.15
               }}
             >
