@@ -89,6 +89,8 @@ export default function PrescriptionModal({
       if (result.error === "insufficient") {
         setBalance(result.balance ?? 0);
         setPhase("insufficient");
+      } else {
+        console.error("payment failed", result.error);
       }
       return;
     }
