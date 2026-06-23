@@ -34,6 +34,11 @@ export default function RegisterModal({ onClose, onDone }: Props) {
       const supabase = createClient();
       const { error: rpcError } = await supabase.rpc("claim_patient_bonus");
       if (rpcError) throw rpcError;
+      try {
+        localStorage.setItem("yakbang-has-account", "1"); // 재방문 판별용
+      } catch {
+        /* noop */
+      }
       onDone();
     } catch (err) {
       const msg = err instanceof Error ? err.message : "";

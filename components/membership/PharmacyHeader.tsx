@@ -5,6 +5,7 @@ import { tiers, type Tier } from "../../data/membership";
 import { useDailyAttendance } from "../../lib/hooks/useDailyAttendance";
 import { useUser } from "../../lib/hooks/useUser";
 import RegisterModal from "./RegisterModal";
+import ReturnLoginModal from "./ReturnLoginModal";
 import StageBadge from "./StageBadge";
 import StageUpgradeNotification from "./StageUpgradeNotification";
 import UpgradeModal from "./UpgradeModal";
@@ -14,11 +15,22 @@ export default function PharmacyHeader() {
   useDailyAttendance(); // 약방 진입 시 당일 자동 출석
 
   const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [notif, setNotif] = useState<{ from: Tier; to: Tier } | null>(null);
 
   const tier: Tier = profile?.tier ?? "visitor";
   const name = profile?.display_name ?? "";
+
+  // 진료등록 클릭: 재방문(이 브라우저에서 등록 이력/로그인)이면 재진 입장, 아니면 신규 등록
+  function handleEnter() {
+    const returning =
+      isRegistered ||
+      (typeof window !== "undefined" &&
+        localStorage.getItem("yakbang-has-account") === "1");
+    if (returning) setShowLogin(true);
+    else setShowRegister(true);
+  }
 
   return (
     <>
@@ -26,7 +38,7 @@ export default function PharmacyHeader() {
       <div className="absolute left-1/2 top-[80%] z-30 -translate-x-1/2 -translate-y-1/2">
         <button
           className="rounded-full border-2 border-yakbangGold bg-yakbangGold px-10 py-4 font-script text-[42px] font-bold text-black shadow-[0_4px_16px_rgba(0,0,0,0.55)] transition hover:brightness-110"
-          onClick={() => setShowRegister(true)}
+          onClick={handleEnter}
           type="button"
         >
           진료 등록
@@ -63,6 +75,10 @@ export default function PharmacyHeader() {
             setNotif({ from: "visitor", to: "patient" });
           }}
         />
+      ) : null}
+
+      {showLogin ? (
+        <ReturnLoginModal onClose={() => setShowLogin(false)} />
       ) : null}
 
       {showUpgrade ? (
