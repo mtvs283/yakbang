@@ -1,4 +1,3 @@
-import PatientStatus from "../../components/membership/PatientStatus";
 import PharmacyHeader from "../../components/membership/PharmacyHeader";
 import ShopNav from "../../components/membership/ShopNav";
 import PharmacyScene from "../../components/PharmacyScene";
@@ -11,7 +10,6 @@ export default function ShopPage() {
   return (
     <>
       <ShopNav />
-      <PatientStatus />
       <div className="relative">
         <PharmacyScene />
         <PharmacyHeader />

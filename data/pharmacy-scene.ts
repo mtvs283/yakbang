@@ -6,7 +6,8 @@ export type HotspotStyle =
   | "speech-bubble"
   | "category-marker"
   | "royal-marker"
-  | "button-gold";
+  | "button-gold"
+  | "nameplate";
 
 export interface Hotspot {
   id: string;
@@ -36,6 +37,16 @@ export const pharmacyScene: { background: string; hotspots: Hotspot[] } = {
       mobileY: "11.1%",
       style: "calligraphy-gold",
       text: { ko: "집현전약방" }
+    },
+    {
+      // 책상 위 명패 (한국어 고정, 번역 X) — 강아지 어의 뭉치
+      id: "nameplate",
+      x: "50%",
+      y: "70%",
+      mobileX: "50%",
+      mobileY: "70%",
+      style: "nameplate",
+      text: { ko: "초대 어의: 뭉치" }
     },
     {
       id: "greeting",

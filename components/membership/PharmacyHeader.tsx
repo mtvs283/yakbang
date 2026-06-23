@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import type { Tier } from "../../data/membership";
+import { tiers, type Tier } from "../../data/membership";
 import { useDailyAttendance } from "../../lib/hooks/useDailyAttendance";
 import { useUser } from "../../lib/hooks/useUser";
-import PointDisplay from "./PointDisplay";
 import RegisterModal from "./RegisterModal";
 import StageBadge from "./StageBadge";
 import StageUpgradeNotification from "./StageUpgradeNotification";
 import UpgradeModal from "./UpgradeModal";
 
 export default function PharmacyHeader() {
-  const { profile, loading, refresh, isRegistered } = useUser();
+  const { profile, refresh, isRegistered } = useUser();
   useDailyAttendance(); // 약방 진입 시 당일 자동 출석
 
   const [showRegister, setShowRegister] = useState(false);
@@ -23,20 +22,26 @@ export default function PharmacyHeader() {
 
   return (
     <>
-      {/* 책상 위에 떠 있는 진료등록/회원 표시. transform이 걸려 있으므로
-          모달(fixed)은 이 박스 밖(아래)에 둬야 화면 기준으로 정상 표시됨 */}
-      <div className="absolute left-1/2 top-[80%] z-30 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-3 text-yakbangPaper">
-      {loading ? (
-        <span className="font-script text-sm text-yakbangPaper/50">…</span>
-      ) : isRegistered ? (
-        <div className="flex items-center gap-3 rounded-full border border-yakbangGold/40 bg-black/70 px-4 py-1.5 backdrop-blur-sm">
-          <StageBadge size={22} tier={tier} />
-          {name ? (
-            <span className="font-script text-sm text-yakbangPaper/90">
-              {name}
-            </span>
-          ) : null}
-          <PointDisplay points={profile?.points ?? 0} tier={tier} />
+      {/* 책상: 진료 등록 버튼 항상 노출 (transform 안 — 모달은 fragment 직속) */}
+      <div className="absolute left-1/2 top-[80%] z-30 -translate-x-1/2 -translate-y-1/2">
+        <button
+          className="rounded-full border-2 border-yakbangGold bg-yakbangGold px-10 py-4 font-script text-[42px] font-bold text-black shadow-[0_4px_16px_rgba(0,0,0,0.55)] transition hover:brightness-110"
+          onClick={() => setShowRegister(true)}
+          type="button"
+        >
+          진료 등록
+        </button>
+      </div>
+
+      {/* 우상단(다국어 토글 아래): 회원 상태 — 등록 시만 */}
+      {isRegistered ? (
+        <div className="fixed right-4 top-[68px] z-40 flex items-center gap-2 rounded-full border border-yakbangGold/40 bg-yakbangBlack/80 px-4 py-1.5 backdrop-blur">
+          <StageBadge size={20} tier={tier} />
+          <span className="font-script text-sm font-bold text-yakbangGold">
+            {tiers[tier].ko}
+            {profile?.daily_number != null ? ` ${profile.daily_number}` : ""} :{" "}
+            {(profile?.points ?? 0).toLocaleString("ko-KR")}원
+          </span>
           {tier === "patient" ? (
             <button
               className="rounded-full border border-yakbangGold/70 px-3 py-1 font-script text-xs font-bold text-yakbangGold transition hover:bg-yakbangGold hover:text-black"
@@ -47,16 +52,7 @@ export default function PharmacyHeader() {
             </button>
           ) : null}
         </div>
-      ) : (
-        <button
-          className="rounded-full border-2 border-yakbangGold bg-yakbangGold px-10 py-4 font-script text-[42px] font-bold text-black shadow-[0_4px_16px_rgba(0,0,0,0.55)] transition hover:brightness-110"
-          onClick={() => setShowRegister(true)}
-          type="button"
-        >
-          진료 등록
-        </button>
-      )}
-      </div>
+      ) : null}
 
       {showRegister ? (
         <RegisterModal
