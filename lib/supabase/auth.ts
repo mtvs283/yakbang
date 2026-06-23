@@ -60,6 +60,17 @@ export async function sendMagicLink(email: string) {
   if (error) throw error;
 }
 
+// 재진 입장 2단계: 메일로 받은 6자리 코드 검증 → 로그인. (링크 대신 코드 — 지메일 링크 선소모 회피)
+export async function verifyLoginCode(email: string, code: string) {
+  const supabase = createClient();
+  const { error } = await supabase.auth.verifyOtp({
+    email,
+    token: code.trim(),
+    type: "email"
+  });
+  if (error) throw error;
+}
+
 export async function signOut() {
   const supabase = createClient();
   await supabase.auth.signOut();
