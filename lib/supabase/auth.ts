@@ -2,16 +2,25 @@
 
 import { createClient } from "./client";
 
-// 사이트 진입 시 익명 유저 자동 발급 (없을 때만)
+// 사이트 진입 시 익명 유저 자동 발급 (없을 때만).
+// 여러 컴포넌트가 동시에 불러도 익명 로그인은 1번만 일어나도록 in-flight 디듀프.
+let ensureInFlight: Promise<unknown> | null = null;
+
 export async function ensureAnonymousUser() {
-  const supabase = createClient();
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
-  if (session) return session.user;
-  const { data, error } = await supabase.auth.signInAnonymously();
-  if (error) throw error;
-  return data.user;
+  if (ensureInFlight) return ensureInFlight;
+  ensureInFlight = (async () => {
+    const supabase = createClient();
+    const {
+      data: { session }
+    } = await supabase.auth.getSession();
+    if (session) return session.user;
+    const { data, error } = await supabase.auth.signInAnonymously();
+    if (error) throw error;
+    return data.user;
+  })().finally(() => {
+    ensureInFlight = null;
+  });
+  return ensureInFlight;
 }
 
 // 환자 등록: 익명 유저에 이메일 정보만 붙이고 프로필 갱신 (비밀번호는 격상 때)
