@@ -52,9 +52,9 @@ export default function PharmacyGuideModal({ onClose }: Props) {
             className="pointer-events-auto absolute overflow-y-auto overscroll-y-contain px-[0.25em] pb-[0.15em] pt-[0.1em] font-script font-bold text-[#2a1810] [scrollbar-color:rgba(42,24,16,0.35)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#2a1810]/35"
             dir={isRtl ? "rtl" : "ltr"}
             style={{
-              left: "35.5%",
+              left: "40.5%",
               top: "31.5%",
-              width: "48%",
+              width: "52.8%",
               height: "36%",
               fontSize: "clamp(1.12rem, 3.33vw, 1.84rem)",
               lineHeight: 1.22,
