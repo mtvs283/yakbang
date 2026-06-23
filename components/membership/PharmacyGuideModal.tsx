@@ -62,10 +62,10 @@ export default function PharmacyGuideModal({ onClose }: Props) {
             }}
           >
             <p
-              className="mb-[0.2em] w-full shrink-0 text-center"
+              className="mb-[0.22em] w-full shrink-0 text-center font-shilla text-[#c62828]"
               id="pharmacy-guide-title"
               style={{
-                fontSize: "clamp(1.4rem, 4.23vw, 2.2rem)",
+                fontSize: "clamp(1.61rem, 4.86vw, 2.53rem)",
                 lineHeight: 1.15
               }}
             >
