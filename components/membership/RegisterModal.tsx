@@ -36,8 +36,11 @@ export default function RegisterModal({ onClose, onDone }: Props) {
       if (rpcError) throw rpcError;
       onDone();
     } catch (err) {
+      const msg = err instanceof Error ? err.message : "";
       setError(
-        err instanceof Error ? err.message : "진료 등록 중 탈이 났소이다."
+        /registered|already|exist/i.test(msg)
+          ? "이미 등록된 거처요. 좌상단 '재진 입장'으로 드시오."
+          : msg || "진료 등록 중 탈이 났소이다."
       );
     } finally {
       setLoading(false);

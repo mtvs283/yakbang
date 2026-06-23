@@ -37,6 +37,20 @@ export async function upgradeToEmailAuth(password: string) {
   if (error) throw error;
 }
 
+// 재진 입장: 등록된 이메일로 매직링크 발송 (비밀번호 없는 환자 재로그인).
+// shouldCreateUser:false → 신규 생성 막고 기존 환자만. 링크 클릭 → /auth/callback.
+export async function sendMagicLink(email: string) {
+  const supabase = createClient();
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: {
+      shouldCreateUser: false,
+      emailRedirectTo: `${window.location.origin}/auth/callback?next=/shop`
+    }
+  });
+  if (error) throw error;
+}
+
 export async function signOut() {
   const supabase = createClient();
   await supabase.auth.signOut();

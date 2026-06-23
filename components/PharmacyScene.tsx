@@ -158,7 +158,7 @@ export default function PharmacyScene() {
 
             {h.style === "speech-bubble" ? (
               <div className="relative">
-                <div className="max-w-[240px] rounded-2xl border-2 border-[#7a4f28] bg-white/95 px-4 py-2 text-center font-script text-base leading-snug text-[#3d2b1a] shadow-[0_4px_14px_rgba(0,0,0,0.45)] sm:max-w-[300px] sm:text-2xl">
+                <div className="max-w-[240px] break-keep rounded-2xl border-2 border-[#7a4f28] bg-white/95 px-4 py-2 text-center font-script text-base leading-snug text-[#3d2b1a] shadow-[0_4px_14px_rgba(0,0,0,0.45)] sm:max-w-[300px] sm:text-2xl">
                   {label}
                 </div>
                 <div className="absolute left-1/2 top-full h-3 w-3 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b-2 border-r-2 border-[#7a4f28] bg-white/95" />
@@ -168,7 +168,7 @@ export default function PharmacyScene() {
             {h.style === "category-marker" ? (
               <button
                 aria-label={label}
-                className="min-h-[44px] min-w-[44px] max-w-[150px] rounded-lg border-2 border-[#7a4f28] bg-yakbangGold/95 px-5 py-3 text-center font-script text-lg font-bold leading-tight text-black shadow-[0_2px_12px_rgba(0,0,0,0.6)] transition duration-200 hover:scale-105 hover:bg-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold sm:max-w-[190px] sm:text-2xl"
+                className="min-h-[44px] min-w-[44px] max-w-[150px] break-keep rounded-lg border-2 border-[#7a4f28] bg-yakbangGold/95 px-5 py-3 text-center font-script text-lg font-bold leading-tight text-black shadow-[0_2px_12px_rgba(0,0,0,0.6)] transition duration-200 hover:scale-105 hover:bg-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold sm:max-w-[190px] sm:text-2xl"
                 onClick={() => handleAction(h)}
                 type="button"
               >
@@ -179,7 +179,7 @@ export default function PharmacyScene() {
             {h.style === "royal-marker" ? (
               <button
                 aria-label={label}
-                className="inline-flex min-h-[44px] max-w-[210px] animate-pulse items-center gap-2 rounded-md border-2 border-yakbangGold bg-[#8a1a1a] px-4 py-2.5 text-center font-script text-lg font-bold leading-tight text-yakbangPaper shadow-[0_0_18px_rgba(212,175,55,0.7)] transition hover:bg-[#a52121] focus:outline-none focus:ring-2 focus:ring-yakbangGold sm:max-w-[260px] sm:text-2xl"
+                className="inline-flex min-h-[44px] max-w-[210px] animate-pulse items-center gap-2 break-keep rounded-md border-2 border-yakbangGold bg-[#8a1a1a] px-4 py-2.5 text-center font-script text-lg font-bold leading-tight text-yakbangPaper shadow-[0_0_18px_rgba(212,175,55,0.7)] transition hover:bg-[#a52121] focus:outline-none focus:ring-2 focus:ring-yakbangGold sm:max-w-[260px] sm:text-2xl"
                 onClick={() => handleAction(h)}
                 type="button"
               >
@@ -196,7 +196,7 @@ export default function PharmacyScene() {
             {h.style === "button-gold" ? (
               <button
                 aria-label={label}
-                className="min-h-[44px] max-w-[300px] rounded-xl border-2 border-yakbangGold bg-black/85 px-6 py-3 text-center font-script text-base font-bold leading-tight text-yakbangGold shadow-[0_4px_20px_rgba(0,0,0,0.55)] backdrop-blur-sm transition duration-200 hover:-translate-y-0.5 hover:bg-yakbangGold hover:text-black focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07] sm:text-2xl"
+                className="min-h-[44px] max-w-[300px] break-keep rounded-xl border-2 border-yakbangGold bg-black/85 px-6 py-3 text-center font-script text-base font-bold leading-tight text-yakbangGold shadow-[0_4px_20px_rgba(0,0,0,0.55)] backdrop-blur-sm transition duration-200 hover:-translate-y-0.5 hover:bg-yakbangGold hover:text-black focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07] sm:text-2xl"
                 onClick={() => handleAction(h)}
                 type="button"
               >

@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { useUser } from "../../lib/hooks/useUser";
 import { signOut } from "../../lib/supabase/auth";
+import ReturnLoginModal from "./ReturnLoginModal";
 
 const GWANGGAETO_URL = "https://gwanggaeto-home.vercel.app/";
 
@@ -12,6 +14,7 @@ const PILL =
 
 export default function ShopNav() {
   const { isRegistered } = useUser();
+  const [showLogin, setShowLogin] = useState(false);
 
   async function handleLogout() {
     await signOut();
@@ -19,15 +22,29 @@ export default function ShopNav() {
   }
 
   return (
-    <div className="fixed left-4 top-4 z-40 flex flex-col items-start gap-2">
-      <a className={PILL} href={GWANGGAETO_URL}>
-        <span aria-hidden="true">⚜</span> 광개토로
-      </a>
-      {isRegistered ? (
-        <button className={PILL} onClick={handleLogout} type="button">
-          나가기
-        </button>
+    <>
+      <div className="fixed left-4 top-4 z-40 flex flex-col items-start gap-2">
+        <a className={PILL} href={GWANGGAETO_URL}>
+          <span aria-hidden="true">⚜</span> 광개토로
+        </a>
+        {isRegistered ? (
+          <button className={PILL} onClick={handleLogout} type="button">
+            나가기
+          </button>
+        ) : (
+          <button
+            className={PILL}
+            onClick={() => setShowLogin(true)}
+            type="button"
+          >
+            재진 입장
+          </button>
+        )}
+      </div>
+
+      {showLogin ? (
+        <ReturnLoginModal onClose={() => setShowLogin(false)} />
       ) : null}
-    </div>
+    </>
   );
 }

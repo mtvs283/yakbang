@@ -83,24 +83,24 @@ export const pharmacyScene: { background: string; hotspots: Hotspot[] } = {
     },
     {
       id: "pronunciation-shelf",
-      x: "9.5%",
-      y: "45%",
+      x: "14%",
+      y: "40%",
       style: "category-marker",
       action: "open-catalog/pronunciation",
       category: "pronunciation"
     },
     {
       id: "phonological-shelf",
-      x: "21.4%",
-      y: "45%",
+      x: "22%",
+      y: "58%",
       style: "category-marker",
       action: "open-catalog/phonological-rule",
       category: "phonological-rule"
     },
     {
       id: "grammar-shelf",
-      x: "38.5%",
-      y: "45%",
+      x: "14%",
+      y: "76%",
       style: "category-marker",
       action: "open-catalog/grammar",
       category: "grammar"
