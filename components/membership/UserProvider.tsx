@@ -26,6 +26,7 @@ interface UserContextValue {
   userId: string | null;
   profile: Profile | null;
   loading: boolean;
+  admissionDays: number | null;
   refresh: () => Promise<void>;
   isRegistered: boolean;
 }
@@ -35,6 +36,7 @@ const UserContext = createContext<UserContextValue | null>(null);
 export function UserProvider({ children }: { children: ReactNode }) {
   const [userId, setUserId] = useState<string | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [admissionDays, setAdmissionDays] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
@@ -45,16 +47,20 @@ export function UserProvider({ children }: { children: ReactNode }) {
     if (!user) {
       setUserId(null);
       setProfile(null);
+      setAdmissionDays(null);
       setLoading(false);
       return;
     }
     setUserId(user.id);
-    const { data } = await supabase
-      .from("users")
-      .select("*")
-      .eq("id", user.id)
-      .single();
+    const [{ data }, { count }] = await Promise.all([
+      supabase.from("users").select("*").eq("id", user.id).single(),
+      supabase
+        .from("attendance")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", user.id)
+    ]);
     setProfile((data as Profile) ?? null);
+    setAdmissionDays(count ?? 0);
     setLoading(false);
   }, []);
 
@@ -77,7 +83,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   return (
     <UserContext.Provider
-      value={{ userId, profile, loading, refresh, isRegistered }}
+      value={{ userId, profile, loading, admissionDays, refresh, isRegistered }}
     >
       {children}
     </UserContext.Provider>

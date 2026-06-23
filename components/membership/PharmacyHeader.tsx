@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { tiers, type Tier } from "../../data/membership";
 import { useDailyAttendance } from "../../lib/hooks/useDailyAttendance";
 import { useUser } from "../../lib/hooks/useUser";
@@ -11,10 +11,31 @@ import StageBadge from "./StageBadge";
 import StageUpgradeNotification from "./StageUpgradeNotification";
 import UpgradeModal from "./UpgradeModal";
 
+function formatStatusLine(
+  isRegistered: boolean,
+  tier: Tier,
+  dailyNumber: number | null | undefined,
+  admissionDays: number | null,
+  points: number
+): string {
+  if (!isRegistered) return "방문객";
+  const tierLabel = tiers[tier].ko;
+  const number = dailyNumber != null ? ` ${dailyNumber}` : "";
+  const admission =
+    admissionDays != null ? ` · 입원 ${admissionDays}일째` : "";
+  const balance = ` · ${points.toLocaleString("ko-KR")}원`;
+  return `${tierLabel}${number}${admission}${balance}`;
+}
+
 export default function PharmacyHeader() {
-  const { profile, refresh, isRegistered } = useUser();
+  const { profile, refresh, isRegistered, userId, loading, admissionDays } =
+    useUser();
   const { prescriptionOpen } = useShopUi();
-  useDailyAttendance(); // 약방 진입 시 당일 자동 출석
+  const { checked } = useDailyAttendance(); // 약방 진입 시 당일 자동 출석
+
+  useEffect(() => {
+    if (checked) void refresh();
+  }, [checked, refresh]);
 
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -24,6 +45,14 @@ export default function PharmacyHeader() {
 
   const tier: Tier = profile?.tier ?? "visitor";
   const name = profile?.display_name ?? "";
+  const statusLine = formatStatusLine(
+    isRegistered,
+    tier,
+    profile?.daily_number,
+    admissionDays,
+    profile?.points ?? 0
+  );
+  const showStatusWidget = !loading && Boolean(userId);
 
   // 진료등록 클릭: 재방문(이 브라우저에서 등록 이력/로그인)이면 재진 입장, 아니면 신규 등록
   function handleEnter() {
@@ -50,18 +79,16 @@ export default function PharmacyHeader() {
       </div>
       ) : null}
 
-      {/* 우상단(다국어 토글 아래): 회원 상태 — 등록 시만 */}
-      {isRegistered ? (
-        <div className="fixed right-4 top-[68px] z-40 flex items-center gap-2 rounded-full border border-yakbangGold/40 bg-yakbangBlack/80 px-4 py-1.5 backdrop-blur">
-          <StageBadge size={20} tier={tier} />
-          <span className="font-script text-sm font-bold text-yakbangGold">
-            {tiers[tier].ko}
-            {profile?.daily_number != null ? ` ${profile.daily_number}` : ""} :{" "}
-            {(profile?.points ?? 0).toLocaleString("ko-KR")}원
+      {/* 우상단(다국어 토글 아래): 회원/방문자 상태 */}
+      {showStatusWidget ? (
+        <div className="fixed right-4 top-[68px] z-40 flex max-w-[min(100vw-2rem,22rem)] flex-wrap items-center gap-2.5 rounded-full border border-yakbangGold/40 bg-yakbangBlack/80 px-5 py-2 backdrop-blur sm:max-w-none sm:flex-nowrap sm:px-6 sm:py-2.5">
+          {isRegistered ? <StageBadge size={26} tier={tier} /> : null}
+          <span className="font-script text-base font-bold leading-snug text-yakbangGold sm:text-[17px]">
+            {statusLine}
           </span>
-          {tier === "patient" ? (
+          {isRegistered && tier === "patient" ? (
             <button
-              className="rounded-full border border-yakbangGold/70 px-3 py-1 font-script text-xs font-bold text-yakbangGold transition hover:bg-yakbangGold hover:text-black"
+              className="shrink-0 rounded-full border border-yakbangGold/70 px-3.5 py-1.5 font-script text-sm font-bold text-yakbangGold transition hover:bg-yakbangGold hover:text-black"
               onClick={() => setShowUpgrade(true)}
               type="button"
             >
