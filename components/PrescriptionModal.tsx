@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getRemedyText } from "../data/i18n";
 import { formatPrice, type Remedy } from "../data/remedies";
+import { recordPrescriptionComplete } from "../lib/recordPrescriptionComplete";
 import { useLocale } from "./LocaleProvider";
 
 interface PrescriptionModalProps {
@@ -27,6 +28,7 @@ export default function PrescriptionModal({
   const { locale, t } = useLocale();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const completedRef = useRef(false);
+  const recordedRef = useRef(false);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [hintsShown, setHintsShown] = useState<Record<number, boolean>>({});
 
@@ -48,6 +50,14 @@ export default function PrescriptionModal({
 
   const allCorrect =
     quiz.length > 0 && correctness.every((value) => value === true);
+
+  // 전부 정답 → 처방완료 도장과 동시에 학습 기록 (실패해도 도장은 그대로)
+  useEffect(() => {
+    if (!allCorrect || recordedRef.current) return;
+    if (remedy.id !== "h-pronunciation") return;
+    recordedRef.current = true;
+    void recordPrescriptionComplete("h-pron");
+  }, [allCorrect, remedy.id]);
 
   // 전부 정답이면 합격 도장을 보여준 뒤(1.5초) 완료 콜백 1회 — 가치 체험 직후 전환
   useEffect(() => {
