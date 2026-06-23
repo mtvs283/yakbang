@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { getRemedyText } from "../data/i18n";
 import { formatPrice, type Remedy } from "../data/remedies";
 import { chargePrescription, getPointBalance } from "../lib/chargePrescription";
@@ -48,6 +49,8 @@ export default function PrescriptionModal({
   const [balance, setBalance] = useState(0);
   const [receiptBalance, setReceiptBalance] = useState(0);
   const [paying, setPaying] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   const text = getRemedyText(remedy, locale);
   const quiz = remedy.prescription.quiz;
@@ -82,6 +85,7 @@ export default function PrescriptionModal({
   }
 
   async function handlePay() {
+    setPaymentError(null);
     setPaying(true);
     const result = await chargePrescription(H_PRON_SLUG, H_PRON_PRICE);
     setPaying(false);
@@ -90,7 +94,7 @@ export default function PrescriptionModal({
         setBalance(result.balance ?? 0);
         setPhase("insufficient");
       } else {
-        console.error("payment failed", result.error);
+        setPaymentError("지불에 실패했소. 잠시 후 다시 시도하시오.");
       }
       return;
     }
@@ -140,10 +144,17 @@ export default function PrescriptionModal({
   }, [allCorrect, onComplete, requiresPayment]);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     closeButtonRef.current?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
+        if (phase === "payment" || phase === "receipt" || phase === "insufficient") {
+          return;
+        }
         onClose();
       }
     }
@@ -155,16 +166,24 @@ export default function PrescriptionModal({
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [onClose]);
+  }, [onClose, phase]);
 
   const callback = remedy.prescription.callback;
   const callbackIsLive = isExternalUrl(callback.url);
 
-  return (
+  function handleBackdropClick(event: React.MouseEvent<HTMLDivElement>) {
+    if (event.target !== event.currentTarget) return;
+    if (phase !== "quiz") return;
+    onClose();
+  }
+
+  if (!mounted) return null;
+
+  return createPortal(
     <div
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/72 px-4 py-6 backdrop-blur-sm"
-      onMouseDown={onClose}
+      className="fixed inset-0 z-[80] flex items-center justify-center bg-black/72 px-4 py-6 backdrop-blur-sm"
+      onClick={handleBackdropClick}
       role="dialog"
     >
       <section
@@ -388,6 +407,7 @@ export default function PrescriptionModal({
           paying={paying}
           price={H_PRON_PRICE}
           remedyName={text.name}
+          error={paymentError}
         />
       ) : null}
 
@@ -407,6 +427,7 @@ export default function PrescriptionModal({
           onGoAttendance={handleGoAttendance}
         />
       ) : null}
-    </div>
+    </div>,
+    document.body
   );
 }

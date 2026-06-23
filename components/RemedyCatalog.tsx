@@ -10,6 +10,7 @@ import {
   type RemedyCategory
 } from "../data/remedies";
 import { useUser } from "../lib/hooks/useUser";
+import { useShopUi } from "./ShopUiProvider";
 import { useLocale } from "./LocaleProvider";
 import PrescriptionModal from "./PrescriptionModal";
 import RegisterModal from "./membership/RegisterModal";
@@ -34,12 +35,18 @@ function scrollToTop() {
 export default function RemedyCatalog() {
   const { locale, t } = useLocale();
   const { isRegistered, refresh } = useUser();
+  const { setPrescriptionOpen } = useShopUi();
   const [selected, setSelected] = useState<Remedy | null>(null);
   const [showTop, setShowTop] = useState(false);
   const [promptVariant, setPromptVariant] = useState<
     "locked" | "completed" | null
   >(null);
   const [showRegister, setShowRegister] = useState(false);
+
+  useEffect(() => {
+    setPrescriptionOpen(selected !== null);
+    return () => setPrescriptionOpen(false);
+  }, [selected, setPrescriptionOpen]);
 
   useEffect(() => {
     function onScroll() {

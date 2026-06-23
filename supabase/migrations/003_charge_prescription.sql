@@ -39,3 +39,29 @@ end;
 $$;
 
 grant execute on function public.charge_prescription(text, integer) to authenticated, anon;
+
+-- RPC 미배포 시 클라이언트 fallback: 구매 차감 INSERT + users.points 동기화
+create or replace function public.apply_point_transaction()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  update public.users
+     set points = points + new.delta,
+         updated_at = now()
+   where id = new.user_id;
+  return new;
+end;
+$$;
+
+drop trigger if exists trg_apply_point_transaction on public.point_transactions;
+create trigger trg_apply_point_transaction
+  after insert on public.point_transactions
+  for each row execute function public.apply_point_transaction();
+
+drop policy if exists "ptx_insert_purchase" on public.point_transactions;
+create policy "ptx_insert_purchase" on public.point_transactions
+  for insert to authenticated
+  with check (
+    auth.uid() = user_id
+    and delta < 0
+    and reason = 'prescription_purchase'
+  );

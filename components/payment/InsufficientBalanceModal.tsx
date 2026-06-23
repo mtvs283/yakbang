@@ -16,7 +16,7 @@ export default function InsufficientBalanceModal({
   return createPortal(
     <div
       aria-modal="true"
-      className="fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto bg-black/75 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-[90] flex items-center justify-center overflow-y-auto bg-black/75 px-4 py-6 backdrop-blur-sm"
       onMouseDown={onClose}
       role="dialog"
     >
