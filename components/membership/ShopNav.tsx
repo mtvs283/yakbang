@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useUser } from "../../lib/hooks/useUser";
 import { signOut } from "../../lib/supabase/auth";
+import PharmacyGuideModal from "./PharmacyGuideModal";
 import ReturnLoginModal from "./ReturnLoginModal";
 
 const GWANGGAETO_URL = "https://gwanggaeto-home.vercel.app/";
@@ -12,9 +14,13 @@ const GWANGGAETO_URL = "https://gwanggaeto-home.vercel.app/";
 const PILL =
   "inline-flex items-center gap-1.5 rounded-full border border-yakbangGold/60 bg-yakbangBlack/70 px-3.5 py-1.5 text-sm font-bold text-yakbangGold backdrop-blur transition hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold";
 
+const PILL_GUIDE =
+  "inline-flex items-center gap-2 rounded-full border border-yakbangGold/60 bg-yakbangBlack/70 px-4 py-2 text-base font-bold text-yakbangGold backdrop-blur transition hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold";
+
 export default function ShopNav() {
   const { isRegistered } = useUser();
   const [showLogin, setShowLogin] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
 
   async function handleLogout() {
     await signOut();
@@ -27,6 +33,22 @@ export default function ShopNav() {
         <a className={PILL} href={GWANGGAETO_URL}>
           <span aria-hidden="true">⚜</span> 광개토로
         </a>
+        <button
+          aria-label="약방 이용법"
+          className={PILL_GUIDE}
+          onClick={() => setShowGuide(true)}
+          type="button"
+        >
+          <Image
+            alt=""
+            aria-hidden
+            className="h-9 w-9 shrink-0 rounded-full border border-yakbangGold/50 object-cover object-[center_20%]"
+            height={72}
+            src="/images/moongchi-guide-label.png"
+            width={72}
+          />
+          <span>약방 이용법</span>
+        </button>
         {isRegistered ? (
           <button className={PILL} onClick={handleLogout} type="button">
             나가기
@@ -44,6 +66,10 @@ export default function ShopNav() {
 
       {showLogin ? (
         <ReturnLoginModal onClose={() => setShowLogin(false)} />
+      ) : null}
+
+      {showGuide ? (
+        <PharmacyGuideModal onClose={() => setShowGuide(false)} />
       ) : null}
     </>
   );
