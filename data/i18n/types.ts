@@ -25,6 +25,16 @@ export type Locale =
   | "sw"
   | "ha";
 
+export interface PharmacyGuideCopy {
+  button: string;
+  title: string;
+  step1: string;
+  step1Note: string;
+  step2: string;
+  step3: string;
+  step4: string;
+}
+
 export interface UIMessages {
   catalogTitle: string;
   catalogSubtitle: string;
@@ -51,6 +61,7 @@ export interface UIMessages {
   callbackPending: string;
   closeAria: string;
   stockLabel: (count: number) => string;
+  pharmacyGuide: PharmacyGuideCopy;
 }
 
 export interface RemedyText {
@@ -62,8 +73,7 @@ export interface RemedyText {
   callbackLabel: string;
 }
 
-// 한 언어 = UI 문구 + 약 번역(id별). 약 번역이 없으면 한국어 원본(remedies.ts)으로 폴백.
 export interface LocaleData {
-  ui: UIMessages;
+  ui: Omit<UIMessages, "pharmacyGuide">;
   remedies: Record<string, RemedyText>;
 }

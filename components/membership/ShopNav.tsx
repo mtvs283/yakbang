@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useLocale } from "../LocaleProvider";
 import { useUser } from "../../lib/hooks/useUser";
 import { signOut } from "../../lib/supabase/auth";
 import PharmacyGuideModal from "./PharmacyGuideModal";
@@ -21,6 +22,7 @@ const PILL_GUIDE =
 const GUIDE_BLOCK_OFFSET = "mt-[6.75rem]";
 
 export default function ShopNav() {
+  const { t } = useLocale();
   const { isRegistered } = useUser();
   const [showLogin, setShowLogin] = useState(false);
   const [showGuide, setShowGuide] = useState(false);
@@ -71,7 +73,7 @@ export default function ShopNav() {
             onClick={() => setShowGuide(true)}
             type="button"
           >
-            약방 이용법
+            {t.pharmacyGuide.button}
           </button>
         </div>
       </div>

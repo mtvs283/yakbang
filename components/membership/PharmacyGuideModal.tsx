@@ -2,19 +2,17 @@
 
 import Image from "next/image";
 import { createPortal } from "react-dom";
-
-const STEPS = [
-  "一. 매일 약방에 들러 입원하시오",
-  "二. 약방문 목록에서 약을 고르시오",
-  "三. 빈칸을 채워 약방문을 익히시오",
-  "四. 약값을 내고 약을 받으시오"
-] as const;
+import { useLocale } from "../LocaleProvider";
 
 interface Props {
   onClose: () => void;
 }
 
 export default function PharmacyGuideModal({ onClose }: Props) {
+  const { locale, t } = useLocale();
+  const g = t.pharmacyGuide;
+  const isRtl = locale === "ar";
+
   return createPortal(
     <div
       aria-labelledby="pharmacy-guide-title"
@@ -30,7 +28,7 @@ export default function PharmacyGuideModal({ onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          aria-label="닫기"
+          aria-label={t.closeAria}
           className="absolute right-2 top-2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-yakbangGold/60 bg-yakbangBlack/75 text-2xl leading-none text-yakbangGold shadow-lg transition hover:bg-yakbangGold hover:text-yakbangBlack sm:right-3 sm:top-3"
           onClick={onClose}
           type="button"
@@ -40,7 +38,8 @@ export default function PharmacyGuideModal({ onClose }: Props) {
 
         <div className="relative overflow-hidden rounded-lg shadow-[0_0_42px_rgba(0,0,0,0.55)]">
           <Image
-            alt="뭉치가 가로 두루마리로 약방 이용법을 안내하오"
+            alt=""
+            aria-hidden
             className="h-auto w-full"
             height={1024}
             priority
@@ -49,34 +48,41 @@ export default function PharmacyGuideModal({ onClose }: Props) {
             width={1536}
           />
 
-          {/* 가로 두루마리 한지 — 좌측 막대 끝(지편 시작)부터 */}
           <div
-            className="absolute flex flex-col items-start justify-start overflow-hidden px-[0.35em] pt-[0.2em] font-script font-bold text-[#2a1810]"
+            className="absolute flex flex-col items-start justify-start overflow-hidden px-[0.25em] pt-[0.1em] font-script font-bold text-[#2a1810]"
+            dir={isRtl ? "rtl" : "ltr"}
             style={{
-              left: "49%",
-              top: "33.5%",
-              width: "47.5%",
-              height: "30%",
-              fontSize: "clamp(0.62rem, 1.85vw, 1.02rem)",
-              lineHeight: 1.28
+              left: "45.5%",
+              top: "31.5%",
+              width: "50%",
+              height: "36%",
+              fontSize: "clamp(1.24rem, 3.7vw, 2.04rem)",
+              lineHeight: 1.22
             }}
           >
             <p
-              className="mb-[0.25em] w-full text-center"
+              className="mb-[0.2em] w-full text-center"
               id="pharmacy-guide-title"
               style={{
-                fontSize: "clamp(0.78rem, 2.35vw, 1.22rem)",
-                lineHeight: 1.2
+                fontSize: "clamp(1.56rem, 4.7vw, 2.44rem)",
+                lineHeight: 1.15
               }}
             >
-              약방 이용법
+              {g.title}
             </p>
-            <ul className="m-0 w-full list-none space-y-[0.12em] p-0">
-              {STEPS.map((step) => (
-                <li className="w-full break-keep text-left" key={step}>
-                  {step}
-                </li>
-              ))}
+            <ul className="m-0 w-full list-none space-y-[0.08em] p-0">
+              <li className="w-full break-keep text-start">
+                {g.step1}
+                <span
+                  className="mt-[0.05em] block ps-[0.45em] text-[0.82em] font-semibold opacity-90"
+                  style={{ lineHeight: 1.18 }}
+                >
+                  {g.step1Note}
+                </span>
+              </li>
+              <li className="w-full break-keep text-start">{g.step2}</li>
+              <li className="w-full break-keep text-start">{g.step3}</li>
+              <li className="w-full break-keep text-start">{g.step4}</li>
             </ul>
           </div>
         </div>

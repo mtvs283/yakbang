@@ -17,6 +17,7 @@ import { ky } from "./ky";
 import { mn } from "./mn";
 import { my } from "./my";
 import { ne } from "./ne";
+import { PHARMACY_GUIDE } from "./pharmacyGuide";
 import { ru } from "./ru";
 import { sw } from "./sw";
 import { th } from "./th";
@@ -26,7 +27,7 @@ import { zhCN } from "./zh-CN";
 import { zhTW } from "./zh-TW";
 import type { Locale, LocaleData, RemedyText, UIMessages } from "./types";
 
-export type { Locale, LocaleData, RemedyText, UIMessages } from "./types";
+export type { Locale, LocaleData, PharmacyGuideCopy, RemedyText, UIMessages } from "./types";
 
 // 토글에 보이는 순서
 export const LOCALES: Locale[] = [
@@ -115,7 +116,10 @@ const DATA: Record<Locale, LocaleData> = {
 };
 
 export const messages: Record<Locale, UIMessages> = Object.fromEntries(
-  (Object.keys(DATA) as Locale[]).map((locale) => [locale, DATA[locale].ui])
+  (Object.keys(DATA) as Locale[]).map((locale) => [
+    locale,
+    { ...DATA[locale].ui, pharmacyGuide: PHARMACY_GUIDE[locale] }
+  ])
 ) as Record<Locale, UIMessages>;
 
 export function getRemedyText(remedy: Remedy, locale: Locale): RemedyText {
