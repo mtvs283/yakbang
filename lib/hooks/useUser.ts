@@ -12,6 +12,7 @@ export interface Profile {
   tier: Tier;
   points: number;
   learning_progress: string;
+  daily_number: number | null;
 }
 
 export function useUser() {

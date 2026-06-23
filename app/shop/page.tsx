@@ -1,4 +1,6 @@
+import PatientStatus from "../../components/membership/PatientStatus";
 import PharmacyHeader from "../../components/membership/PharmacyHeader";
+import ShopNav from "../../components/membership/ShopNav";
 import PharmacyScene from "../../components/PharmacyScene";
 import RemedyCatalog from "../../components/RemedyCatalog";
 // 롤백 대비 보관 (뭉치 영상 → PharmacyScene 정적 장면으로 교체):
@@ -8,6 +10,8 @@ import RemedyCatalog from "../../components/RemedyCatalog";
 export default function ShopPage() {
   return (
     <>
+      <ShopNav />
+      <PatientStatus />
       <div className="relative">
         <PharmacyScene />
         <PharmacyHeader />
