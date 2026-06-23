@@ -8,6 +8,7 @@ import { useLocale } from "./LocaleProvider";
 interface PrescriptionModalProps {
   remedy: Remedy;
   onClose: () => void;
+  onComplete?: () => void; // 퀴즈 전부 정답 시 1회 호출 (가입 전환 유도용)
 }
 
 function normalize(value: string): string {
@@ -20,10 +21,12 @@ function isExternalUrl(url: string): boolean {
 
 export default function PrescriptionModal({
   remedy,
-  onClose
+  onClose,
+  onComplete
 }: PrescriptionModalProps) {
   const { locale, t } = useLocale();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const completedRef = useRef(false);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [hintsShown, setHintsShown] = useState<Record<number, boolean>>({});
 
@@ -45,6 +48,14 @@ export default function PrescriptionModal({
 
   const allCorrect =
     quiz.length > 0 && correctness.every((value) => value === true);
+
+  // 전부 정답이면 합격 도장을 보여준 뒤(1.5초) 완료 콜백 1회 — 가치 체험 직후 전환
+  useEffect(() => {
+    if (!allCorrect || completedRef.current || !onComplete) return;
+    completedRef.current = true;
+    const timer = setTimeout(onComplete, 1500);
+    return () => clearTimeout(timer);
+  }, [allCorrect, onComplete]);
 
   useEffect(() => {
     closeButtonRef.current?.focus();

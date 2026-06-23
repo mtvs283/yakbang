@@ -9,10 +9,16 @@ import {
   type Remedy,
   type RemedyCategory
 } from "../data/remedies";
+import { useUser } from "../lib/hooks/useUser";
 import { useLocale } from "./LocaleProvider";
 import PrescriptionModal from "./PrescriptionModal";
+import RegisterModal from "./membership/RegisterModal";
+import RegisterPromptModal from "./membership/RegisterPromptModal";
 
 const GWANGGAETO_URL = "https://gwanggaeto-home.vercel.app/";
+
+// 무료 개방 약 (가장 단순). 비회원은 이 약 + 왕실(불가)만 접근 가능.
+const FREE_REMEDY_ID = "h-pronunciation";
 
 const CATEGORY_ORDER: RemedyCategory[] = [
   "pronunciation",
@@ -27,8 +33,13 @@ function scrollToTop() {
 
 export default function RemedyCatalog() {
   const { locale, t } = useLocale();
+  const { isRegistered, refresh } = useUser();
   const [selected, setSelected] = useState<Remedy | null>(null);
   const [showTop, setShowTop] = useState(false);
+  const [promptVariant, setPromptVariant] = useState<
+    "locked" | "completed" | null
+  >(null);
+  const [showRegister, setShowRegister] = useState(false);
 
   useEffect(() => {
     function onScroll() {
@@ -70,35 +81,48 @@ export default function RemedyCatalog() {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((remedy) => {
                   const text = getRemedyText(remedy, locale);
-                  const locked = remedy.status === "unavailable";
+                  // 환자 전용 게이트: 비회원 + (왕실·무료약 아님) → 잠금
+                  const gated =
+                    !isRegistered &&
+                    remedy.category !== "royal" &&
+                    remedy.id !== FREE_REMEDY_ID;
+                  const dim = remedy.status === "unavailable" || gated;
                   return (
                     <button
                       className={[
                         "group flex flex-col rounded-lg border bg-yakbangBlack/60 p-5 text-left transition duration-200 focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07]",
-                        locked
+                        dim
                           ? "border-yakbangGold/25 opacity-80 hover:border-yakbangGold/50"
                           : "border-yakbangGold/40 hover:-translate-y-0.5 hover:border-yakbangGold hover:shadow-royal"
                       ].join(" ")}
                       key={remedy.id}
-                      onClick={() => setSelected(remedy)}
+                      onClick={() =>
+                        gated ? setPromptVariant("locked") : setSelected(remedy)
+                      }
                       type="button"
                     >
                       <div className="mb-2 flex items-start justify-between gap-2">
                         <h4 className="font-script text-2xl font-bold leading-snug text-yakbangPaper">
                           {text.name}
                         </h4>
-                        <span
-                          className={[
-                            "shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-bold",
-                            remedy.status === "available"
-                              ? "bg-green-900/40 text-green-300"
-                              : remedy.status === "limited"
-                                ? "bg-yakbangGold/20 text-yakbangGold"
-                                : "bg-zinc-700/70 text-zinc-300"
-                          ].join(" ")}
-                        >
-                          {t.status[remedy.status]}
-                        </span>
+                        {gated ? (
+                          <span className="shrink-0 rounded-full bg-yakbangGold/20 px-2.5 py-0.5 text-[11px] font-bold text-yakbangGold">
+                            🔒 환자 전용
+                          </span>
+                        ) : (
+                          <span
+                            className={[
+                              "shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-bold",
+                              remedy.status === "available"
+                                ? "bg-green-900/40 text-green-300"
+                                : remedy.status === "limited"
+                                  ? "bg-yakbangGold/20 text-yakbangGold"
+                                  : "bg-zinc-700/70 text-zinc-300"
+                            ].join(" ")}
+                          >
+                            {t.status[remedy.status]}
+                          </span>
+                        )}
                       </div>
 
                       <p className="mb-4 grow text-sm leading-6 text-yakbangPaper/80">
@@ -110,7 +134,7 @@ export default function RemedyCatalog() {
                           {formatPrice(remedy.price)}
                         </span>
                         <span className="text-sm font-bold text-yakbangPaper/70 transition group-hover:text-yakbangGold">
-                          {t.cardAction} →
+                          {gated ? "🔒 환자 전용" : `${t.cardAction} →`}
                         </span>
                       </div>
                     </button>
@@ -171,7 +195,33 @@ export default function RemedyCatalog() {
         <PrescriptionModal
           key={selected.id}
           onClose={() => setSelected(null)}
+          onComplete={
+            selected.id === FREE_REMEDY_ID && !isRegistered
+              ? () => setPromptVariant("completed")
+              : undefined
+          }
           remedy={selected}
+        />
+      ) : null}
+
+      {promptVariant ? (
+        <RegisterPromptModal
+          onClose={() => setPromptVariant(null)}
+          onRegister={() => {
+            setPromptVariant(null);
+            setShowRegister(true);
+          }}
+          variant={promptVariant}
+        />
+      ) : null}
+
+      {showRegister ? (
+        <RegisterModal
+          onClose={() => setShowRegister(false)}
+          onDone={async () => {
+            setShowRegister(false);
+            await refresh();
+          }}
         />
       ) : null}
     </section>
