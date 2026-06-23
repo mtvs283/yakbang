@@ -119,7 +119,7 @@ export const vi: LocaleData = {
       name: "Vị giác phân biệt âm thường·âm bật hơi·âm căng",
       description: "Cảm nhận ㅈ ㅊ ㅉ bằng đầu lưỡi",
       diagnosis: "Bạn đang gặp khó khi phân biệt âm thường, âm bật hơi và âm căng.",
-      info: "Cùng một vị trí nhưng có ba kiểu lực: âm thường như ㅂㄷㄱㅈ đọc tự nhiên, âm bật hơi như ㅍㅌㅋㅊ có hơi mạnh, âm căng như ㅃㄸㄲㅉ thì ngắn và chắc.",
+      info: "Ba âm phát ra từ cùng một vị trí — Âm thường (ㅂㄷㄱㅈ): tự nhiên, Âm bật hơi (ㅍㅌㅋㅊ): bật mạnh dứt khoát, Âm căng (ㅃㄸㄲㅉ): nhanh và mạnh.",
       quizQuestions: [
         "'바보' và '파보' — từ nào có âm bật hơi?",
         "Từ nào có âm căng ㄸ?"

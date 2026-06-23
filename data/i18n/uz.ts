@@ -115,7 +115,7 @@ export const uz: LocaleData = {
       name: "Oddiy · intiluvchi · kuchli taʼm",
       description: "ㅈ ㅊ ㅉ ni til uchi bilan his qil.",
       diagnosis: "Sen oddiy, intiluvchi va kuchli undoshlarni ajratishda qiynalyapsan.",
-      info: "Bir oʻrinda uch kuch — oddiy (ㅂㄷㄱㅈ) tabiiy, intiluvchi (ㅍㅌㅋㅊ) kuchli nafas bilan, kuchli (ㅃㄸㄲㅉ) qisqa va tarang.",
+      info: "Bir joydan chiqadigan uchta tovush — Oddiy (ㅂㄷㄱㅈ): tabiiy, Intiluvchi (ㅍㅌㅋㅊ): keskin va portlab, Kuchli (ㅃㄸㄲㅉ): tez va kuchli.",
       quizQuestions: [
         "'바보' va '파보' — qaysi biri intiluvchi?",
         "Qaysi soʻzda kuchli ㄸ bor?"

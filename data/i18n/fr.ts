@@ -119,7 +119,7 @@ export const fr: LocaleData = {
       name: "Palais simple · aspirée · tendue",
       description: "Sentez ㅈ ㅊ ㅉ du bout de la langue.",
       diagnosis: "Vous avez du mal à distinguer les consonnes simples, aspirées et tendues.",
-      info: "Trois intensités au même endroit : simple (ㅂㄷㄱㅈ) naturelle, aspirée (ㅍㅌㅋㅊ) avec un souffle fort, tendue (ㅃㄸㄲㅉ) brève et tendue.",
+      info: "Trois sons depuis le même endroit — Simple (ㅂㄷㄱㅈ): naturellement, Aspiré (ㅍㅌㅋㅊ): vif et explosif, Tendu (ㅃㄸㄲㅉ): rapide et fort.",
       quizQuestions: [
         "'바보' ou '파보' — laquelle est aspirée ?",
         "Quel mot contient la tendue ㄸ ?"

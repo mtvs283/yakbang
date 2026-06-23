@@ -119,7 +119,7 @@ export const es: LocaleData = {
       name: "Paladar de simple · aspirada · tensa",
       description: "Siente ㅈ ㅊ ㅉ en la punta de la lengua.",
       diagnosis: "Te cuesta distinguir las consonantes simples, aspiradas y tensas.",
-      info: "Tres intensidades en el mismo punto: simple (ㅂㄷㄱㅈ) natural, aspirada (ㅍㅌㅋㅊ) con un soplo fuerte, tensa (ㅃㄸㄲㅉ) corta y tensa.",
+      info: "Tres sonidos desde el mismo lugar — Simple (ㅂㄷㄱㅈ): natural, Aspirado (ㅍㅌㅋㅊ): agudo y explosivo, Tenso (ㅃㄸㄲㅉ): rápido y fuerte.",
       quizQuestions: [
         "'바보' o '파보' — ¿cuál es aspirada?",
         "¿Qué palabra lleva la tensa ㄸ?"

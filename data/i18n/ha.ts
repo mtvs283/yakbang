@@ -115,7 +115,7 @@ export const ha: LocaleData = {
       name: "Ɗanɗano: sauƙi · mai numfashi · mai ƙarfi",
       description: "Ji ㅈ ㅊ ㅉ da bakin harshe.",
       diagnosis: "Kana fama da bambanta baƙaƙe masu sauƙi, masu numfashi, da masu ƙarfi.",
-      info: "Ƙarfi uku a wuri ɗaya — sauƙi (ㅂㄷㄱㅈ) na halitta, mai numfashi (ㅍㅌㅋㅊ) da numfashi mai ƙarfi, mai ƙarfi (ㅃㄸㄲㅉ) gajere da tsauri.",
+      info: "Sautuna uku daga wuri ɗaya — Sauti mai sauƙi (ㅂㄷㄱㅈ): a dabi'a, Sauti mai ƙarfin numfashi (ㅍㅌㅋㅊ): mai kaifi da fashewa, Sauti mai ƙarfi (ㅃㄸㄲㅉ): da sauri da ƙarfi.",
       quizQuestions: [
         "'바보' ko '파보' — wanne ne mai numfashi?",
         "Wace kalma ce da ㄸ mai ƙarfi?"

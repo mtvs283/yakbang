@@ -118,7 +118,7 @@ export const en: LocaleData = {
       name: "Plain · Aspirated · Tense Palate",
       description: "Feel ㅈ ㅊ ㅉ on the tip of your tongue.",
       diagnosis: "You struggle to distinguish plain / aspirated / tense consonants.",
-      info: "Three intensities at the same place — plain (ㅂㄷㄱㅈ) natural, aspirated (ㅍㅌㅋㅊ) with a strong puff, tense (ㅃㄸㄲㅉ) short and hard.",
+      info: "Three sounds from the same place — Plain (ㅂㄷㄱㅈ): naturally, Aspirated (ㅍㅌㅋㅊ): sharp and bursting, Tense (ㅃㄸㄲㅉ): fast and strong.",
       quizQuestions: [
         "'바보' or '파보' — which is aspirated?",
         "Which word contains the tense ㄸ?"

@@ -120,7 +120,7 @@ export const de: LocaleData = {
       name: "Gaumen für einfach · aspiriert · gespannt",
       description: "Spüre ㅈ ㅊ ㅉ auf der Zungenspitze.",
       diagnosis: "Dir fällt es schwer, einfache, aspirierte und gespannte Konsonanten zu unterscheiden.",
-      info: "Drei Intensitäten an derselben Stelle: einfach (ㅂㄷㄱㅈ) natürlich, aspiriert (ㅍㅌㅋㅊ) mit starkem Hauch, gespannt (ㅃㄸㄲㅉ) kurz und fest.",
+      info: "Drei Laute vom selben Ort — Einfach (ㅂㄷㄱㅈ): natürlich, Behaucht (ㅍㅌㅋㅊ): scharf und berstend, Gespannt (ㅃㄸㄲㅉ): schnell und stark.",
       quizQuestions: [
         "'바보' oder '파보' — welches ist aspiriert?",
         "Welches Wort enthält das gespannte ㄸ?"

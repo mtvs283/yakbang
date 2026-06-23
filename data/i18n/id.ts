@@ -119,7 +119,7 @@ export const id: LocaleData = {
       name: "Indra rasa: biasa · aspirasi · tegang",
       description: "Rasakan ㅈ ㅊ ㅉ di ujung lidah.",
       diagnosis: "Kamu kesulitan membedakan konsonan biasa, aspirasi, dan tegang.",
-      info: "Tiga kekuatan di posisi yang sama: biasa (ㅂㄷㄱㅈ) alami, aspirasi (ㅍㅌㅋㅊ) dengan hembusan kuat, tegang (ㅃㄸㄲㅉ) singkat dan tegang.",
+      info: "Tiga bunyi dari tempat yang sama — Bunyi biasa (ㅂㄷㄱㅈ): alami, Bunyi aspirasi (ㅍㅌㅋㅊ): meletup tajam, Bunyi tegang (ㅃㄸㄲㅉ): cepat dan kuat.",
       quizQuestions: [
         "'바보' atau '파보' — mana yang aspirasi?",
         "Kata mana yang ada tegang ㄸ?"

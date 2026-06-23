@@ -115,7 +115,7 @@ export const fil: LocaleData = {
       name: "Panlasa: payak · mahangin · mariin",
       description: "Damhin ang ㅈ ㅊ ㅉ sa dulo ng dila.",
       diagnosis: "Nahihirapan kang ikilala ang payak, mahangin, at mariing katinig.",
-      info: "Tatlong lakas sa iisang posisyon: payak (ㅂㄷㄱㅈ) natural, mahangin (ㅍㅌㅋㅊ) may malakas na hangin, mariin (ㅃㄸㄲㅉ) maikli at mahigpit.",
+      info: "Tatlong tunog mula sa parehong lugar — Payak (ㅂㄷㄱㅈ): natural, Mahigpit ang hangin (ㅍㅌㅋㅊ): matalas at pumuputok, Mabilis at malakas (ㅃㄸㄲㅉ): mabilis at malakas.",
       quizQuestions: [
         "'바보' o '파보' — alin ang mahangin?",
         "Aling salita ang may mariing ㄸ?"

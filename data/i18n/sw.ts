@@ -115,7 +115,7 @@ export const sw: LocaleData = {
       name: "Onjo: rahisi · pumzi · kazi",
       description: "Hisi ㅈ ㅊ ㅉ kwa ncha ya ulimi.",
       diagnosis: "Unapata ugumu kutofautisha konsonanti rahisi, za pumzi na kazi.",
-      info: "Nguvu tatu mahali pamoja: rahisi (ㅂㄷㄱㅈ) kawaida, za pumzi (ㅍㅌㅋㅊ) kwa pumzi kali, kazi (ㅃㄸㄲㅉ) fupi na kazi.",
+      info: "Sauti tatu kutoka mahali pamoja — Sauti ya kawaida (ㅂㄷㄱㅈ): kwa kawaida, Sauti yenye pumzi (ㅍㅌㅋㅊ): kali na inayolipuka, Sauti yenye msisitizo (ㅃㄸㄲㅉ): haraka na nguvu.",
       quizQuestions: [
         "'바보' au '파보' — lipi ni la pumzi?",
         "Neno lipi lina kazi ㄸ?"
