@@ -193,6 +193,7 @@ export default function RemedyCatalog() {
 
       {selected ? (
         <PrescriptionModal
+          isRegistered={isRegistered}
           key={selected.id}
           onClose={() => setSelected(null)}
           onComplete={
@@ -200,6 +201,7 @@ export default function RemedyCatalog() {
               ? () => setPromptVariant("completed")
               : undefined
           }
+          onPaymentComplete={refresh}
           remedy={selected}
         />
       ) : null}

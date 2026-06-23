@@ -3,13 +3,24 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getRemedyText } from "../data/i18n";
 import { formatPrice, type Remedy } from "../data/remedies";
+import { chargePrescription, getPointBalance } from "../lib/chargePrescription";
 import { recordPrescriptionComplete } from "../lib/recordPrescriptionComplete";
+import InsufficientBalanceModal from "./payment/InsufficientBalanceModal";
+import PaymentConfirmModal from "./payment/PaymentConfirmModal";
+import ReceiptModal from "./payment/ReceiptModal";
 import { useLocale } from "./LocaleProvider";
+
+const H_PRON_SLUG = "h-pron";
+const H_PRON_PRICE = 500;
+
+type PaymentPhase = "quiz" | "payment" | "receipt" | "insufficient" | "stamped";
 
 interface PrescriptionModalProps {
   remedy: Remedy;
   onClose: () => void;
   onComplete?: () => void; // 퀴즈 전부 정답 시 1회 호출 (가입 전환 유도용)
+  isRegistered?: boolean;
+  onPaymentComplete?: () => void;
 }
 
 function normalize(value: string): string {
@@ -23,7 +34,9 @@ function isExternalUrl(url: string): boolean {
 export default function PrescriptionModal({
   remedy,
   onClose,
-  onComplete
+  onComplete,
+  isRegistered = false,
+  onPaymentComplete
 }: PrescriptionModalProps) {
   const { locale, t } = useLocale();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -31,10 +44,16 @@ export default function PrescriptionModal({
   const recordedRef = useRef(false);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [hintsShown, setHintsShown] = useState<Record<number, boolean>>({});
+  const [phase, setPhase] = useState<PaymentPhase>("quiz");
+  const [balance, setBalance] = useState(0);
+  const [receiptBalance, setReceiptBalance] = useState(0);
+  const [paying, setPaying] = useState(false);
 
   const text = getRemedyText(remedy, locale);
   const quiz = remedy.prescription.quiz;
   const isUnavailable = remedy.status === "unavailable";
+  const requiresPayment =
+    isRegistered && remedy.id === "h-pronunciation";
 
   const correctness = useMemo(
     () =>
@@ -51,21 +70,72 @@ export default function PrescriptionModal({
   const allCorrect =
     quiz.length > 0 && correctness.every((value) => value === true);
 
-  // 전부 정답 → 처방완료 도장과 동시에 학습 기록 (실패해도 도장은 그대로)
+  const showStamp =
+    allCorrect && (!requiresPayment || phase === "stamped");
+  const showAllDone =
+    allCorrect && (!requiresPayment || phase === "stamped");
+
+  function dismissPaymentFlow() {
+    setPhase("quiz");
+    setAnswers({});
+    setHintsShown({});
+  }
+
+  async function handlePay() {
+    setPaying(true);
+    const result = await chargePrescription(H_PRON_SLUG, H_PRON_PRICE);
+    setPaying(false);
+    if ("error" in result) {
+      if (result.error === "insufficient") {
+        setBalance(result.balance ?? 0);
+        setPhase("insufficient");
+      }
+      return;
+    }
+    setReceiptBalance(result.newBalance);
+    setPhase("receipt");
+    onPaymentComplete?.();
+  }
+
+  function handleGoAttendance() {
+    onClose();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    onPaymentComplete?.();
+  }
+
+  // 전부 정답 → 학습 기록 (실패해도 UI는 그대로)
   useEffect(() => {
     if (!allCorrect || recordedRef.current) return;
     if (remedy.id !== "h-pronunciation") return;
     recordedRef.current = true;
-    void recordPrescriptionComplete("h-pron");
+    void recordPrescriptionComplete(H_PRON_SLUG);
   }, [allCorrect, remedy.id]);
 
-  // 전부 정답이면 합격 도장을 보여준 뒤(1.5초) 완료 콜백 1회 — 가치 체험 직후 전환
+  // 가입 환자: 풀이 완료 직후 결제 확인 모달
   useEffect(() => {
-    if (!allCorrect || completedRef.current || !onComplete) return;
+    if (!allCorrect || !requiresPayment || phase !== "quiz") return;
+    let active = true;
+    (async () => {
+      const currentBalance = await getPointBalance();
+      if (active) {
+        setBalance(currentBalance);
+        setPhase("payment");
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, [allCorrect, requiresPayment, phase]);
+
+  // 비회원: 합격 도장 후 가입 유도 콜백
+  useEffect(() => {
+    if (!allCorrect || completedRef.current || !onComplete || requiresPayment) {
+      return;
+    }
     completedRef.current = true;
     const timer = setTimeout(onComplete, 1500);
     return () => clearTimeout(timer);
-  }, [allCorrect, onComplete]);
+  }, [allCorrect, onComplete, requiresPayment]);
 
   useEffect(() => {
     closeButtonRef.current?.focus();
@@ -113,7 +183,7 @@ export default function PrescriptionModal({
           ×
         </button>
 
-        {allCorrect ? (
+        {showStamp ? (
           <div
             aria-hidden="true"
             className="animate-stamp pointer-events-none absolute right-6 top-16 rotate-[-14deg] rounded-md border-4 border-red-700 px-4 py-2 text-2xl font-black tracking-[0.2em] text-red-700 sm:text-3xl"
@@ -283,7 +353,7 @@ export default function PrescriptionModal({
               })}
             </ol>
 
-            {allCorrect ? (
+            {showAllDone ? (
               <p className="mt-4 text-center font-script text-xl font-bold text-[#8a3a1a]">
                 {t.allDone}
               </p>
@@ -307,6 +377,34 @@ export default function PrescriptionModal({
           </div>
         )}
       </section>
+
+      {phase === "payment" ? (
+        <PaymentConfirmModal
+          balance={balance}
+          onClose={dismissPaymentFlow}
+          onPay={handlePay}
+          paying={paying}
+          price={H_PRON_PRICE}
+          remedyName={text.name}
+        />
+      ) : null}
+
+      {phase === "receipt" ? (
+        <ReceiptModal
+          balance={receiptBalance}
+          onClose={() => setPhase("stamped")}
+          price={H_PRON_PRICE}
+          remedyName={text.name}
+        />
+      ) : null}
+
+      {phase === "insufficient" ? (
+        <InsufficientBalanceModal
+          balance={balance}
+          onClose={dismissPaymentFlow}
+          onGoAttendance={handleGoAttendance}
+        />
+      ) : null}
     </div>
   );
 }
