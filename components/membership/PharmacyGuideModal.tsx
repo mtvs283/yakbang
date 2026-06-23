@@ -71,12 +71,11 @@ export default function PharmacyGuideModal({ onClose }: Props) {
             >
               {g.title}
             </p>
-            <ul className="m-0 w-full list-none space-y-[0.08em] p-0">
+            <ul className="m-0 w-full list-none space-y-[0.55em] p-0">
               <li className="w-full break-words text-start">
                 {g.step1}
                 <span
-                  className="mt-[0.05em] block ps-[0.45em] text-[0.82em] font-semibold opacity-90"
-                  style={{ lineHeight: 1.18 }}
+                  className="mt-[0.12em] block ps-[0.45em] text-[0.82em] font-semibold leading-snug opacity-90"
                 >
                   {g.step1Note}
                 </span>
