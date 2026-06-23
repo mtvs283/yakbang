@@ -6,11 +6,12 @@ import { sendMagicLink } from "../../lib/supabase/auth";
 
 interface Props {
   onClose: () => void;
+  initialEmail?: string;
 }
 
 // 재진 입장: 등록 이메일 → 매직링크 발송. 링크 클릭 시 원래 환자 계정으로 입장.
-export default function ReturnLoginModal({ onClose }: Props) {
-  const [email, setEmail] = useState("");
+export default function ReturnLoginModal({ onClose, initialEmail }: Props) {
+  const [email, setEmail] = useState(initialEmail ?? "");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);

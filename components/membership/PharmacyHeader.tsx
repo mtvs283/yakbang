@@ -16,6 +16,7 @@ export default function PharmacyHeader() {
 
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [notif, setNotif] = useState<{ from: Tier; to: Tier } | null>(null);
 
@@ -74,11 +75,19 @@ export default function PharmacyHeader() {
             await refresh();
             setNotif({ from: "visitor", to: "patient" });
           }}
+          onSwitchToLogin={(email) => {
+            setShowRegister(false);
+            setLoginEmail(email);
+            setShowLogin(true);
+          }}
         />
       ) : null}
 
       {showLogin ? (
-        <ReturnLoginModal onClose={() => setShowLogin(false)} />
+        <ReturnLoginModal
+          initialEmail={loginEmail}
+          onClose={() => setShowLogin(false)}
+        />
       ) : null}
 
       {showUpgrade ? (
