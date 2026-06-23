@@ -9,12 +9,19 @@ import { recordPrescriptionComplete } from "../lib/recordPrescriptionComplete";
 import InsufficientBalanceModal from "./payment/InsufficientBalanceModal";
 import PaymentConfirmModal from "./payment/PaymentConfirmModal";
 import ReceiptModal from "./payment/ReceiptModal";
+import TreatmentConfirmModal from "./payment/TreatmentConfirmModal";
 import { useLocale } from "./LocaleProvider";
 
 const H_PRON_SLUG = "h-pron";
 const H_PRON_PRICE = 500;
 
-type PaymentPhase = "quiz" | "payment" | "receipt" | "insufficient" | "stamped";
+type PaymentPhase =
+  | "quiz"
+  | "treatment"
+  | "payment"
+  | "receipt"
+  | "insufficient"
+  | "stamped";
 
 interface PrescriptionModalProps {
   remedy: Remedy;
@@ -50,6 +57,7 @@ export default function PrescriptionModal({
   const [receiptBalance, setReceiptBalance] = useState(0);
   const [paying, setPaying] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [treatmentLoading, setTreatmentLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   const text = getRemedyText(remedy, locale);
@@ -82,6 +90,15 @@ export default function PrescriptionModal({
     setPhase("quiz");
     setAnswers({});
     setHintsShown({});
+    setPaymentError(null);
+  }
+
+  async function handleTreatmentConfirm() {
+    setTreatmentLoading(true);
+    const currentBalance = await getPointBalance();
+    setBalance(currentBalance);
+    setTreatmentLoading(false);
+    setPhase("payment");
   }
 
   async function handlePay() {
@@ -117,20 +134,10 @@ export default function PrescriptionModal({
     void recordPrescriptionComplete(H_PRON_SLUG);
   }, [allCorrect, remedy.id]);
 
-  // 가입 환자: 풀이 완료 직후 결제 확인 모달
+  // 가입 환자: 풀이 완료 → 치료 확인 모달 (답 확인 후 [확인] → 결제)
   useEffect(() => {
     if (!allCorrect || !requiresPayment || phase !== "quiz") return;
-    let active = true;
-    (async () => {
-      const currentBalance = await getPointBalance();
-      if (active) {
-        setBalance(currentBalance);
-        setPhase("payment");
-      }
-    })();
-    return () => {
-      active = false;
-    };
+    setPhase("treatment");
   }, [allCorrect, requiresPayment, phase]);
 
   // 비회원: 합격 도장 후 가입 유도 콜백
@@ -152,7 +159,12 @@ export default function PrescriptionModal({
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        if (phase === "payment" || phase === "receipt" || phase === "insufficient") {
+        if (
+          phase === "treatment" ||
+          phase === "payment" ||
+          phase === "receipt" ||
+          phase === "insufficient"
+        ) {
           return;
         }
         onClose();
@@ -398,6 +410,15 @@ export default function PrescriptionModal({
           </div>
         )}
       </section>
+
+      {phase === "treatment" ? (
+        <TreatmentConfirmModal
+          loading={treatmentLoading}
+          onClose={dismissPaymentFlow}
+          onConfirm={handleTreatmentConfirm}
+          remedyName={text.name}
+        />
+      ) : null}
 
       {phase === "payment" ? (
         <PaymentConfirmModal
