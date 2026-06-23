@@ -117,7 +117,7 @@ export default function PrescriptionModal({
     }
     setReceiptBalance(result.newBalance);
     setPhase("receipt");
-    onPaymentComplete?.();
+    await onPaymentComplete?.();
   }
 
   function handleGoAttendance() {
