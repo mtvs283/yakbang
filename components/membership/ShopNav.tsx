@@ -15,7 +15,10 @@ const PILL =
   "inline-flex items-center gap-1.5 rounded-full border border-yakbangGold/60 bg-yakbangBlack/70 px-3.5 py-1.5 text-sm font-bold text-yakbangGold backdrop-blur transition hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold";
 
 const PILL_GUIDE =
-  "inline-flex items-center gap-2 rounded-full border border-yakbangGold/60 bg-yakbangBlack/70 px-4 py-2 text-base font-bold text-yakbangGold backdrop-blur transition hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold";
+  "inline-flex items-center justify-center rounded-full border border-yakbangGold/60 bg-yakbangBlack/70 px-4 py-2 text-base font-bold text-yakbangGold backdrop-blur transition hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold";
+
+// 나가기 pill 높이(~2.25rem)의 300% — 약방 이용법 블록 여백
+const GUIDE_BLOCK_OFFSET = "mt-[6.75rem]";
 
 export default function ShopNav() {
   const { isRegistered } = useUser();
@@ -33,22 +36,6 @@ export default function ShopNav() {
         <a className={PILL} href={GWANGGAETO_URL}>
           <span aria-hidden="true">⚜</span> 광개토로
         </a>
-        <button
-          aria-label="약방 이용법"
-          className={PILL_GUIDE}
-          onClick={() => setShowGuide(true)}
-          type="button"
-        >
-          <Image
-            alt=""
-            aria-hidden
-            className="h-9 w-9 shrink-0 rounded-full border border-yakbangGold/50 object-cover object-[center_20%]"
-            height={72}
-            src="/images/moongchi-guide-label.png"
-            width={72}
-          />
-          <span>약방 이용법</span>
-        </button>
         {isRegistered ? (
           <button className={PILL} onClick={handleLogout} type="button">
             나가기
@@ -62,6 +49,31 @@ export default function ShopNav() {
             재진 입장
           </button>
         )}
+
+        <div className={`${GUIDE_BLOCK_OFFSET} flex flex-col items-start gap-1.5`}>
+          <button
+            aria-label="약방 이용법"
+            className="overflow-hidden rounded-md border border-yakbangGold/50 bg-yakbangBlack/70 p-0 shadow-sm transition hover:border-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
+            onClick={() => setShowGuide(true)}
+            type="button"
+          >
+            <Image
+              alt=""
+              aria-hidden
+              className="block aspect-square h-11 w-11 object-cover object-[center_18%]"
+              height={88}
+              src="/images/moongchi-guide-label.png"
+              width={88}
+            />
+          </button>
+          <button
+            className={PILL_GUIDE}
+            onClick={() => setShowGuide(true)}
+            type="button"
+          >
+            약방 이용법
+          </button>
+        </div>
       </div>
 
       {showLogin ? (
