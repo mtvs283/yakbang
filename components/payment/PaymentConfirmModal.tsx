@@ -1,6 +1,7 @@
 "use client";
 
 import { createPortal } from "react-dom";
+import RegisteredReceiptEmailNotice from "./RegisteredReceiptEmailNotice";
 
 interface Props {
   balance: number;
@@ -41,9 +42,12 @@ export default function PaymentConfirmModal({
         <h2 className="mb-4 text-center font-script text-2xl font-bold text-[#8a3a1a]">
           약값을 지불하시오
         </h2>
-        <p className="mb-6 whitespace-pre-line text-center font-script text-lg leading-relaxed">
-          {`${remedyName} 한 첩 — ${price.toLocaleString("ko-KR")}원\n그대의 잔액 — ${balance.toLocaleString("ko-KR")}원\n지불하시겠소?`}
-        </p>
+        <div className="mb-4 border-b border-dashed border-[#7a4f28]/40 pb-4">
+          <p className="whitespace-pre-line text-center font-script text-lg leading-relaxed">
+            {`${remedyName} 한 첩 — ${price.toLocaleString("ko-KR")}원\n그대의 잔액 — ${balance.toLocaleString("ko-KR")}원\n지불하시겠소?`}
+          </p>
+        </div>
+        <RegisteredReceiptEmailNotice className="mb-4" />
         {error ? (
           <p className="mb-4 text-center font-script text-base font-bold text-red-700">
             {error}

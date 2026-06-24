@@ -1,6 +1,7 @@
 "use client";
 
 import { createPortal } from "react-dom";
+import RegisteredReceiptEmailNotice from "./RegisteredReceiptEmailNotice";
 
 interface Props {
   remedyName: string;
@@ -65,10 +66,7 @@ export default function ReceiptModal({
         </div>
 
         {isRegisteredPatient ? (
-          <p className="mb-4 text-center font-script text-sm leading-relaxed text-[#7a4f28]/85">
-            ※ 영수증은 가입하신 서신 주소로 자동 발송되오 (서신 배달 기능은 곧 박힐
-            예정)
-          </p>
+          <RegisteredReceiptEmailNotice className="mb-4" />
         ) : null}
         {!isRegisteredPatient ? (
           <button
