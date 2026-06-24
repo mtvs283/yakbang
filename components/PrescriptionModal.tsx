@@ -531,7 +531,7 @@ export default function PrescriptionModal({
       {phase === "receipt" ? (
         <ReceiptModal
           balance={receiptBalance}
-          isRegisteredPatient={isRegistered}
+          isRegisteredPatient
           onClose={() => setPhase("stamped")}
           price={H_PRON_PRICE}
           remedyName={text.name}

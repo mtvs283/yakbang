@@ -65,11 +65,12 @@ export default function ReceiptModal({
         </div>
 
         {isRegisteredPatient ? (
-          <p className="mb-4 text-center text-xs leading-relaxed text-[#7a4f28]/75">
+          <p className="mb-4 text-center font-script text-sm leading-relaxed text-[#7a4f28]/85">
             ※ 영수증은 가입하신 서신 주소로 자동 발송되오 (서신 배달 기능은 곧 박힐
             예정)
           </p>
-        ) : (
+        ) : null}
+        {!isRegisteredPatient ? (
           <button
             className="mb-4 w-full cursor-not-allowed rounded-md border border-[#7a4f28]/30 bg-[#7a4f28]/5 px-4 py-2.5 font-script text-base font-bold text-[#7a4f28]/50"
             disabled
@@ -77,7 +78,7 @@ export default function ReceiptModal({
           >
             영수증 이메일로 받기
           </button>
-        )}
+        ) : null}
 
         {showKimchiGuide ? (
         <div className="my-4 border-b border-dashed border-[#7a4f28]/40 pb-4 text-center text-sm leading-7 text-[#7a4f28]">

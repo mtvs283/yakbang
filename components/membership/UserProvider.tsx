@@ -38,6 +38,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [userId, setUserId] = useState<string | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [admissionDays, setAdmissionDays] = useState<number | null>(null);
+  const [authEmail, setAuthEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
@@ -48,11 +49,13 @@ export function UserProvider({ children }: { children: ReactNode }) {
     if (!user) {
       setUserId(null);
       setProfile(null);
+      setAuthEmail(null);
       setAdmissionDays(null);
       setLoading(false);
       return;
     }
     setUserId(user.id);
+    setAuthEmail(user.email ?? null);
     await migrateStashedReceipts();
     const [{ data }, { count }] = await Promise.all([
       supabase.from("users").select("*").eq("id", user.id).single(),
@@ -81,7 +84,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     };
   }, [refresh]);
 
-  const isRegistered = Boolean(profile?.email);
+  const isRegistered = Boolean(profile?.email || authEmail);
 
   return (
     <UserContext.Provider
