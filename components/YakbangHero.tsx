@@ -31,8 +31,8 @@ export default function YakbangHero() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/8 via-black/5 to-black/48" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
 
-      {/* 왼쪽 위 태그라인 */}
-      <div className="absolute left-4 top-4 z-20 max-w-[min(88vw,28rem)] sm:left-8 sm:top-8">
+      {/* 왼쪽 태그라인 — 윗줄을 노란 박스 상단에 맞춤 */}
+      <div className="absolute left-4 top-[54%] z-20 max-w-[min(88vw,28rem)] sm:left-8 sm:top-[19%]">
         <p className="font-shilla text-xl font-medium leading-snug text-yakbangPaper/95 sm:text-3xl">
           {taglineLine1}
         </p>
