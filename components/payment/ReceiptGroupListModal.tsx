@@ -64,12 +64,12 @@ export default function ReceiptGroupListModal({
         <ul className="space-y-2">
           {group.receipts.map((row, index) => (
             <li key={row.id}>
-              <button
-                className="flex w-full flex-col gap-2 rounded-md border border-[#7a4f28]/40 bg-white/40 px-4 py-3 text-left transition hover:border-[#7a4f28] hover:bg-white/60 focus:outline-none focus:ring-2 focus:ring-[#7a4f28]"
-                onClick={() => onSelectReceipt(row)}
-                type="button"
-              >
-                <div className="flex w-full items-center justify-between gap-3">
+              <div className="flex w-full flex-col gap-2 rounded-md border border-[#7a4f28]/40 bg-white/40 transition hover:border-[#7a4f28] hover:bg-white/60">
+                <button
+                  className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#7a4f28]"
+                  onClick={() => onSelectReceipt(row)}
+                  type="button"
+                >
                   <span className="font-script text-sm text-[#7a4f28]">
                     {group.count - index}번째
                   </span>
@@ -79,13 +79,15 @@ export default function ReceiptGroupListModal({
                   <span className="font-script text-base font-bold text-[#8a3a1a]">
                     {formatAmount(row.receipt_data.amount)}
                   </span>
+                </button>
+                <div className="border-t border-[#7a4f28]/15 px-4 py-2">
+                  <ReceiptEmailActions
+                    compact
+                    onSent={onEmailSent}
+                    row={row}
+                  />
                 </div>
-                <ReceiptEmailActions
-                  compact
-                  onSent={onEmailSent}
-                  row={row}
-                />
-              </button>
+              </div>
             </li>
           ))}
         </ul>

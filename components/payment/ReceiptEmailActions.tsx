@@ -46,7 +46,10 @@ export default function ReceiptEmailActions({
           <button
             className={btnClass}
             disabled={sending}
-            onClick={() => void send(false)}
+            onClick={(e) => {
+              e.stopPropagation();
+              void send(false);
+            }}
             type="button"
           >
             {sending ? "보내는 중…" : "서신 보내기"}
@@ -55,7 +58,10 @@ export default function ReceiptEmailActions({
           <button
             className={btnClass}
             disabled={sending}
-            onClick={() => void send(true)}
+            onClick={(e) => {
+              e.stopPropagation();
+              void send(true);
+            }}
             type="button"
           >
             {sending ? "보내는 중…" : "다시 보내기"}
