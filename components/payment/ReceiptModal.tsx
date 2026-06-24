@@ -7,6 +7,8 @@ interface Props {
   price: number;
   balance: number;
   onClose: () => void;
+  showKimchiGuide?: boolean;
+  closeLabel?: string;
 }
 
 function Row({ label, value }: { label: string; value: string }) {
@@ -22,7 +24,9 @@ export default function ReceiptModal({
   remedyName,
   price,
   balance,
-  onClose
+  onClose,
+  showKimchiGuide = true,
+  closeLabel = "닫고 처방전 받기"
 }: Props) {
   const priceStr = `${price.toLocaleString("ko-KR")}원`;
   const balanceStr = `${balance.toLocaleString("ko-KR")}원`;
@@ -57,12 +61,14 @@ export default function ReceiptModal({
           <Row label="잔액 ..............." value={balanceStr} />
         </div>
 
+        {showKimchiGuide ? (
         <div className="my-4 border-b border-dashed border-[#7a4f28]/40 pb-4 text-center text-sm leading-7 text-[#7a4f28]">
           <p>※ 이 약 한 첩(500원) 기준</p>
           <p>김밥 한 줄 = 7첩 (3,500원)</p>
           <p>삼각김밥 = 3첩 (1,500원)</p>
           <p>자판기 커피 = 1.4첩 (700원)</p>
         </div>
+        ) : null}
 
         <div className="flex flex-col gap-2">
           <button
@@ -77,7 +83,7 @@ export default function ReceiptModal({
             onClick={onClose}
             type="button"
           >
-            닫고 처방전 받기
+            {closeLabel}
           </button>
         </div>
       </section>

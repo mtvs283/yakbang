@@ -9,6 +9,7 @@ import {
   type ReactNode
 } from "react";
 import type { Tier } from "../../data/membership";
+import { migrateStashedReceipts } from "../../lib/migrateReceiptsOnAuth";
 import { ensureAnonymousUser } from "../../lib/supabase/auth";
 import { createClient } from "../../lib/supabase/client";
 
@@ -52,6 +53,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       return;
     }
     setUserId(user.id);
+    await migrateStashedReceipts();
     const [{ data }, { count }] = await Promise.all([
       supabase.from("users").select("*").eq("id", user.id).single(),
       supabase

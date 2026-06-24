@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { useLocale } from "../LocaleProvider";
 import { useUser } from "../../lib/hooks/useUser";
@@ -75,6 +76,9 @@ export default function ShopNav() {
           >
             {t.pharmacyGuide.button}
           </button>
+          <Link className={PILL_GUIDE} href="/receipts">
+            📜 영수증함
+          </Link>
         </div>
       </div>
 

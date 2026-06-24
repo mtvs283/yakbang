@@ -6,13 +6,20 @@ import { getRemedyText } from "../data/i18n";
 import { formatPrice, type Remedy } from "../data/remedies";
 import { chargePrescription, getPointBalance } from "../lib/chargePrescription";
 import { recordPrescriptionComplete } from "../lib/recordPrescriptionComplete";
+import { recordUserReceipt } from "../lib/recordUserReceipt";
+import {
+  buildFreeReceiptData,
+  buildPaidReceiptData,
+  H_PRON_RECEIPT_SLUG
+} from "../lib/receiptTypes";
 import InsufficientBalanceModal from "./payment/InsufficientBalanceModal";
 import PaymentConfirmModal from "./payment/PaymentConfirmModal";
+import ReceiptIssuanceModal from "./payment/ReceiptIssuanceModal";
 import ReceiptModal from "./payment/ReceiptModal";
 import TreatmentConfirmModal from "./payment/TreatmentConfirmModal";
 import { useLocale } from "./LocaleProvider";
 
-const H_PRON_SLUG = "h-pron";
+const H_PRON_SLUG = H_PRON_RECEIPT_SLUG;
 const H_PRON_PRICE = 500;
 
 type PaymentPhase =
@@ -50,6 +57,7 @@ export default function PrescriptionModal({
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const completedRef = useRef(false);
   const recordedRef = useRef(false);
+  const receiptPendingRef = useRef(false);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [hintsShown, setHintsShown] = useState<Record<number, boolean>>({});
   const [phase, setPhase] = useState<PaymentPhase>("quiz");
@@ -59,6 +67,8 @@ export default function PrescriptionModal({
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [treatmentLoading, setTreatmentLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [showIssuance, setShowIssuance] = useState(false);
+  const [receiptId, setReceiptId] = useState<string | null>(null);
 
   const text = getRemedyText(remedy, locale);
   const quiz = remedy.prescription.quiz;
@@ -85,6 +95,17 @@ export default function PrescriptionModal({
     allCorrect && (!requiresPayment || phase === "stamped");
   const showAllDone =
     allCorrect && (!requiresPayment || phase === "stamped");
+
+  function finishVisitorFlow() {
+    if (completedRef.current || !onComplete) return;
+    completedRef.current = true;
+    setTimeout(onComplete, 1500);
+  }
+
+  function handleIssuanceDone() {
+    setShowIssuance(false);
+    finishVisitorFlow();
+  }
 
   function dismissPaymentFlow() {
     setPhase("quiz");
@@ -116,6 +137,10 @@ export default function PrescriptionModal({
       return;
     }
     setReceiptBalance(result.newBalance);
+    await recordUserReceipt({
+      prescriptionSlug: H_PRON_SLUG,
+      receiptData: buildPaidReceiptData(text.name, result.newBalance)
+    });
     setPhase("receipt");
     await onPaymentComplete?.();
   }
@@ -140,15 +165,28 @@ export default function PrescriptionModal({
     setPhase("treatment");
   }, [allCorrect, requiresPayment, phase]);
 
-  // 비회원: 합격 도장 후 가입 유도 콜백
+  // 비회원: 영수증 기록 → 발급 모달 → 가입 유도
   useEffect(() => {
-    if (!allCorrect || completedRef.current || !onComplete || requiresPayment) {
+    if (!allCorrect || requiresPayment || remedy.id !== "h-pronunciation") {
       return;
     }
-    completedRef.current = true;
-    const timer = setTimeout(onComplete, 1500);
-    return () => clearTimeout(timer);
-  }, [allCorrect, onComplete, requiresPayment]);
+    if (receiptPendingRef.current) return;
+    receiptPendingRef.current = true;
+
+    void (async () => {
+      const id = await recordUserReceipt({
+        prescriptionSlug: H_PRON_SLUG,
+        receiptData: buildFreeReceiptData(text.name),
+        recipientEmail: null
+      });
+      if (id) {
+        setReceiptId(id);
+        setShowIssuance(true);
+      } else {
+        finishVisitorFlow();
+      }
+    })();
+  }, [allCorrect, requiresPayment, remedy.id, text.name]);
 
   useEffect(() => {
     setMounted(true);
@@ -163,7 +201,8 @@ export default function PrescriptionModal({
           phase === "treatment" ||
           phase === "payment" ||
           phase === "receipt" ||
-          phase === "insufficient"
+          phase === "insufficient" ||
+          showIssuance
         ) {
           return;
         }
@@ -178,7 +217,7 @@ export default function PrescriptionModal({
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [onClose, phase]);
+  }, [onClose, phase, showIssuance]);
 
   const callback = remedy.prescription.callback;
   const callbackIsLive = isExternalUrl(callback.url);
@@ -438,6 +477,13 @@ export default function PrescriptionModal({
           onClose={() => setPhase("stamped")}
           price={H_PRON_PRICE}
           remedyName={text.name}
+        />
+      ) : null}
+
+      {showIssuance && receiptId ? (
+        <ReceiptIssuanceModal
+          onDone={handleIssuanceDone}
+          receiptId={receiptId}
         />
       ) : null}
 

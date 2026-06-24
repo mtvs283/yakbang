@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { registerPatient } from "../../lib/supabase/auth";
 import { createClient } from "../../lib/supabase/client";
+import { migrateStashedReceipts } from "../../lib/migrateReceiptsOnAuth";
 import KoreanTermTooltip from "../KoreanTermTooltip";
 
 interface Props {
@@ -45,6 +46,7 @@ export default function RegisterModal({
       const supabase = createClient();
       const { error: rpcError } = await supabase.rpc("claim_patient_bonus");
       if (rpcError) throw rpcError;
+      await migrateStashedReceipts();
       try {
         localStorage.setItem("yakbang-has-account", "1"); // 재방문 판별용
       } catch {
