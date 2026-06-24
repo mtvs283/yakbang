@@ -21,7 +21,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Fill in the blanks to learn the remedy",
     step4: "4. Pay and receive your remedy",
     step5:
-      "5. The prescription stays in your wallet; the receipt is sent to your registered address (e-mail)."
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   ja: {
     button: "薬房のご利用方法",
@@ -32,7 +32,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "三. 空欄を埋めて薬房文を覚えなされ",
     step4: "四. 薬代を払って薬をお受け取りなされ",
     step5:
-      "五. 薬房文は懐に、領収は登録した居所(電子便)へ送られまする。"
+      "5. 処方箋はウォレットに追加され、領収書は登録済みのメールアドレスに送信されます。"
   },
   "zh-CN": {
     button: "药房使用法",
@@ -42,7 +42,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step2: "二. 从药方目录中选药",
     step3: "三. 填空学习药方",
     step4: "四. 付药费,领药",
-    step5: "五. 药方留在钱袋,收据寄往登记的居所(电邮)。"
+    step5: "5. 药方将添加到您的钱包，收据将发送到您注册的电子邮箱。"
   },
   "zh-TW": {
     button: "藥房使用法",
@@ -52,7 +52,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step2: "二. 從藥方目錄中選藥",
     step3: "三. 填空學習藥方",
     step4: "四. 付藥費,領藥",
-    step5: "五. 藥方留在錢袋,收據寄往登記的居所(電郵)。"
+    step5: "5. 藥方將加入您的錢包，收據將寄送到您註冊的電子信箱。"
   },
   vi: {
     button: "Cách dùng tiệm thuốc",
@@ -63,7 +63,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Điền vào chỗ trống để học đơn thuốc",
     step4: "4. Trả tiền và nhận thuốc",
     step5:
-      "5. Đơn thuốc ở ví; biên lai gửi tới địa chỉ đã đăng ký (e-mail)."
+      "5. Đơn thuốc sẽ được thêm vào ví, còn biên lai sẽ được gửi đến email đã đăng ký của bạn."
   },
   th: {
     button: "วิธีใช้ร้านยา",
@@ -74,7 +74,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "๓. เติมคำในช่องว่างเพื่อเรียนรู้ใบสั่งยา",
     step4: "๔. ชำระเงินและรับยา",
     step5:
-      "๕. ใบสั่งยาอยู่ในกระเป๋า ใบเสร็จส่งไปยังที่อยู่ที่ลงทะเบียน (อีเมล)"
+      "5. ใบสั่งยาจะถูกเพิ่มไว้ในกระเป๋าเงิน และใบเสร็จจะถูกส่งไปยังอีเมลที่คุณลงทะเบียนไว้"
   },
   id: {
     button: "Cara pakai apotek",
@@ -85,7 +85,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Isi titik-titik untuk mempelajari resep",
     step4: "4. Bayar dan terima obat Anda",
     step5:
-      "5. Resep di dompet; kwitansi dikirim ke alamat terdaftar (e-mail)."
+      "5. Resep akan ditambahkan ke dompet Anda, dan tanda terima akan dikirim ke email yang telah terdaftar."
   },
   mn: {
     button: "Эмийн сангийн заавар",
@@ -96,7 +96,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Хоосон зайг бөглөж эмийг сурах",
     step4: "4. Төлбөр төлж эмээ ав",
     step5:
-      "5. Жор хэтэвчид; баримт бүртгэсэн хаягаар (e-mail) илгээгдэнэ."
+      "5. Эмийн жор таны түрийвчид нэмэгдэх бөгөөд баримт нь бүртгэлтэй имэйл хаяг руу илгээгдэнэ."
   },
   ru: {
     button: "Как пользоваться",
@@ -107,7 +107,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Заполните пропуски и изучите рецепт",
     step4: "4. Оплатите и получите лекарство",
     step5:
-      "5. Рецепт в кошельке; квитанция отправляется на зарегистрированный адрес (e-mail)."
+      "5. Рецепт будет добавлен в ваш кошелёк, а квитанция будет отправлена на зарегистрированный адрес электронной почты."
   },
   uz: {
     button: "Dorixona qo'llanmasi",
@@ -118,7 +118,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Bo'sh joylarni to'ldirib retseptni o'rganing",
     step4: "4. To'lov qiling va doringizni oling",
     step5:
-      "5. Retsept hamyonda; kvitansiya ro'yxatdan o'tgan manzilga (e-mail) yuboriladi."
+      "5. Retsept hamyoningizga qo'shiladi, chek esa ro'yxatdan o'tgan elektron pochtangizga yuboriladi."
   },
   kk: {
     button: "Дәріхана нұсқаулығы",
@@ -129,7 +129,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Бос орындарды толтырып рецептті үйреніңіз",
     step4: "4. Төлеп, дәріңізді алыңыз",
     step5:
-      "5. Рецепт әмиянда; түбіртек тіркелген мекенжайға (e-mail) жіберіледі."
+      "5. Рецепт әмияныңызға қосылады, ал түбіртек тіркелген электрондық поштаңызға жіберіледі."
   },
   ky: {
     button: "Дары-дармек боюнча",
@@ -140,7 +140,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Бош жерлерди толтуруп рецептти үйрөнүңүз",
     step4: "4. Акысын төлөп дарыңызды алыңыз",
     step5:
-      "5. Рецепт капчыкта; далил катталган дарекке (e-mail) жөнөтүлөт."
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   ne: {
     button: "औषधालय विधि",
@@ -151,7 +151,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "३. खाली ठाउँ भरेर औषधि सिक्नुहोस्",
     step4: "४. पैसा तिरेर औषधि प्राप्त गर्नुहोस्",
     step5:
-      "५. औषधि पर्समा; रसिद दर्ता गरिएको ठेगाना (e-mail) मा पठाइन्छ।"
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   my: {
     button: "ဆေးခန်း အသုံးပြုနည်း",
@@ -162,7 +162,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "၃. ကွက်လပ်ဖြည့်၍ ဆေးညွှန်းကို သင်ယူပါ",
     step4: "၄. ဆေးဖိုးပေး၍ ဆေးကို လက်ခံပါ",
     step5:
-      "၅. ဆေးညွှန်းကို ပိုက်ဆံအိတ်တွင်၊ ပြေစာကို မှတ်ပုံတင်ထားသော လိပ်စာ (e-mail) သို့ ပို့ပါမည်။"
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   km: {
     button: "របៀបប្រើឱសថស្ថាន",
@@ -173,7 +173,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "៣. បំពេញចន្លោះដើម្បីរៀនវេជ្ជបញ្ជា",
     step4: "៤. បង់ប្រាក់ និងទទួលឱសថ",
     step5:
-      "៥. វេជ្ជបញ្ជានៅក្នុងកាបូប; បង្កាន់ដៃផ្ញើទៅអាសយដ្ឋានដែលបានចុះឈ្មោះ (e-mail)។"
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   fil: {
     button: "Gabay sa botika",
@@ -184,7 +184,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Punan ang patlang upang matutunan ang reseta",
     step4: "4. Magbayad at tanggapin ang inyong gamot",
     step5:
-      "5. Ang reseta ay sa pitaka; ang resibo ay ipapadala sa rehistradong tirahan (e-mail)."
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   hi: {
     button: "औषधालय गाइड",
@@ -195,7 +195,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "३. रिक्त स्थान भरकर नुस्खा सीखिए",
     step4: "४. मूल्य चुकाकर दवा प्राप्त कीजिए",
     step5:
-      "५. नुस्खा बटुए में; रसीद पंजीकृत पते (e-mail) पर भेजी जाएगी।"
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   bn: {
     button: "ঔষধালয় গাইড",
@@ -206,7 +206,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "৩. শূন্যস্থান পূরণ করে ঔষধ শিখুন",
     step4: "৪. মূল্য প্রদান করে ঔষধ গ্রহণ করুন",
     step5:
-      "৫. ঔষধপত্র মানিব্যাগে; রসিদ নিবন্ধিত ঠিকানায় (e-mail) পাঠানো হবে।"
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   ar: {
     button: "دليل الصيدلية",
@@ -217,7 +217,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "٣. املأ الفراغات لتتعلم الوصفة",
     step4: "٤. ادفع واستلم دواءك",
     step5:
-      "٥. الوصفة في المحفظة؛ الإيصال يُرسل إلى العنوان المسجل (e-mail)."
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   es: {
     button: "Guía de la botica",
@@ -228,7 +228,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Complete los espacios para aprender la receta",
     step4: "4. Pague y reciba su remedio",
     step5:
-      "5. La receta queda en la cartera; el recibo se envía a la dirección registrada (e-mail)."
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   fr: {
     button: "Guide de la pharmacie",
@@ -239,7 +239,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Remplissez les blancs pour apprendre l'ordonnance",
     step4: "4. Payez et recevez votre remède",
     step5:
-      "5. L'ordonnance reste dans le portefeuille; le reçu est envoyé à l'adresse enregistrée (e-mail)."
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   de: {
     button: "Apotheken-Anleitung",
@@ -250,7 +250,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Füllen Sie die Lücken aus, um das Rezept zu lernen",
     step4: "4. Bezahlen Sie und erhalten Sie Ihr Heilmittel",
     step5:
-      "5. Das Rezept bleibt in der Börse; die Quittung geht an die registrierte Adresse (e-mail)."
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   sw: {
     button: "Mwongozo wa duka",
@@ -261,7 +261,7 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Jaza nafasi tupu kujifunza maagizo",
     step4: "4. Lipa na pokea dawa yako",
     step5:
-      "5. Dawa ya maagizo iko poacheni; risiti itatumwa kwa anwani iliyosajiliwa (e-mail)."
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   },
   ha: {
     button: "Jagoran kantin magani",
@@ -272,6 +272,6 @@ export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
     step3: "3. Cika wuraren da babu rubutu don koyon takardar magani",
     step4: "4. Biya kuɗi kuma karɓi maganinku",
     step5:
-      "5. Takardar magani a cikin walat; rasit ɗin za a aika zuwa adireshin da aka yi rajista (e-mail)."
+      "5. The prescription will be added to your wallet, and the receipt will be sent to your registered email."
   }
 };
