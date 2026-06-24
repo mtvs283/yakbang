@@ -7,10 +7,15 @@ import { loginWithPassword } from "../../lib/supabase/auth";
 interface Props {
   onClose: () => void;
   initialEmail?: string;
+  onNewRegister?: () => void;
 }
 
 // 재진 입장: 등록 이메일 + 비밀번호로 즉시 로그인 (메일 불필요).
-export default function ReturnLoginModal({ onClose, initialEmail }: Props) {
+export default function ReturnLoginModal({
+  onClose,
+  initialEmail,
+  onNewRegister
+}: Props) {
   const [email, setEmail] = useState(initialEmail ?? "");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -105,6 +110,17 @@ export default function ReturnLoginModal({ onClose, initialEmail }: Props) {
           >
             {loading ? "입장 중…" : "입장하기"}
           </button>
+
+          {onNewRegister ? (
+            <button
+              className="w-full rounded-md border border-[#7a4f28]/50 bg-transparent px-4 py-2.5 font-script text-base font-bold text-[#7a4f28] transition hover:bg-[#7a4f28]/10 disabled:opacity-60"
+              disabled={loading}
+              onClick={onNewRegister}
+              type="button"
+            >
+              처음 오셨소? 새 환자 등록
+            </button>
+          ) : null}
         </form>
       </section>
     </div>,

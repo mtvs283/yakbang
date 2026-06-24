@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { tiers, type Tier } from "../../data/membership";
 import { useDailyAttendance } from "../../lib/hooks/useDailyAttendance";
+import { hasStoredAccountHint, prepareNewPatientRegistration } from "../../lib/supabase/auth";
 import { useUser } from "../../lib/hooks/useUser";
 import { useShopUi } from "../ShopUiProvider";
 import RegisterModal from "./RegisterModal";
@@ -56,12 +57,15 @@ export default function PharmacyHeader() {
 
   // 진료등록 클릭: 재방문(이 브라우저에서 등록 이력/로그인)이면 재진 입장, 아니면 신규 등록
   function handleEnter() {
-    const returning =
-      isRegistered ||
-      (typeof window !== "undefined" &&
-        localStorage.getItem("yakbang-has-account") === "1");
+    const returning = isRegistered || hasStoredAccountHint();
     if (returning) setShowLogin(true);
     else setShowRegister(true);
+  }
+
+  async function handleNewRegister() {
+    setShowLogin(false);
+    await prepareNewPatientRegistration();
+    setShowRegister(true);
   }
 
   return (
@@ -118,6 +122,7 @@ export default function PharmacyHeader() {
         <ReturnLoginModal
           initialEmail={loginEmail}
           onClose={() => setShowLogin(false)}
+          onNewRegister={() => void handleNewRegister()}
         />
       ) : null}
 

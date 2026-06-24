@@ -6,8 +6,9 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useLocale } from "../LocaleProvider";
 import { useUser } from "../../lib/hooks/useUser";
-import { signOut } from "../../lib/supabase/auth";
+import { prepareNewPatientRegistration, signOut } from "../../lib/supabase/auth";
 import PharmacyGuideModal from "./PharmacyGuideModal";
+import RegisterModal from "./RegisterModal";
 import ReturnLoginModal from "./ReturnLoginModal";
 
 const GWANGGAETO_URL = "https://gwanggaeto-home.vercel.app/";
@@ -29,11 +30,19 @@ export default function ShopNav() {
   const pathname = usePathname();
   const onReceiptsPage = pathname === "/receipts";
   const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
   const [showGuide, setShowGuide] = useState(false);
 
   async function handleLogout() {
     await signOut();
-    window.location.reload(); // 로그아웃 후 새 방문자로 초기화
+    window.location.reload();
+  }
+
+  async function handleNewRegister() {
+    setShowLogin(false);
+    await prepareNewPatientRegistration();
+    setShowRegister(true);
   }
 
   return (
@@ -94,7 +103,26 @@ export default function ShopNav() {
       </div>
 
       {showLogin ? (
-        <ReturnLoginModal onClose={() => setShowLogin(false)} />
+        <ReturnLoginModal
+          initialEmail={loginEmail}
+          onClose={() => setShowLogin(false)}
+          onNewRegister={() => void handleNewRegister()}
+        />
+      ) : null}
+
+      {showRegister ? (
+        <RegisterModal
+          onClose={() => setShowRegister(false)}
+          onDone={() => {
+            setShowRegister(false);
+            window.location.reload();
+          }}
+          onSwitchToLogin={(email) => {
+            setShowRegister(false);
+            setLoginEmail(email);
+            setShowLogin(true);
+          }}
+        />
       ) : null}
 
       {showGuide ? (

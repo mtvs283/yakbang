@@ -1,6 +1,35 @@
 "use client";
 
+import { clearReceiptStash } from "../receiptStorage";
 import { createClient } from "./client";
+
+const HAS_ACCOUNT_KEY = "yakbang-has-account";
+
+export function hasStoredAccountHint(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return localStorage.getItem(HAS_ACCOUNT_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function markStoredAccountHint() {
+  try {
+    localStorage.setItem(HAS_ACCOUNT_KEY, "1");
+  } catch {
+    /* noop */
+  }
+}
+
+export function clearLocalPatientFlags() {
+  try {
+    localStorage.removeItem(HAS_ACCOUNT_KEY);
+    clearReceiptStash();
+  } catch {
+    /* noop */
+  }
+}
 
 // 사이트 진입 시 익명 유저 자동 발급 (없을 때만).
 // 여러 컴포넌트가 동시에 불러도 익명 로그인은 1번만 일어나도록 in-flight 디듀프.
@@ -58,4 +87,13 @@ export async function upgradeToEmailAuth(password: string) {
 export async function signOut() {
   const supabase = createClient();
   await supabase.auth.signOut();
+  clearLocalPatientFlags();
+}
+
+/** 다른 이메일로 새 환자 등록 — 세션·로컬 힌트 초기화 후 익명 유저 발급 */
+export async function prepareNewPatientRegistration() {
+  const supabase = createClient();
+  await supabase.auth.signOut();
+  clearLocalPatientFlags();
+  await ensureAnonymousUser();
 }
