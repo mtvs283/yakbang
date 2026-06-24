@@ -11,9 +11,11 @@ import {
   SLUG_TO_REMEDY_ID
 } from "../../data/receiptCatalog";
 import { fetchUserReceipts } from "../../lib/fetchUserReceipts";
+import { groupReceiptsBySlug, type ReceiptGroup } from "../../lib/groupUserReceipts";
 import { useUser } from "../../lib/hooks/useUser";
 import type { UserReceiptRow } from "../../lib/receiptTypes";
 import { useLocale } from "../../components/LocaleProvider";
+import ReceiptGroupListModal from "../../components/payment/ReceiptGroupListModal";
 import ReceiptModal from "../../components/payment/ReceiptModal";
 import ShopNav from "../../components/membership/ShopNav";
 
@@ -46,6 +48,7 @@ export default function ReceiptsPageClient() {
   const { profile, isRegistered, loading: userLoading } = useUser();
   const [receipts, setReceipts] = useState<UserReceiptRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedGroup, setSelectedGroup] = useState<ReceiptGroup | null>(null);
   const [detail, setDetail] = useState<UserReceiptRow | null>(null);
 
   const load = useCallback(async () => {
@@ -60,9 +63,11 @@ export default function ReceiptsPageClient() {
     void load();
   }, [load, userLoading]);
 
+  const receiptGroups = useMemo(() => groupReceiptsBySlug(receipts), [receipts]);
+
   const receivedSlugs = useMemo(
-    () => new Set(receipts.map((r) => r.prescription_slug)),
-    [receipts]
+    () => new Set(receiptGroups.map((g) => g.prescriptionSlug)),
+    [receiptGroups]
   );
 
   const unreceivedSlugs = useMemo(
@@ -85,6 +90,15 @@ export default function ReceiptsPageClient() {
     backgroundImage:
       "repeating-linear-gradient(90deg, rgba(122,79,40,0.05) 0px, rgba(122,79,40,0.05) 1px, transparent 1px, transparent 22px)"
   };
+
+  function handleCloseDetail() {
+    setDetail(null);
+  }
+
+  function handleCloseGroup() {
+    setSelectedGroup(null);
+    setDetail(null);
+  }
 
   return (
     <>
@@ -119,33 +133,33 @@ export default function ReceiptsPageClient() {
                 <h2 className="mb-4 font-script text-xl font-bold text-[#7a4f28]">
                   받은 영수증
                 </h2>
-                {receipts.length === 0 ? (
+                {receiptGroups.length === 0 ? (
                   <p className="rounded-lg border border-dashed border-[#7a4f28]/40 bg-white/30 p-8 text-center font-script text-base text-[#7a4f28]">
                     아직 영수증이 없소. 약방에서 치료를 받으시오.
                   </p>
                 ) : (
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {receipts.map((row) => {
-                      const data = row.receipt_data;
-                      return (
-                        <button
-                          className="rounded-lg border-2 border-[#7a4f28]/50 bg-white/50 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-[#7a4f28] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#7a4f28]"
-                          key={row.id}
-                          onClick={() => setDetail(row)}
-                          type="button"
-                        >
-                          <p className="font-sanskr text-lg font-bold text-[#3d2b1a]">
-                            {data.remedyName}
-                          </p>
-                          <p className="mt-1 text-sm text-[#7a4f28]">
-                            {formatIssuedAt(row.issued_at)}
-                          </p>
-                          <p className="mt-2 font-script text-base font-bold text-[#8a3a1a]">
-                            {amountLabel(data.amount)}
-                          </p>
-                        </button>
-                      );
-                    })}
+                    {receiptGroups.map((group) => (
+                      <button
+                        className="rounded-lg border-2 border-[#7a4f28]/50 bg-white/50 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-[#7a4f28] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#7a4f28]"
+                        key={group.prescriptionSlug}
+                        onClick={() => setSelectedGroup(group)}
+                        type="button"
+                      >
+                        <p className="flex flex-wrap items-center gap-2 font-sanskr text-lg font-bold text-[#3d2b1a]">
+                          {group.remedyName}
+                          <span className="inline-flex rounded-full border border-[#7a4f28]/50 bg-[#7a4f28]/10 px-2 py-0.5 font-script text-sm font-bold text-[#7a4f28]">
+                            {group.count}
+                          </span>
+                        </p>
+                        <p className="mt-1 text-sm text-[#7a4f28]">
+                          최근 {formatIssuedAt(group.latestIssuedAt)}
+                        </p>
+                        <p className="mt-2 font-script text-base font-bold text-[#8a3a1a]">
+                          누적 {amountLabel(group.totalAmount)}
+                        </p>
+                      </button>
+                    ))}
                   </div>
                 )}
               </section>
@@ -211,12 +225,22 @@ export default function ReceiptsPageClient() {
         </div>
       </main>
 
+      {selectedGroup && !detail ? (
+        <ReceiptGroupListModal
+          formatAmount={amountLabel}
+          formatIssuedAt={formatIssuedAt}
+          group={selectedGroup}
+          onClose={handleCloseGroup}
+          onSelectReceipt={setDetail}
+        />
+      ) : null}
+
       {detail ? (
         <ReceiptModal
           balance={detail.receipt_data.balance ?? 0}
-          closeLabel="닫기"
+          closeLabel="목록으로"
           isRegisteredPatient={isRegistered}
-          onClose={() => setDetail(null)}
+          onClose={handleCloseDetail}
           price={detail.receipt_data.amount}
           remedyName={detail.receipt_data.remedyName}
           showKimchiGuide={detail.receipt_data.amount > 0}
