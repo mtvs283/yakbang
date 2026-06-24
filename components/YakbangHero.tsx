@@ -48,25 +48,26 @@ export default function YakbangHero() {
         <p className="absolute right-5 top-2 font-sans text-xs font-bold uppercase tracking-[0.22em] text-white/86 sm:right-8 sm:top-3 sm:text-2xl">
           YAKBANG GWANGGAETO
         </p>
-        <Link
-          aria-label="약방으로 들어가기"
-          href="/shop"
-          className="absolute right-5 top-0 z-10 text-right transition duration-200 ease-in-out hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black sm:right-8"
-        >
-          <span className="relative inline-block font-shilla text-6xl font-bold leading-none text-white drop-shadow-[0_0_24px_rgba(255,255,255,0.18)] sm:text-8xl">
-            {PHARMACY_TITLE}
-            <span
-              aria-hidden="true"
-              className="absolute right-[0.18em] top-full mt-3 font-sans text-5xl font-black leading-none text-yakbangGold sm:text-7xl"
-            >
-              ↓
-            </span>
-          </span>
-        </Link>
-        <div className="absolute bottom-16 right-5 sm:bottom-20 sm:right-8">
+        {/* 제목 → 화살표 → 엔터를 하단에 모아, 화살표 끝이 엔터에 가깝게 */}
+        <div className="absolute bottom-12 right-5 z-10 flex flex-col items-end sm:bottom-16 sm:right-8">
           <Link
             aria-label="약방으로 들어가기"
-            className="inline-flex whitespace-nowrap transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black"
+            href="/shop"
+            className="text-right transition duration-200 ease-in-out hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black"
+          >
+            <span className="inline-block font-shilla text-6xl font-bold leading-none text-white drop-shadow-[0_0_24px_rgba(255,255,255,0.18)] sm:text-8xl">
+              {PHARMACY_TITLE}
+            </span>
+          </Link>
+          <span
+            aria-hidden="true"
+            className="mr-[0.18em] mt-2 font-sans text-5xl font-black leading-none text-yakbangGold sm:mt-3 sm:text-7xl"
+          >
+            ↓
+          </span>
+          <Link
+            aria-label="약방으로 들어가기"
+            className="mt-2 inline-flex whitespace-nowrap transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-black sm:mt-3"
             href="/shop"
           >
             <span className="animate-stamp-slam inline-block rounded-md border-2 border-[#e23b3b] px-2 py-0.5 font-sans text-4xl font-black text-[#e23b3b] drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] sm:text-6xl">
