@@ -16,7 +16,7 @@ import { useUser } from "../../lib/hooks/useUser";
 import type { UserReceiptRow } from "../../lib/receiptTypes";
 import { useLocale } from "../../components/LocaleProvider";
 import ReceiptGroupListModal from "../../components/payment/ReceiptGroupListModal";
-import { ReceiptEmailBadge, ReceiptEmailBadgeForLatest } from "../../components/payment/ReceiptEmailBadge";
+import { ReceiptEmailBadgeForLatest } from "../../components/payment/ReceiptEmailBadge";
 import ReceiptModal from "../../components/payment/ReceiptModal";
 import ShopNav from "../../components/membership/ShopNav";
 
@@ -235,6 +235,7 @@ export default function ReceiptsPageClient() {
           formatIssuedAt={formatIssuedAt}
           group={selectedGroup}
           onClose={handleCloseGroup}
+          onEmailSent={() => void load()}
           onSelectReceipt={setDetail}
         />
       ) : null}

@@ -3,12 +3,13 @@
 import { createPortal } from "react-dom";
 import type { ReceiptGroup } from "../../lib/groupUserReceipts";
 import type { UserReceiptRow } from "../../lib/receiptTypes";
-import { ReceiptEmailBadge } from "./ReceiptEmailBadge";
+import ReceiptEmailActions from "./ReceiptEmailActions";
 
 interface Props {
   group: ReceiptGroup;
   onClose: () => void;
   onSelectReceipt: (row: UserReceiptRow) => void;
+  onEmailSent?: () => void;
   formatIssuedAt: (iso: string) => string;
   formatAmount: (amount: number) => string;
 }
@@ -17,6 +18,7 @@ export default function ReceiptGroupListModal({
   group,
   onClose,
   onSelectReceipt,
+  onEmailSent,
   formatIssuedAt,
   formatAmount
 }: Props) {
@@ -78,7 +80,11 @@ export default function ReceiptGroupListModal({
                     {formatAmount(row.receipt_data.amount)}
                   </span>
                 </div>
-                <ReceiptEmailBadge row={row} />
+                <ReceiptEmailActions
+                  compact
+                  onSent={onEmailSent}
+                  row={row}
+                />
               </button>
             </li>
           ))}

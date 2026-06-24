@@ -29,8 +29,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "서신 발송 설정이 없소." }, { status: 500 });
     }
 
-    const body = (await request.json()) as { receipt_id?: string };
+    const body = (await request.json()) as {
+      receipt_id?: string;
+      force?: boolean;
+    };
     const receiptId = body.receipt_id?.trim();
+    const force = body.force === true;
     if (!receiptId) {
       return NextResponse.json({ error: "receipt_id가 필요하오." }, { status: 400 });
     }
@@ -63,7 +67,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "서신 주소가 없소." }, { status: 400 });
     }
 
-    if (row.email_sent) {
+    if (row.email_sent && !force) {
       return NextResponse.json({ error: "이미 발송된 영수증이오." }, { status: 409 });
     }
 
@@ -83,7 +87,7 @@ export async function POST(request: Request) {
 
     const resend = new Resend(apiKey);
     const subject = `[약방광개토] ${row.receipt_data.remedyName} 영수증`;
-    const { error: sendError } = await resend.emails.send({
+    const { data: sent, error: sendError } = await resend.emails.send({
       from: RECEIPT_FROM,
       to: row.recipient_email.trim(),
       subject,
@@ -95,11 +99,18 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error: "서신 발송에 실패했소.",
-          detail: sendError.message
+          detail: sendError.message,
+          code: sendError.name
         },
         { status: 500 }
       );
     }
+
+    console.info("[send-receipt] sent", {
+      receiptId,
+      to: row.recipient_email.trim(),
+      resendId: sent?.id
+    });
 
     const { error: updateError } = await supabase
       .from("user_receipts")
@@ -122,7 +133,7 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, id: sent?.id ?? null });
   } catch (e) {
     console.error("[send-receipt] unexpected error", e);
     return NextResponse.json({ error: "서신 발송 중 탈이 났소." }, { status: 500 });

@@ -178,7 +178,11 @@ export default function PrescriptionModal({
       setPaymentError("영수증 기록에 실패했소. 잠시 후 다시 시도하시오.");
       return;
     }
-    void requestReceiptEmail(receipt.id);
+    void requestReceiptEmail(receipt.id).then((result) => {
+      if (!result.ok) {
+        console.error("[paid receipt email]", result);
+      }
+    });
     setPhase("receipt");
     await onPaymentComplete?.();
   }

@@ -14,7 +14,9 @@ export default function ReceiptIssuanceModal({ receiptId, onDone }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [emailNote, setEmailNote] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,13 +26,23 @@ export default function ReceiptIssuanceModal({ receiptId, onDone }: Props) {
     }
     setLoading(true);
     setError(null);
+    setEmailNote(null);
     const ok = await updateReceiptRecipient(receiptId, name, email);
-    setLoading(false);
     if (!ok) {
+      setLoading(false);
       setError("영수증 정보를 남기지 못했소. 잠시 후 다시 시도하시오.");
       return;
     }
-    void requestReceiptEmail(receiptId);
+    setLoading(false);
+    setSending(true);
+    const sent = await requestReceiptEmail(receiptId);
+    setSending(false);
+    if (!sent.ok) {
+      setEmailNote(
+        `${sent.message} 영수증함에서 ‘서신 보내기’로 다시 시도하실 수 있소.`
+      );
+      return;
+    }
     onDone();
   }
 
@@ -91,13 +103,23 @@ export default function ReceiptIssuanceModal({ receiptId, onDone }: Props) {
             <p className="text-center text-sm font-bold text-red-700">{error}</p>
           ) : null}
 
+          {emailNote ? (
+            <p className="text-center text-sm font-bold leading-relaxed text-[#8a3a1a]">
+              {emailNote}
+            </p>
+          ) : null}
+
           <div className="flex flex-col gap-2 pt-2">
             <button
               className="w-full rounded-md border-2 border-[#7a4f28] bg-[#7a4f28] px-4 py-3 font-script text-lg font-bold text-[#f5e6c8] transition hover:bg-[#8a3a1a] disabled:opacity-60"
-              disabled={loading}
+              disabled={loading || sending}
               type="submit"
             >
-              {loading ? "기록 중…" : "영수증 받기"}
+              {loading
+                ? "기록 중…"
+                : sending
+                  ? "서신 보내는 중…"
+                  : "영수증 받기"}
             </button>
             <button
               className="w-full rounded-md border border-[#7a4f28]/50 bg-transparent px-4 py-2.5 font-script text-base font-bold text-[#7a4f28] transition hover:bg-[#7a4f28]/10"
