@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useLocale } from "../LocaleProvider";
 import { useUser } from "../../lib/hooks/useUser";
@@ -25,6 +26,8 @@ const GUIDE_BLOCK_OFFSET = "mt-[6.75rem]";
 export default function ShopNav() {
   const { t } = useLocale();
   const { isRegistered } = useUser();
+  const pathname = usePathname();
+  const onReceiptsPage = pathname === "/receipts";
   const [showLogin, setShowLogin] = useState(false);
   const [showGuide, setShowGuide] = useState(false);
 
@@ -53,6 +56,12 @@ export default function ShopNav() {
           </button>
         )}
 
+        {onReceiptsPage ? (
+          <Link className={PILL} href="/shop">
+            ← 약방으로
+          </Link>
+        ) : null}
+
         <div className={`${GUIDE_BLOCK_OFFSET} flex flex-col items-start gap-1.5`}>
           <button
             aria-label="약방 이용법"
@@ -76,9 +85,11 @@ export default function ShopNav() {
           >
             {t.pharmacyGuide.button}
           </button>
-          <Link className={PILL_GUIDE} href="/receipts">
-            📜 영수증함
-          </Link>
+          {!onReceiptsPage ? (
+            <Link className={PILL_GUIDE} href="/receipts">
+              📜 영수증함
+            </Link>
+          ) : null}
         </div>
       </div>
 

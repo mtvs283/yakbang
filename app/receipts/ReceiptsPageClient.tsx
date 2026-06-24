@@ -102,10 +102,10 @@ export default function ReceiptsPageClient() {
               {headingPatient}의 영수증함 · 총 {receipts.length}장
             </h1>
             <Link
-              className="mt-4 inline-block font-script text-base font-bold text-[#7a4f28] underline underline-offset-4 transition hover:text-[#8a3a1a]"
+              className="mt-5 inline-flex items-center gap-1.5 rounded-full border-2 border-[#7a4f28] bg-[#7a4f28] px-6 py-2.5 font-script text-base font-bold text-[#f5e6c8] shadow-sm transition hover:bg-[#8a3a1a] focus:outline-none focus:ring-2 focus:ring-[#7a4f28]"
               href="/shop"
             >
-              ← 약방으로
+              ← 약방으로 돌아가기
             </Link>
           </header>
 
