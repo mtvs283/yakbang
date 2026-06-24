@@ -3,7 +3,12 @@ import { Resend } from "resend";
 import { renderReceiptEmailHtml } from "../../../lib/email/renderReceiptEmailHtml";
 import { RECEIPT_FROM } from "../../../lib/email/receiptEmailConfig";
 import type { ReceiptData } from "../../../lib/receiptTypes";
-import { createClient, createServiceClient } from "../../../lib/supabase/server";
+import {
+  createClientFromRequest,
+  createServiceClient
+} from "../../../lib/supabase/server";
+
+export const dynamic = "force-dynamic";
 
 interface ReceiptRow {
   id: string;
@@ -30,10 +35,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "receipt_id가 필요하오." }, { status: 400 });
     }
 
-    const supabase = createClient();
+    const supabase = createClientFromRequest(request);
     const {
-      data: { user }
+      data: { user },
+      error: authError
     } = await supabase.auth.getUser();
+    if (authError) {
+      console.error("[send-receipt] auth error", authError.message);
+    }
     if (!user) {
       return NextResponse.json({ error: "로그인이 필요하오." }, { status: 401 });
     }
@@ -58,11 +67,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "이미 발송된 영수증이오." }, { status: 409 });
     }
 
-    const service = createServiceClient();
-    const { data: profile } = await service
+    const { data: profile } = await supabase
       .from("users")
       .select("daily_number")
-      .eq("id", row.user_id)
+      .eq("id", user.id)
       .maybeSingle();
 
     const html = renderReceiptEmailHtml({
@@ -84,17 +92,34 @@ export async function POST(request: Request) {
 
     if (sendError) {
       console.error("[send-receipt] Resend error", sendError);
-      return NextResponse.json({ error: "서신 발송에 실패했소." }, { status: 500 });
+      return NextResponse.json(
+        {
+          error: "서신 발송에 실패했소.",
+          detail: sendError.message
+        },
+        { status: 500 }
+      );
     }
 
-    const { error: updateError } = await service
+    const { error: updateError } = await supabase
       .from("user_receipts")
       .update({ email_sent: true })
-      .eq("id", receiptId)
-      .eq("user_id", row.user_id);
+      .eq("id", receiptId);
 
     if (updateError) {
       console.error("[send-receipt] email_sent update failed", updateError);
+      const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+      if (serviceKey) {
+        const service = createServiceClient();
+        const { error: fallbackError } = await service
+          .from("user_receipts")
+          .update({ email_sent: true })
+          .eq("id", receiptId)
+          .eq("user_id", row.user_id);
+        if (fallbackError) {
+          console.error("[send-receipt] service fallback failed", fallbackError);
+        }
+      }
     }
 
     return NextResponse.json({ ok: true });
