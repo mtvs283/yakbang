@@ -143,7 +143,7 @@ export default function PharmacyScene() {
             ) : null}
 
             {h.style === "calligraphy-gold" ? (
-              // 집현전약방 간판: 검정 글씨, 기존 대비 20% 키움 (43px / 86px)
+              // 광개토약방 간판: 검정 글씨, 기존 대비 20% 키움 (43px / 86px)
               <span
                 className="whitespace-nowrap font-shilla text-[43px] font-bold sm:text-[86px]"
                 style={{

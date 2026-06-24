@@ -36,7 +36,7 @@ export const pharmacyScene: { background: string; hotspots: Hotspot[] } = {
       mobileX: "50%",
       mobileY: "11.1%",
       style: "calligraphy-gold",
-      text: { ko: "집현전약방" }
+      text: { ko: "광개토약방" }
     },
     {
       // 책상 위 명패 (한국어 고정, 번역 X) — 강아지 어의 뭉치
