@@ -16,6 +16,7 @@ import { useUser } from "../../lib/hooks/useUser";
 import type { UserReceiptRow } from "../../lib/receiptTypes";
 import { useLocale } from "../../components/LocaleProvider";
 import ReceiptGroupListModal from "../../components/payment/ReceiptGroupListModal";
+import { ReceiptEmailBadge, ReceiptEmailBadgeForLatest } from "../../components/payment/ReceiptEmailBadge";
 import ReceiptModal from "../../components/payment/ReceiptModal";
 import ShopNav from "../../components/membership/ShopNav";
 
@@ -158,6 +159,9 @@ export default function ReceiptsPageClient() {
                         <p className="mt-2 font-script text-base font-bold text-[#8a3a1a]">
                           누적 {amountLabel(group.totalAmount)}
                         </p>
+                        <div className="mt-2">
+                          <ReceiptEmailBadgeForLatest rows={group.receipts} />
+                        </div>
                       </button>
                     ))}
                   </div>

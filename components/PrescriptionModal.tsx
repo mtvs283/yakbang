@@ -7,6 +7,7 @@ import { formatPrice, type Remedy } from "../data/remedies";
 import { chargePrescription, getPointBalance } from "../lib/chargePrescription";
 import { recordPrescriptionComplete } from "../lib/recordPrescriptionComplete";
 import { recordUserReceipt } from "../lib/recordUserReceipt";
+import { requestReceiptEmail } from "../lib/sendReceiptEmail";
 import {
   buildFreeReceiptData,
   buildPaidReceiptData,
@@ -177,6 +178,7 @@ export default function PrescriptionModal({
       setPaymentError("영수증 기록에 실패했소. 잠시 후 다시 시도하시오.");
       return;
     }
+    void requestReceiptEmail(receipt.id);
     setPhase("receipt");
     await onPaymentComplete?.();
   }

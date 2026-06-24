@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { updateReceiptRecipient } from "../../lib/recordUserReceipt";
+import { requestReceiptEmail } from "../../lib/sendReceiptEmail";
 
 interface Props {
   receiptId: string;
@@ -29,6 +30,7 @@ export default function ReceiptIssuanceModal({ receiptId, onDone }: Props) {
       setError("영수증 정보를 남기지 못했소. 잠시 후 다시 시도하시오.");
       return;
     }
+    void requestReceiptEmail(receiptId);
     onDone();
   }
 
