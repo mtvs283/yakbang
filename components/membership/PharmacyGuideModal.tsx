@@ -83,6 +83,7 @@ export default function PharmacyGuideModal({ onClose }: Props) {
               <li className="w-full break-words text-start">{g.step2}</li>
               <li className="w-full break-words text-start">{g.step3}</li>
               <li className="w-full break-words text-start">{g.step4}</li>
+              <li className="w-full break-words text-start">{g.step5}</li>
             </ul>
           </div>
         </div>

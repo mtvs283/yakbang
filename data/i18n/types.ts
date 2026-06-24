@@ -33,6 +33,7 @@ export interface PharmacyGuideCopy {
   step2: string;
   step3: string;
   step4: string;
+  step5: string;
 }
 
 export interface UIMessages {
