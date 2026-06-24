@@ -9,6 +9,8 @@ interface Props {
   onClose: () => void;
   showKimchiGuide?: boolean;
   closeLabel?: string;
+  /** 가입 환자: 이메일 버튼 대신 자동 발송 안내 */
+  isRegisteredPatient?: boolean;
 }
 
 function Row({ label, value }: { label: string; value: string }) {
@@ -26,7 +28,8 @@ export default function ReceiptModal({
   balance,
   onClose,
   showKimchiGuide = true,
-  closeLabel = "닫고 처방전 받기"
+  closeLabel = "닫고 처방전 받기",
+  isRegisteredPatient = false
 }: Props) {
   const priceStr = `${price.toLocaleString("ko-KR")}원`;
   const balanceStr = `${balance.toLocaleString("ko-KR")}원`;
@@ -61,6 +64,21 @@ export default function ReceiptModal({
           <Row label="잔액 ..............." value={balanceStr} />
         </div>
 
+        {isRegisteredPatient ? (
+          <p className="mb-4 text-center text-xs leading-relaxed text-[#7a4f28]/75">
+            ※ 영수증은 가입하신 서신 주소로 자동 발송되오 (서신 배달 기능은 곧 박힐
+            예정)
+          </p>
+        ) : (
+          <button
+            className="mb-4 w-full cursor-not-allowed rounded-md border border-[#7a4f28]/30 bg-[#7a4f28]/5 px-4 py-2.5 font-script text-base font-bold text-[#7a4f28]/50"
+            disabled
+            type="button"
+          >
+            영수증 이메일로 받기
+          </button>
+        )}
+
         {showKimchiGuide ? (
         <div className="my-4 border-b border-dashed border-[#7a4f28]/40 pb-4 text-center text-sm leading-7 text-[#7a4f28]">
           <p>※ 이 약 한 첩(500원) 기준</p>
@@ -71,13 +89,6 @@ export default function ReceiptModal({
         ) : null}
 
         <div className="flex flex-col gap-2">
-          <button
-            className="w-full cursor-not-allowed rounded-md border border-[#7a4f28]/30 bg-[#7a4f28]/5 px-4 py-2.5 font-script text-base font-bold text-[#7a4f28]/50"
-            disabled
-            type="button"
-          >
-            영수증 이메일로 받기
-          </button>
           <button
             className="w-full rounded-md border-2 border-[#7a4f28] bg-[#7a4f28] px-4 py-3 font-script text-lg font-bold text-[#f5e6c8] transition hover:bg-[#8a3a1a]"
             onClick={onClose}

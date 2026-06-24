@@ -215,6 +215,7 @@ export default function ReceiptsPageClient() {
         <ReceiptModal
           balance={detail.receipt_data.balance ?? 0}
           closeLabel="닫기"
+          isRegisteredPatient={isRegistered}
           onClose={() => setDetail(null)}
           price={detail.receipt_data.amount}
           remedyName={detail.receipt_data.remedyName}
