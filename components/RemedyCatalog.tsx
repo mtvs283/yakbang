@@ -59,25 +59,35 @@ export default function RemedyCatalog() {
 
   return (
     <section
-      className="relative z-10 scroll-mt-4 bg-[#100b07] px-5 py-14 text-yakbangPaper sm:px-10"
+      className="relative z-10 scroll-mt-4 bg-[#100b07] px-5 text-yakbangPaper sm:px-10"
       id="remedy-catalog"
     >
-      <div className="mx-auto max-w-6xl">
-        <header className="mb-10 text-center">
-          <h2 className="font-script text-4xl font-bold text-yakbangGold sm:text-5xl">
-            {t.catalogTitle}
-          </h2>
-          <p className="mt-2 text-sm text-yakbangPaper/70">{t.catalogSubtitle}</p>
-        </header>
+      {/* 고정 타이틀: 스크롤해도 상단에 머무름 */}
+      <div className="sticky top-0 z-30 -mx-5 border-b border-yakbangGold/25 bg-[#100b07]/95 px-5 py-4 text-center backdrop-blur sm:-mx-10 sm:px-10">
+        <h2 className="font-script text-3xl font-bold text-yakbangGold sm:text-4xl">
+          {t.catalogTitle}
+        </h2>
+        <p className="mt-1 text-xs text-yakbangPaper/70 sm:text-sm">
+          {t.catalogSubtitle}
+        </p>
+      </div>
 
+      <div className="mx-auto max-w-6xl">
         {CATEGORY_ORDER.map((category) => {
           const items = remedies.filter((remedy) => remedy.category === category);
           if (items.length === 0) {
             return null;
           }
           const group = t.groups[category];
+          // 소제목마다 한 페이지를 채우도록 '출시예정' 빈 박스로 채움 (3열 기준 최소 9칸)
+          const targetCount = Math.max(9, Math.ceil(items.length / 3) * 3);
+          const fillerCount = targetCount - items.length;
           return (
-            <div className="mb-12" key={category}>
+            <section
+              className="flex min-h-[100svh] scroll-mt-24 flex-col pb-12 pt-6 sm:scroll-mt-28"
+              id={`catalog-${category}`}
+              key={category}
+            >
               <div className="mb-5 flex items-baseline gap-3 border-b border-yakbangGold/30 pb-2">
                 <h3 className="font-script text-2xl font-bold text-yakbangGold sm:text-3xl">
                   {group.title}
@@ -147,8 +157,20 @@ export default function RemedyCatalog() {
                     </button>
                   );
                 })}
+
+                {Array.from({ length: fillerCount }).map((_, index) => (
+                  <div
+                    aria-hidden="true"
+                    className="flex min-h-[150px] flex-col items-center justify-center rounded-lg border border-dashed border-yakbangGold/25 bg-yakbangBlack/30 p-5 text-center"
+                    key={`filler-${category}-${index}`}
+                  >
+                    <span className="font-script text-lg font-bold text-yakbangPaper/35">
+                      출시예정
+                    </span>
+                  </div>
+                ))}
               </div>
-            </div>
+            </section>
           );
         })}
 

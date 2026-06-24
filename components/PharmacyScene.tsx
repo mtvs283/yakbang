@@ -97,10 +97,15 @@ export default function PharmacyScene() {
     return "";
   }
 
-  // 카탈로그/모달은 DO NOT TOUCH이므로 현재 모든 액션은 카탈로그로 스크롤.
-  // (카테고리 활성화·왕실 모달 열기는 카탈로그 수정이 필요해 추후 별도 처리)
-  function handleAction(_h: Hotspot) {
+  // 소제목 마커를 누르면 해당 카테고리 페이지가 화면을 꽉 채우도록 정확히 스크롤.
+  function handleAction(h: Hotspot) {
     if (dev) return; // dev 모드에선 드래그 편집이 우선 (네비게이션 비활성)
+    if (h.category) {
+      document
+        .getElementById(`catalog-${h.category}`)
+        ?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
     scrollToCatalog();
   }
 
