@@ -31,7 +31,7 @@ export default function RegisterPromptModal({
   return createPortal(
     <div
       aria-modal="true"
-      className="fixed inset-0 z-[60] flex items-center justify-center overflow-y-auto bg-black/75 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/75 px-4 py-6 backdrop-blur-sm"
       onMouseDown={onClose}
       role="dialog"
     >

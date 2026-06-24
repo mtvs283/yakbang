@@ -9,21 +9,55 @@ interface RecordReceiptParams {
   recipientName?: string | null;
 }
 
-export async function recordUserReceipt(
-  params: RecordReceiptParams
-): Promise<string | null> {
-  try {
-    const supabase = createClient();
+export type RecordReceiptResult =
+  | { ok: true; id: string }
+  | { ok: false; reason: "no_user" | "insert_failed"; detail: string };
+
+async function resolveAuthUser() {
+  const supabase = createClient();
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const {
+      data: { session }
+    } = await supabase.auth.getSession();
+    if (session?.user) return session.user;
+
     const {
       data: { user }
     } = await supabase.auth.getUser();
-    if (!user) return null;
+    if (user) return user;
+
+    await new Promise((resolve) => setTimeout(resolve, 250));
+  }
+  return null;
+}
+
+function formatSupabaseError(error: {
+  message?: string;
+  code?: string;
+  details?: string;
+  hint?: string;
+}): string {
+  return [error.code, error.message, error.details, error.hint]
+    .filter(Boolean)
+    .join(" | ");
+}
+
+export async function recordUserReceipt(
+  params: RecordReceiptParams
+): Promise<RecordReceiptResult> {
+  try {
+    const user = await resolveAuthUser();
+    if (!user) {
+      console.error("[user_receipts] no auth user after retries");
+      return { ok: false, reason: "no_user", detail: "auth.uid() 없음" };
+    }
 
     const email =
       params.recipientEmail !== undefined
         ? params.recipientEmail
         : user.email ?? null;
 
+    const supabase = createClient();
     const { data, error } = await supabase
       .from("user_receipts")
       .insert({
@@ -36,16 +70,24 @@ export async function recordUserReceipt(
       .single();
 
     if (error || !data?.id) {
-      console.error("user_receipts insert failed", error);
-      return null;
+      const detail = error ? formatSupabaseError(error) : "empty insert response";
+      console.error("[user_receipts] insert failed", {
+        userId: user.id,
+        slug: params.prescriptionSlug,
+        detail,
+        error
+      });
+      return { ok: false, reason: "insert_failed", detail };
     }
 
     stashReceiptId(data.id);
     stashReceiptOwnerId(user.id);
-    return data.id;
+    console.info("[user_receipts] insert ok", { id: data.id, userId: user.id });
+    return { ok: true, id: data.id };
   } catch (e) {
-    console.error("recordUserReceipt failed", e);
-    return null;
+    const detail = e instanceof Error ? e.message : String(e);
+    console.error("[user_receipts] recordUserReceipt exception", e);
+    return { ok: false, reason: "insert_failed", detail };
   }
 }
 
@@ -64,12 +106,12 @@ export async function updateReceiptRecipient(
       })
       .eq("id", receiptId);
     if (error) {
-      console.error("user_receipts recipient update failed", error);
+      console.error("[user_receipts] recipient update failed", error);
       return false;
     }
     return true;
   } catch (e) {
-    console.error("updateReceiptRecipient failed", e);
+    console.error("[user_receipts] updateReceiptRecipient failed", e);
     return false;
   }
 }

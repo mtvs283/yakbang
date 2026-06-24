@@ -18,6 +18,7 @@ import ReceiptIssuanceModal from "./payment/ReceiptIssuanceModal";
 import ReceiptModal from "./payment/ReceiptModal";
 import TreatmentConfirmModal from "./payment/TreatmentConfirmModal";
 import { useLocale } from "./LocaleProvider";
+import { useUser } from "../lib/hooks/useUser";
 
 const H_PRON_SLUG = H_PRON_RECEIPT_SLUG;
 const H_PRON_PRICE = 500;
@@ -50,10 +51,13 @@ export default function PrescriptionModal({
   remedy,
   onClose,
   onComplete,
-  isRegistered = false,
+  isRegistered: isRegisteredProp = false,
   onPaymentComplete
 }: PrescriptionModalProps) {
   const { locale, t } = useLocale();
+  const { isRegistered: userIsRegistered, loading: userLoading, userId } =
+    useUser();
+  const isRegistered = isRegisteredProp || userIsRegistered;
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const completedRef = useRef(false);
   const recordedRef = useRef(false);
@@ -69,6 +73,8 @@ export default function PrescriptionModal({
   const [mounted, setMounted] = useState(false);
   const [showIssuance, setShowIssuance] = useState(false);
   const [receiptId, setReceiptId] = useState<string | null>(null);
+  const [receiptError, setReceiptError] = useState<string | null>(null);
+  const [receiptRetrying, setReceiptRetrying] = useState(false);
 
   const text = getRemedyText(remedy, locale);
   const quiz = remedy.prescription.quiz;
@@ -100,6 +106,31 @@ export default function PrescriptionModal({
     if (completedRef.current || !onComplete) return;
     completedRef.current = true;
     setTimeout(onComplete, 1500);
+  }
+
+  async function saveVisitorReceipt() {
+    setReceiptError(null);
+    const result = await recordUserReceipt({
+      prescriptionSlug: H_PRON_SLUG,
+      receiptData: buildFreeReceiptData(text.name),
+      recipientEmail: null
+    });
+    if (result.ok) {
+      setReceiptId(result.id);
+      setShowIssuance(true);
+      return true;
+    }
+    const hint =
+      result.reason === "no_user"
+        ? "세션이 아직 준비되지 않았소."
+        : result.detail.includes("user_receipts") ||
+            result.detail.includes("42P01") ||
+            result.detail.includes("PGRST205")
+          ? "user_receipts 테이블이 없소. Supabase SQL Editor에서 005_user_receipts.sql을 실행하시오."
+          : result.detail;
+    setReceiptError(hint);
+    console.error("[visitor receipt]", result);
+    return false;
   }
 
   function handleIssuanceDone() {
@@ -137,10 +168,15 @@ export default function PrescriptionModal({
       return;
     }
     setReceiptBalance(result.newBalance);
-    await recordUserReceipt({
+    const receipt = await recordUserReceipt({
       prescriptionSlug: H_PRON_SLUG,
       receiptData: buildPaidReceiptData(text.name, result.newBalance)
     });
+    if (!receipt.ok) {
+      console.error("[paid receipt]", receipt);
+      setPaymentError("영수증 기록에 실패했소. 잠시 후 다시 시도하시오.");
+      return;
+    }
     setPhase("receipt");
     await onPaymentComplete?.();
   }
@@ -165,8 +201,9 @@ export default function PrescriptionModal({
     setPhase("treatment");
   }, [allCorrect, requiresPayment, phase]);
 
-  // 비회원: 영수증 기록 → 발급 모달 → 가입 유도
+  // 비회원: 세션 준비 후 영수증 기록 → 발급 모달 → 가입 유도
   useEffect(() => {
+    if (userLoading || !userId) return;
     if (!allCorrect || requiresPayment || remedy.id !== "h-pronunciation") {
       return;
     }
@@ -174,19 +211,20 @@ export default function PrescriptionModal({
     receiptPendingRef.current = true;
 
     void (async () => {
-      const id = await recordUserReceipt({
-        prescriptionSlug: H_PRON_SLUG,
-        receiptData: buildFreeReceiptData(text.name),
-        recipientEmail: null
-      });
-      if (id) {
-        setReceiptId(id);
-        setShowIssuance(true);
-      } else {
-        finishVisitorFlow();
+      const ok = await saveVisitorReceipt();
+      if (!ok) {
+        receiptPendingRef.current = false;
       }
     })();
-  }, [allCorrect, requiresPayment, remedy.id, text.name]);
+  }, [allCorrect, requiresPayment, remedy.id, text.name, userLoading, userId]);
+
+  async function handleReceiptRetry() {
+    setReceiptRetrying(true);
+    receiptPendingRef.current = true;
+    const ok = await saveVisitorReceipt();
+    setReceiptRetrying(false);
+    if (!ok) receiptPendingRef.current = false;
+  }
 
   useEffect(() => {
     setMounted(true);
@@ -429,6 +467,25 @@ export default function PrescriptionModal({
               <p className="mt-4 text-center font-script text-xl font-bold text-[#8a3a1a]">
                 {t.allDone}
               </p>
+            ) : null}
+
+            {showAllDone && receiptError && !showIssuance ? (
+              <div className="mt-4 rounded-md border-2 border-red-700/50 bg-red-700/10 p-4 text-center">
+                <p className="font-script text-base font-bold text-red-800">
+                  영수증을 남기지 못했소.
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-red-900/90">
+                  {receiptError}
+                </p>
+                <button
+                  className="mt-3 rounded-md border-2 border-[#7a4f28] bg-[#7a4f28] px-4 py-2 font-script text-base font-bold text-[#f5e6c8] transition hover:bg-[#8a3a1a] disabled:opacity-60"
+                  disabled={receiptRetrying}
+                  onClick={() => void handleReceiptRetry()}
+                  type="button"
+                >
+                  {receiptRetrying ? "다시 시도 중…" : "영수증 다시 남기기"}
+                </button>
+              </div>
             ) : null}
           </div>
         )}
