@@ -22,9 +22,6 @@ const PILL =
 const PILL_GUIDE =
   "inline-flex items-center justify-center rounded-full border border-yakbangGold/60 bg-yakbangBlack/70 px-4 py-2 text-base font-bold text-yakbangGold backdrop-blur transition hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold";
 
-// 나가기 pill 높이(~2.25rem)의 300% — 약방 이용법 블록 여백
-const GUIDE_BLOCK_OFFSET = "mt-[6.75rem]";
-
 export default function ShopNav() {
   const { t } = useLocale();
   const { isRegistered } = useUser();
@@ -72,38 +69,37 @@ export default function ShopNav() {
             ← 약방으로
           </Link>
         ) : null}
+      </div>
 
-        <div className={`${GUIDE_BLOCK_OFFSET} flex flex-col items-start gap-1.5`}>
-          <div className="flex w-32 flex-col gap-1.5">
-            <button
-              aria-label="약방 이용법"
-              className="overflow-hidden rounded-md border border-yakbangGold/50 bg-yakbangBlack/70 p-0 shadow-sm transition hover:border-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
-              onClick={() => setShowGuide(true)}
-              type="button"
-            >
-              <Image
-                alt=""
-                aria-hidden
-                className="block aspect-square h-auto w-full object-cover object-[center_18%]"
-                height={256}
-                src="/images/moongchi-guide-label.png"
-                width={256}
-              />
-            </button>
-            <button
-              className={`${PILL_GUIDE} w-full`}
-              onClick={() => setShowGuide(true)}
-              type="button"
-            >
-              {t.pharmacyGuide.button}
-            </button>
-          </div>
-          {!onReceiptsPage ? (
-            <Link className={PILL_GUIDE} href="/receipts">
-              📜 영수증함
-            </Link>
-          ) : null}
-        </div>
+      {/* 우상단(다국어 토글 아래) 고정: 약방 이용법 + 영수증함 */}
+      <div className="fixed right-4 top-20 z-40 flex w-32 flex-col items-end gap-1.5">
+        <button
+          aria-label="약방 이용법"
+          className="w-full overflow-hidden rounded-md border border-yakbangGold/50 bg-yakbangBlack/70 p-0 shadow-sm transition hover:border-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
+          onClick={() => setShowGuide(true)}
+          type="button"
+        >
+          <Image
+            alt=""
+            aria-hidden
+            className="block aspect-square h-auto w-full object-cover object-[center_18%]"
+            height={256}
+            src="/images/moongchi-guide-label.png"
+            width={256}
+          />
+        </button>
+        <button
+          className={`${PILL_GUIDE} w-full`}
+          onClick={() => setShowGuide(true)}
+          type="button"
+        >
+          {t.pharmacyGuide.button}
+        </button>
+        {!onReceiptsPage ? (
+          <Link className={`${PILL_GUIDE} w-full`} href="/receipts">
+            📜 영수증함
+          </Link>
+        ) : null}
       </div>
 
       {/* 좌하단 고정: 약방 품계도 */}
