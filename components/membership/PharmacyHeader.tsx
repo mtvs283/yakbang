@@ -74,7 +74,7 @@ export default function PharmacyHeader() {
       {!prescriptionOpen ? (
       <div className="absolute left-1/2 top-[80%] z-30 -translate-x-1/2 -translate-y-1/2">
         <button
-          className="rounded-full border-2 border-yakbangGold bg-yakbangGold px-10 py-4 font-script text-[42px] font-bold text-black shadow-[0_4px_16px_rgba(0,0,0,0.55)] transition hover:brightness-110"
+          className="whitespace-nowrap rounded-full border-2 border-yakbangGold bg-yakbangGold px-6 py-2.5 font-script text-2xl font-bold text-black shadow-[0_4px_16px_rgba(0,0,0,0.55)] transition hover:brightness-110 sm:px-10 sm:py-4 sm:text-[42px]"
           onClick={handleEnter}
           type="button"
         >
