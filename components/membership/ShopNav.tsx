@@ -8,6 +8,7 @@ import { useLocale } from "../LocaleProvider";
 import { useUser } from "../../lib/hooks/useUser";
 import { prepareNewPatientRegistration, signOut } from "../../lib/supabase/auth";
 import PharmacyGuideModal from "./PharmacyGuideModal";
+import PumgyeModal from "./PumgyeModal";
 import RegisterModal from "./RegisterModal";
 import ReturnLoginModal from "./ReturnLoginModal";
 
@@ -33,6 +34,7 @@ export default function ShopNav() {
   const [showRegister, setShowRegister] = useState(false);
   const [loginEmail, setLoginEmail] = useState("");
   const [showGuide, setShowGuide] = useState(false);
+  const [showPumgye, setShowPumgye] = useState(false);
 
   async function handleLogout() {
     await signOut();
@@ -102,6 +104,32 @@ export default function ShopNav() {
         </div>
       </div>
 
+      {/* 좌하단 고정: 약방 품계도 */}
+      <div className="fixed bottom-4 left-4 z-40 flex flex-col items-start gap-1.5">
+        <button
+          aria-label="약방 품계도"
+          className="overflow-hidden rounded-md border border-yakbangGold/50 bg-yakbangBlack/70 p-0 shadow-sm transition hover:border-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
+          onClick={() => setShowPumgye(true)}
+          type="button"
+        >
+          <Image
+            alt=""
+            aria-hidden
+            className="block aspect-square h-11 w-11 object-cover object-[center_22%]"
+            height={88}
+            src="/images/moongchi-pumgye-label.png"
+            width={88}
+          />
+        </button>
+        <button
+          className={PILL_GUIDE}
+          onClick={() => setShowPumgye(true)}
+          type="button"
+        >
+          약방 품계도
+        </button>
+      </div>
+
       {showLogin ? (
         <ReturnLoginModal
           initialEmail={loginEmail}
@@ -127,6 +155,10 @@ export default function ShopNav() {
 
       {showGuide ? (
         <PharmacyGuideModal onClose={() => setShowGuide(false)} />
+      ) : null}
+
+      {showPumgye ? (
+        <PumgyeModal onClose={() => setShowPumgye(false)} />
       ) : null}
     </>
   );
