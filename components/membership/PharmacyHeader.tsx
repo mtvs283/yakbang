@@ -85,7 +85,7 @@ export default function PharmacyHeader() {
 
       {/* 좌상단 메뉴 아래: 회원/방문자 상태 */}
       {showStatusWidget ? (
-        <div className="fixed left-4 top-28 z-40 flex max-w-[min(100vw-2rem,22rem)] flex-wrap items-center gap-2.5 rounded-full border border-yakbangGold/40 bg-yakbangBlack/80 px-5 py-2 backdrop-blur sm:max-w-none sm:flex-nowrap sm:px-6 sm:py-2.5">
+        <div className="absolute left-4 top-28 z-40 flex max-w-[min(100vw-2rem,22rem)] flex-wrap items-center gap-2.5 rounded-full border border-yakbangGold/40 bg-yakbangBlack/80 px-5 py-2 backdrop-blur sm:fixed sm:max-w-none sm:flex-nowrap sm:px-6 sm:py-2.5">
           {isRegistered ? <StageBadge size={26} tier={tier} /> : null}
           <span className="font-script text-base font-bold leading-snug text-yakbangGold sm:text-[17px]">
             {statusLine}

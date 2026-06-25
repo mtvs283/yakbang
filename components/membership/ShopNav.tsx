@@ -46,7 +46,7 @@ export default function ShopNav() {
 
   return (
     <>
-      <div className="fixed left-4 top-4 z-40 flex flex-col items-start gap-2">
+      <div className="absolute left-4 top-4 z-40 flex flex-col items-start gap-2 sm:fixed">
         <a className={PILL} href={GWANGGAETO_URL}>
           <span aria-hidden="true">⚜</span> 광개토로
         </a>
@@ -72,7 +72,7 @@ export default function ShopNav() {
       </div>
 
       {/* 우상단(다국어 토글 아래) 고정: 약방 이용법 + 영수증함 */}
-      <div className="fixed right-4 top-20 z-40 flex w-32 flex-col items-end gap-1.5">
+      <div className="absolute right-4 top-20 z-40 flex w-32 flex-col items-end gap-1.5 sm:fixed">
         <button
           aria-label="약방 이용법"
           className="w-full overflow-hidden rounded-md border border-yakbangGold/50 bg-yakbangBlack/70 p-0 shadow-sm transition hover:border-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
@@ -103,7 +103,7 @@ export default function ShopNav() {
       </div>
 
       {/* 좌하단 고정: 약방 품계도 */}
-      <div className="fixed bottom-4 left-4 z-40 flex w-32 flex-col items-start gap-1.5">
+      <div className="absolute bottom-4 left-4 z-40 flex w-32 flex-col items-start gap-1.5 sm:fixed">
         <button
           aria-label="약방 품계도"
           className="w-full overflow-hidden rounded-md border border-yakbangGold/50 bg-yakbangBlack/70 p-0 shadow-sm transition hover:border-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
