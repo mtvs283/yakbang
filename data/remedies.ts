@@ -141,7 +141,7 @@ export const remedies: Remedy[] = [
       quiz: [
         { question: "'어머니'에서 첫 모음은?", answer: "ㅓ" },
         { question: "'오빠'에서 첫 모음은?", answer: "ㅗ" },
-        { question: "'버스'와 '보스' — 어느 게 ㅓ?", answer: "버스" }
+        { question: "'버스'와 '보스'중 어느 단어가 'ㅓ'?", answer: "버스" }
       ],
       callback: { label: "더 자세히는 → 광개토 모음 앱에서", url: "TBD: hangul-vowels" }
     }
