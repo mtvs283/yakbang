@@ -74,28 +74,30 @@ export default function ShopNav() {
         ) : null}
 
         <div className={`${GUIDE_BLOCK_OFFSET} flex flex-col items-start gap-1.5`}>
-          <button
-            aria-label="약방 이용법"
-            className="overflow-hidden rounded-md border border-yakbangGold/50 bg-yakbangBlack/70 p-0 shadow-sm transition hover:border-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
-            onClick={() => setShowGuide(true)}
-            type="button"
-          >
-            <Image
-              alt=""
-              aria-hidden
-              className="block aspect-square h-11 w-11 object-cover object-[center_18%]"
-              height={88}
-              src="/images/moongchi-guide-label.png"
-              width={88}
-            />
-          </button>
-          <button
-            className={PILL_GUIDE}
-            onClick={() => setShowGuide(true)}
-            type="button"
-          >
-            {t.pharmacyGuide.button}
-          </button>
+          <div className="flex w-32 flex-col gap-1.5">
+            <button
+              aria-label="약방 이용법"
+              className="overflow-hidden rounded-md border border-yakbangGold/50 bg-yakbangBlack/70 p-0 shadow-sm transition hover:border-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
+              onClick={() => setShowGuide(true)}
+              type="button"
+            >
+              <Image
+                alt=""
+                aria-hidden
+                className="block aspect-square h-auto w-full object-cover object-[center_18%]"
+                height={256}
+                src="/images/moongchi-guide-label.png"
+                width={256}
+              />
+            </button>
+            <button
+              className={`${PILL_GUIDE} w-full`}
+              onClick={() => setShowGuide(true)}
+              type="button"
+            >
+              {t.pharmacyGuide.button}
+            </button>
+          </div>
           {!onReceiptsPage ? (
             <Link className={PILL_GUIDE} href="/receipts">
               📜 영수증함
@@ -105,24 +107,24 @@ export default function ShopNav() {
       </div>
 
       {/* 좌하단 고정: 약방 품계도 */}
-      <div className="fixed bottom-4 left-4 z-40 flex flex-col items-start gap-1.5">
+      <div className="fixed bottom-4 left-4 z-40 flex w-32 flex-col items-start gap-1.5">
         <button
           aria-label="약방 품계도"
-          className="overflow-hidden rounded-md border border-yakbangGold/50 bg-yakbangBlack/70 p-0 shadow-sm transition hover:border-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
+          className="w-full overflow-hidden rounded-md border border-yakbangGold/50 bg-yakbangBlack/70 p-0 shadow-sm transition hover:border-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
           onClick={() => setShowPumgye(true)}
           type="button"
         >
           <Image
             alt=""
             aria-hidden
-            className="block aspect-square h-11 w-11 object-cover object-[center_22%]"
-            height={88}
+            className="block aspect-square h-auto w-full object-cover object-[center_28%]"
+            height={256}
             src="/images/moongchi-pumgye-label.png"
-            width={88}
+            width={256}
           />
         </button>
         <button
-          className={PILL_GUIDE}
+          className={`${PILL_GUIDE} w-full`}
           onClick={() => setShowPumgye(true)}
           type="button"
         >
