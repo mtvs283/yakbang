@@ -89,12 +89,12 @@ export default function PumgyeModal({ onClose }: Props) {
           <div
             className="pointer-events-auto absolute flex flex-col overflow-y-auto overscroll-y-contain font-script text-[#2a1810] [scrollbar-color:rgba(42,24,16,0.35)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#2a1810]/35"
             style={{
-              left: "25%",
-              top: "13%",
-              width: "70%",
-              height: "76%",
-              fontSize: "clamp(0.72rem, 1.95vw, 1.18rem)",
-              lineHeight: 1.45,
+              left: "30%",
+              top: "12%",
+              width: "65%",
+              height: "80%",
+              fontSize: "clamp(0.82rem, 2.3vw, 1.42rem)",
+              lineHeight: 1.42,
               WebkitOverflowScrolling: "touch"
             }}
           >
@@ -106,7 +106,7 @@ export default function PumgyeModal({ onClose }: Props) {
               약방 품계도
             </p>
 
-            <ul className="m-0 flex w-full list-none flex-col gap-[0.7em] p-0">
+            <ul className="m-0 flex w-full list-none flex-col gap-[0.5em] p-0">
               {RANKS.map((rank) => (
                 <li className="flex items-start gap-[0.7em]" key={rank.stamp}>
                   <span
@@ -133,8 +133,8 @@ export default function PumgyeModal({ onClose }: Props) {
             </ul>
 
             <div
-              className="mt-[0.9em] w-full shrink-0 border-t border-dashed border-[#8B6F3A]/80 pt-[0.6em] font-semibold leading-relaxed text-[#5A4A30]"
-              style={{ fontSize: "0.78em" }}
+              className="mt-[0.7em] w-full shrink-0 border-t border-dashed border-[#8B6F3A]/80 pt-[0.5em] font-semibold leading-relaxed text-[#5A4A30]"
+              style={{ fontSize: "0.8em" }}
             >
               ※ 단골은 빠지시면 잠시 환자로 돌아가나, 다시 오시면 되돌아오오.
               <br />※ 의관과 어의는 한 번 오르시면 평생이오.
