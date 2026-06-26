@@ -68,10 +68,10 @@ function LanguageToggle() {
         onClick={() => setOpen((value) => !value)}
         type="button"
       >
-        <span className="hidden font-script text-base text-yakbangPaper sm:inline">
+        <span className="hidden font-script text-xl text-yakbangPaper sm:inline">
           어느 나라 말로 해드릴까?
         </span>
-        <span className="text-[20px] text-yakbangGold">
+        <span className="text-sm text-yakbangGold">
           {LOCALE_LABELS[locale]}
         </span>
         <span aria-hidden="true" className="text-yakbangGold">
