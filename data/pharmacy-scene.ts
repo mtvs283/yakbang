@@ -112,14 +112,6 @@ export const pharmacyScene: { background: string; hotspots: Hotspot[] } = {
       style: "royal-marker",
       action: "open-royal",
       category: "royal"
-    },
-    {
-      id: "main-cta",
-      x: "50%",
-      y: "92%",
-      style: "button-gold",
-      action: "scroll-to-catalog",
-      uiKey: "scrollCue"
     }
   ]
 };

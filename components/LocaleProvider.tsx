@@ -60,7 +60,7 @@ function LanguageToggle() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed right-4 top-4 z-40">
+    <div className="fixed bottom-4 left-1/2 z-40 -translate-x-1/2">
       <div className="relative">
       <button
         aria-label="언어 선택 / Language"
@@ -75,7 +75,7 @@ function LanguageToggle() {
           {LOCALE_LABELS[locale]}
         </span>
         <span aria-hidden="true" className="text-yakbangGold">
-          ▾
+          ▴
         </span>
       </button>
 
@@ -86,7 +86,7 @@ function LanguageToggle() {
             className="fixed inset-0 z-30 cursor-default"
             onClick={() => setOpen(false)}
           />
-          <div className="absolute right-0 z-40 mt-2 max-h-[70vh] w-36 overflow-y-auto rounded-md border border-yakbangGold/50 bg-yakbangBlack/95 backdrop-blur">
+          <div className="absolute bottom-full left-1/2 z-40 mb-2 max-h-[60vh] w-36 -translate-x-1/2 overflow-y-auto rounded-md border border-yakbangGold/50 bg-yakbangBlack/95 backdrop-blur">
             {LOCALES.map((option) => (
               <button
                 className={`flex w-full items-center justify-between px-4 py-2.5 text-left text-sm transition hover:bg-yakbangGold/15 ${
