@@ -16,31 +16,23 @@ interface Rank {
   bg: string;
 }
 
-const RANKS: Rank[] = [
+const RANK_STYLES: Omit<Rank, "stamp" | "desc">[] = [
   {
-    stamp: "환자",
-    desc: "약방에 드시면 환자요.",
     border: "#6B6B6B",
     color: "#6B6B6B",
     bg: "rgba(107,107,107,0.08)"
   },
   {
-    stamp: "단골",
-    desc: "넉 주 중 석 주, 매주 세 번 이상 입원하시면 단골이오.",
     border: "#3E8E5A",
     color: "#3E8E5A",
     bg: "rgba(62,142,90,0.08)"
   },
   {
-    stamp: "의관",
-    desc: "단골을 넉 달 지키시고 중급 약방문 몇 첩을 익히시면 의관이오.",
     border: "#2C5F8D",
     color: "#2C5F8D",
     bg: "rgba(44,95,141,0.08)"
   },
   {
-    stamp: "어의",
-    desc: "고급 약방문을 모두 손에 쥐셔야 어의라 하오.",
     border: "#B91C2C",
     color: "#B91C2C",
     bg: "rgba(185,28,44,0.1)"
@@ -49,6 +41,13 @@ const RANKS: Rank[] = [
 
 export default function PumgyeModal({ onClose }: Props) {
   const { t } = useLocale();
+  const p = t.pumgye;
+  const ranks: Rank[] = [
+    { ...RANK_STYLES[0], ...p.patient },
+    { ...RANK_STYLES[1], ...p.regular },
+    { ...RANK_STYLES[2], ...p.physician },
+    { ...RANK_STYLES[3], ...p.royal }
+  ];
 
   return createPortal(
     <div
@@ -103,11 +102,11 @@ export default function PumgyeModal({ onClose }: Props) {
               id="pumgye-title"
               style={{ fontSize: "1.55em", lineHeight: 1.15 }}
             >
-              약방 품계도
+              {p.title}
             </p>
 
             <ul className="m-0 flex w-full list-none flex-col gap-[0.5em] p-0">
-              {RANKS.map((rank) => (
+              {ranks.map((rank) => (
                 <li className="flex items-start gap-[0.7em]" key={rank.stamp}>
                   <span
                     aria-hidden="true"
@@ -132,13 +131,20 @@ export default function PumgyeModal({ onClose }: Props) {
               ))}
             </ul>
 
-            <div
-              className="mt-[0.7em] w-full shrink-0 border-t border-dashed border-[#8B6F3A]/80 pt-[0.5em] font-semibold leading-relaxed text-[#5A4A30]"
-              style={{ fontSize: "0.8em" }}
-            >
-              ※ 단골은 빠지시면 잠시 환자로 돌아가나, 다시 오시면 되돌아오오.
-              <br />※ 의관과 어의는 한 번 오르시면 평생이오.
-            </div>
+            {p.footnote1 || p.footnote2 ? (
+              <div
+                className="mt-[0.7em] w-full shrink-0 border-t border-dashed border-[#8B6F3A]/80 pt-[0.5em] font-semibold leading-relaxed text-[#5A4A30]"
+                style={{ fontSize: "0.8em" }}
+              >
+                {p.footnote1 ? (
+                  <>
+                    {p.footnote1}
+                    {p.footnote2 ? <br /> : null}
+                  </>
+                ) : null}
+                {p.footnote2 ?? null}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

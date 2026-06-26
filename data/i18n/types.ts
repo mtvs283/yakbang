@@ -36,6 +36,21 @@ export interface PharmacyGuideCopy {
   step5: string;
 }
 
+export interface PumgyeRankEntry {
+  stamp: string;
+  desc: string;
+}
+
+export interface PumgyeCopy {
+  title: string;
+  patient: PumgyeRankEntry;
+  regular: PumgyeRankEntry;
+  physician: PumgyeRankEntry;
+  royal: PumgyeRankEntry;
+  footnote1?: string;
+  footnote2?: string;
+}
+
 export interface UIMessages {
   catalogTitle: string;
   catalogSubtitle: string;
@@ -63,6 +78,7 @@ export interface UIMessages {
   closeAria: string;
   stockLabel: (count: number) => string;
   pharmacyGuide: PharmacyGuideCopy;
+  pumgye: PumgyeCopy;
 }
 
 export interface RemedyText {
@@ -75,6 +91,6 @@ export interface RemedyText {
 }
 
 export interface LocaleData {
-  ui: Omit<UIMessages, "pharmacyGuide">;
+  ui: Omit<UIMessages, "pharmacyGuide" | "pumgye">;
   remedies: Record<string, RemedyText>;
 }
