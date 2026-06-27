@@ -16,7 +16,7 @@ import PrescriptionModal from "./PrescriptionModal";
 import RegisterModal from "./membership/RegisterModal";
 import RegisterPromptModal from "./membership/RegisterPromptModal";
 
-const GWANGGAETO_URL = "https://gwanggaeto-home.vercel.app/";
+const GWANGGAETO_URL = "https://gwanggaeto-home.vercel.app/coming-soon";
 
 // 무료 개방 약 (가장 단순). 비회원은 이 약 + 왕실(불가)만 접근 가능.
 const FREE_REMEDY_ID = "h-pronunciation";

@@ -12,7 +12,7 @@ import PumgyeModal from "./PumgyeModal";
 import RegisterModal from "./RegisterModal";
 import ReturnLoginModal from "./ReturnLoginModal";
 
-const GWANGGAETO_URL = "https://gwanggaeto-home.vercel.app/";
+const GWANGGAETO_URL = "https://gwanggaeto-home.vercel.app/coming-soon";
 
 // 좌상단 고정 토글: 광개토 홈 이동(항상) + 로그아웃(등록 환자만).
 // 크기/스타일은 우상단 다국어 토글과 동일.
