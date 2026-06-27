@@ -33,7 +33,6 @@ export const es: LocaleData = {
     footerLead: "Al salir de la botica, te espera un Gwanggaeto más amplio.",
     enterGwanggaeto: "Entrar a Gwanggaeto",
     toTop: "Arriba",
-    home: "Inicio",
     modalLabel: "RECETA · 藥房廣開土",
     diagnosis: "Diagnóstico",
     info: "Sobre este remedio",

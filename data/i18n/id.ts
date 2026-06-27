@@ -33,7 +33,6 @@ export const id: LocaleData = {
     footerLead: "Begitu keluar dari apotek, Gwanggaeto yang lebih luas menantimu.",
     enterGwanggaeto: "Masuk ke Gwanggaeto",
     toTop: "Ke atas",
-    home: "Beranda",
     modalLabel: "RESEP · 藥房廣開土",
     diagnosis: "Diagnosis",
     info: "Tentang obat ini",

@@ -33,7 +33,6 @@ export const hi: LocaleData = {
     footerLead: "औषधालय से बाहर निकलते ही, एक विस्तृत Gwanggaeto आपका इंतज़ार कर रहा है।",
     enterGwanggaeto: "Gwanggaeto में प्रवेश करें",
     toTop: "ऊपर",
-    home: "होम",
     modalLabel: "पर्ची · 藥房廣開土",
     diagnosis: "निदान",
     info: "इस दवा के बारे में",

@@ -32,7 +32,6 @@ export const km: LocaleData = {
     footerLead: "ចង់ហាត់បន្តឲ្យច្បាស់ជាងនេះទេ?",
     enterGwanggaeto: "ចូលទៅ Gwanggaeto",
     toTop: "ឡើងទៅលើវិញ",
-    home: "ទំព័រដើម",
     modalLabel: "ព័ត៌មានវេជ្ជបញ្ជា · 藥房廣開土",
     diagnosis: "រោគវិនិច្ឆ័យ",
     info: "អំពីថ្នាំនេះ",

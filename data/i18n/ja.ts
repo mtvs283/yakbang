@@ -35,7 +35,6 @@ export const ja: LocaleData = {
     footerLead: "続けて練習してみますか？",
     enterGwanggaeto: "Gwanggaetoへ進む",
     toTop: "上へ戻る",
-    home: "ホーム",
     modalLabel: "処方の詳細",
     royalReject: "この処方は貴重すぎて購入できません。",
     stamp: "処方スタンプ",

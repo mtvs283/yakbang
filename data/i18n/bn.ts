@@ -33,7 +33,6 @@ export const bn: LocaleData = {
     footerLead: "ওষুধালয় থেকে বেরোলেই, আরও বিস্তৃত Gwanggaeto আপনার জন্য অপেক্ষা করছে।",
     enterGwanggaeto: "Gwanggaeto-তে প্রবেশ করুন",
     toTop: "উপরে",
-    home: "হোম",
     modalLabel: "প্রেসক্রিপশন · 藥房廣開土",
     diagnosis: "রোগনির্ণয়",
     info: "এই ওষুধ সম্পর্কে",

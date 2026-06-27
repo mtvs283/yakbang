@@ -33,7 +33,6 @@ export const fil: LocaleData = {
     footerLead: "Paglabas mo ng botika, naghihintay ang mas malawak na Gwanggaeto.",
     enterGwanggaeto: "Pumasok sa Gwanggaeto",
     toTop: "Itaas",
-    home: "Home",
     modalLabel: "RESETA · 藥房廣開土",
     diagnosis: "Diyagnosis",
     info: "Tungkol sa gamot na ito",

@@ -61,7 +61,6 @@ export interface UIMessages {
   footerLead: string;
   enterGwanggaeto: string;
   toTop: string;
-  home: string;
   modalLabel: string;
   diagnosis: string;
   info: string;

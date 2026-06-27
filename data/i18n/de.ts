@@ -34,7 +34,6 @@ export const de: LocaleData = {
       "Wenn du die Apotheke verlässt, wartet ein größeres Gwanggaeto auf dich.",
     enterGwanggaeto: "Zu Gwanggaeto",
     toTop: "Nach oben",
-    home: "Startseite",
     modalLabel: "REZEPT · 藥房廣開土",
     diagnosis: "Diagnose",
     info: "Über dieses Mittel",

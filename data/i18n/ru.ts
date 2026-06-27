@@ -33,7 +33,6 @@ export const ru: LocaleData = {
     footerLead: "Выйдя из аптеки, вы попадёте в более широкий Gwanggaeto.",
     enterGwanggaeto: "Войти в Gwanggaeto",
     toTop: "Наверх",
-    home: "Главная",
     modalLabel: "РЕЦЕПТ · 藥房廣開土",
     diagnosis: "Диагноз",
     info: "Об этом средстве",

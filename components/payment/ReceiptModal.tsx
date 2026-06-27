@@ -50,10 +50,7 @@ export default function ReceiptModal({
         }}
       >
         <div className="mb-4 border-b border-dashed border-[#7a4f28]/50 pb-4 text-center">
-          <p className="font-script text-sm tracking-[0.3em] text-[#7a4f28]">
-            집현전 약방
-          </p>
-          <p className="mt-1 font-sanskr text-xl font-bold tracking-widest text-[#8a3a1a]">
+          <p className="font-sanskr text-xl font-bold tracking-widest text-[#8a3a1a]">
             藥房廣開土 영수증
           </p>
         </div>

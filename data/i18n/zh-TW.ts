@@ -20,7 +20,6 @@ export const zhTW: LocaleData = {
     footerLead: "走出藥鋪，更廣闊的廣開土在等你。",
     enterGwanggaeto: "進入廣開土",
     toTop: "回到頂部",
-    home: "首頁",
     modalLabel: "處方箋 · 藥房廣開土",
     diagnosis: "診斷",
     info: "藥品說明",

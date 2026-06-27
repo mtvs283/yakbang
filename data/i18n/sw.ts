@@ -33,7 +33,6 @@ export const sw: LocaleData = {
     footerLead: "Ukitoka dukani, Gwanggaeto pana zaidi inakungoja.",
     enterGwanggaeto: "Ingia Gwanggaeto",
     toTop: "Juu",
-    home: "Mwanzo",
     modalLabel: "AGIZO · 藥房廣開土",
     diagnosis: "Uchunguzi",
     info: "Kuhusu dawa hii",

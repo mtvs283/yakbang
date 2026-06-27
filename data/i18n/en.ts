@@ -33,7 +33,6 @@ export const en: LocaleData = {
     footerLead: "Step out of the apothecary, and a wider Gwanggaeto awaits.",
     enterGwanggaeto: "Enter Gwanggaeto",
     toTop: "Top",
-    home: "Home",
     modalLabel: "PRESCRIPTION · 藥房廣開土",
     diagnosis: "Diagnosis",
     info: "About this remedy",

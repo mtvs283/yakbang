@@ -20,7 +20,6 @@ export const zhCN: LocaleData = {
     footerLead: "走出药铺，更广阔的广开土在等你。",
     enterGwanggaeto: "进入广开土",
     toTop: "回到顶部",
-    home: "首页",
     modalLabel: "处方笺 · 藥房廣開土",
     diagnosis: "诊断",
     info: "药品说明",

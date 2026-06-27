@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getRemedyText } from "../data/i18n";
 import {
@@ -184,54 +183,39 @@ export default function RemedyCatalog() {
           );
         })}
 
-        {/* 광개토 진입 + 네비 */}
-        <div className="mt-2 border-t border-yakbangGold/20 pb-10 pt-8 text-center">
-          <p className="mb-4 font-script text-lg text-yakbangPaper/75">
+        {/* 광개토 안내 문구 */}
+        <div className="mt-2 border-t border-yakbangGold/20 pb-16 pt-8 text-center">
+          <p className="font-script text-lg text-yakbangPaper/75">
             {t.footerLead}
           </p>
-          <a
-            aria-label={t.enterGwanggaeto}
-            className="group inline-flex items-center justify-center rounded-2xl transition duration-200 hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07]"
-            href={GWANGGAETO_URL}
-          >
-            <img
-              alt=""
-              aria-hidden="true"
-              className="h-28 w-28 drop-shadow-[0_8px_28px_rgba(185,28,28,0.35)] transition duration-200 group-hover:drop-shadow-[0_10px_34px_rgba(185,28,28,0.5)] sm:h-36 sm:w-36"
-              src="/images/yakbang-gwanggaeto-stamp.png"
-            />
-            <span className="sr-only">{t.enterGwanggaeto}</span>
-          </a>
-
-          <div className="mt-6 flex items-center justify-center gap-3">
-            <button
-              className="inline-flex items-center gap-1 rounded-full border border-yakbangGold/50 px-5 py-2.5 text-sm font-bold text-yakbangPaper/85 transition hover:border-yakbangGold hover:text-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
-              onClick={scrollToTop}
-              type="button"
-            >
-              ↑ {t.toTop}
-            </button>
-            <Link
-              className="inline-flex items-center gap-1 rounded-full border border-yakbangGold/50 px-5 py-2.5 text-sm font-bold text-yakbangPaper/85 transition hover:border-yakbangGold hover:text-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
-              href="/"
-            >
-              {t.home}
-            </Link>
-          </div>
         </div>
       </div>
 
-      {/* 스크롤 시 떠오르는 맨 위로 화살표 */}
-      {showTop ? (
-        <button
-          aria-label={t.toTop}
-          className="fixed bottom-5 right-5 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-yakbangGold/70 bg-yakbangBlack/80 text-xl font-bold text-yakbangGold shadow-[0_0_20px_rgba(212,175,55,0.3)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold"
-          onClick={scrollToTop}
-          type="button"
+      {/* 우하단 고정: 광개토 도장 + 맨 위로 */}
+      <div className="fixed bottom-5 right-5 z-[35] flex items-center gap-2">
+        <a
+          aria-label={t.enterGwanggaeto}
+          className="group inline-flex shrink-0 items-center justify-center rounded-2xl transition duration-200 hover:-translate-y-0.5 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07]"
+          href={GWANGGAETO_URL}
         >
-          ↑
-        </button>
-      ) : null}
+          <img
+            alt=""
+            aria-hidden="true"
+            className="h-16 w-16 drop-shadow-[0_8px_28px_rgba(185,28,28,0.35)] transition duration-200 group-hover:drop-shadow-[0_10px_34px_rgba(185,28,28,0.5)] sm:h-20 sm:w-20"
+            src="/images/yakbang-gwanggaeto-stamp.png"
+          />
+        </a>
+        {showTop ? (
+          <button
+            aria-label={t.toTop}
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-yakbangGold/70 bg-yakbangBlack/80 text-xl font-bold text-yakbangGold shadow-[0_0_20px_rgba(212,175,55,0.3)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold"
+            onClick={scrollToTop}
+            type="button"
+          >
+            ↑
+          </button>
+        ) : null}
+      </div>
 
       {selected ? (
         <PrescriptionModal

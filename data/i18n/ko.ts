@@ -24,7 +24,6 @@ export const ko: LocaleData = {
     footerLead: "약방을 나서면, 더 넓은 광개토가 그대를 기다리오.",
     enterGwanggaeto: "광개토 입장",
     toTop: "맨 위로",
-    home: "홈으로",
     modalLabel: "약 방 문 · 藥房廣開土",
     diagnosis: "진단",
     info: "약 설명",

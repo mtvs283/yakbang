@@ -33,7 +33,6 @@ export const ky: LocaleData = {
     footerLead: "Дарыканадан чыкканда, кеңири Gwanggaeto сени күтүп турат.",
     enterGwanggaeto: "Gwanggaeto'го кирүү",
     toTop: "Жогору",
-    home: "Башкы бет",
     modalLabel: "РЕЦЕПТ · 藥房廣開土",
     diagnosis: "Диагноз",
     info: "Бул дары жөнүндө",

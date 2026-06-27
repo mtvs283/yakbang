@@ -33,7 +33,6 @@ export const mn: LocaleData = {
     footerLead: "Эмийн сангаас гарахад илүү уужим Gwanggaeto чамайг хүлээж байна.",
     enterGwanggaeto: "Gwanggaeto руу орох",
     toTop: "Дээш",
-    home: "Нүүр",
     modalLabel: "ЖОР · 藥房廣開土",
     diagnosis: "Онош",
     info: "Энэ эмийн тухай",

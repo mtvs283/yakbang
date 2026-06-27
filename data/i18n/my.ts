@@ -33,7 +33,6 @@ export const my: LocaleData = {
     footerLead: "ဆေးဆိုင်ကနေ ထွက်လိုက်ရင် ပိုကျယ်ပြန့်တဲ့ Gwanggaeto က သင့်ကို စောင့်နေတယ်။",
     enterGwanggaeto: "Gwanggaeto ထဲဝင်ရန်",
     toTop: "အပေါ်သို့",
-    home: "ပင်မ",
     modalLabel: "ဆေးညွှန်း · 藥房廣開土",
     diagnosis: "ရောဂါရှာဖွေမှု",
     info: "ဒီဆေးအကြောင်း",

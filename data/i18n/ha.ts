@@ -33,7 +33,6 @@ export const ha: LocaleData = {
     footerLead: "Idan ka fita daga kantin magani, faɗaɗɗen Gwanggaeto na jiranka.",
     enterGwanggaeto: "Shiga Gwanggaeto",
     toTop: "Sama",
-    home: "Gida",
     modalLabel: "TAKARDAR MAGANI · 藥房廣開土",
     diagnosis: "Bincike",
     info: "Game da wannan magani",

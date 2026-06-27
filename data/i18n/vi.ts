@@ -34,7 +34,6 @@ export const vi: LocaleData = {
       "Bước ra khỏi hiệu thuốc, một Gwanggaeto rộng lớn hơn đang đợi bạn.",
     enterGwanggaeto: "Vào Gwanggaeto",
     toTop: "Lên đầu",
-    home: "Trang chủ",
     modalLabel: "ĐƠN THUỐC · 藥房廣開土",
     diagnosis: "Chẩn đoán",
     info: "Mô tả thuốc",

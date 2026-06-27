@@ -32,7 +32,6 @@ export const th: LocaleData = {
     footerLead: "อยากฝึกต่อให้เข้าใจชัดขึ้นไหม?",
     enterGwanggaeto: "เข้า Gwanggaeto",
     toTop: "กลับขึ้นด้านบน",
-    home: "หน้าแรก",
     modalLabel: "รายละเอียดใบสั่งยา · 藥房廣開土",
     diagnosis: "วินิจฉัย",
     info: "เกี่ยวกับยานี้",

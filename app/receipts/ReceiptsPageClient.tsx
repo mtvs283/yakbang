@@ -110,9 +110,6 @@ export default function ReceiptsPageClient() {
       >
         <div className="mx-auto max-w-5xl">
           <header className="mb-10 border-b-2 border-dashed border-[#7a4f28]/40 pb-6 text-center">
-            <p className="mb-2 text-sm font-bold tracking-[0.24em] text-[#7a4f28]">
-              집현전 약방
-            </p>
             <h1 className="font-sanskr text-3xl font-bold text-[#8a3a1a] sm:text-4xl">
               {headingPatient}의 영수증함 · 총 {receipts.length}장
             </h1>

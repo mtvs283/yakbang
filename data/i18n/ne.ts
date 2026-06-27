@@ -33,7 +33,6 @@ export const ne: LocaleData = {
     footerLead: "औषधालयबाट निस्केपछि, अझ फराकिलो Gwanggaeto तपाईंलाई पर्खिरहेको छ।",
     enterGwanggaeto: "Gwanggaeto मा प्रवेश गर्नुहोस्",
     toTop: "माथि",
-    home: "गृहपृष्ठ",
     modalLabel: "नुस्खा · 藥房廣開土",
     diagnosis: "निदान",
     info: "यो औषधिबारे",

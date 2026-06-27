@@ -33,7 +33,6 @@ export const uz: LocaleData = {
     footerLead: "Dorixonadan chiqqaningda, kengroq Gwanggaeto seni kutmoqda.",
     enterGwanggaeto: "Gwanggaeto'ga kirish",
     toTop: "Yuqoriga",
-    home: "Bosh sahifa",
     modalLabel: "RETSEPT · 藥房廣開土",
     diagnosis: "Tashxis",
     info: "Bu dori haqida",

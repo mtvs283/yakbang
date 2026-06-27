@@ -33,7 +33,6 @@ export const ar: LocaleData = {
     footerLead: "حين تغادر الصيدلية، ينتظرك Gwanggaeto أوسع.",
     enterGwanggaeto: "ادخل إلى Gwanggaeto",
     toTop: "إلى الأعلى",
-    home: "الرئيسية",
     modalLabel: "وصفة · 藥房廣開土",
     diagnosis: "التشخيص",
     info: "عن هذا الدواء",
