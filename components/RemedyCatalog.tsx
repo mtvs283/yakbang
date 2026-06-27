@@ -84,7 +84,7 @@ export default function RemedyCatalog() {
           const fillerCount = targetCount - items.length;
           return (
             <section
-              className="flex min-h-[100svh] scroll-mt-24 flex-col pb-12 pt-6 sm:scroll-mt-28"
+              className="flex scroll-mt-24 flex-col pb-8 pt-6 sm:scroll-mt-28"
               id={`catalog-${category}`}
               key={category}
             >
@@ -175,22 +175,25 @@ export default function RemedyCatalog() {
         })}
 
         {/* 광개토 진입 + 네비 */}
-        <div className="mt-6 border-t border-yakbangGold/20 pt-12 text-center">
-          <p className="mb-6 font-script text-lg text-yakbangPaper/75">
+        <div className="mt-2 border-t border-yakbangGold/20 pb-10 pt-8 text-center">
+          <p className="mb-4 font-script text-lg text-yakbangPaper/75">
             {t.footerLead}
           </p>
           <a
-            className="inline-flex items-center gap-3 rounded-xl bg-yakbangGold px-10 py-5 text-xl font-bold tracking-wide text-[#1a1206] shadow-[0_4px_20px_rgba(212,175,55,0.35)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#e6c34d] hover:shadow-[0_6px_28px_rgba(212,175,55,0.55)] focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07] sm:text-2xl"
+            aria-label={t.enterGwanggaeto}
+            className="group inline-flex items-center justify-center rounded-2xl transition duration-200 hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07]"
             href={GWANGGAETO_URL}
           >
-            <span aria-hidden="true" className="text-2xl">
-              ⚜
-            </span>
-            {t.enterGwanggaeto}
-            <span aria-hidden="true">→</span>
+            <img
+              alt=""
+              aria-hidden="true"
+              className="h-28 w-28 drop-shadow-[0_8px_28px_rgba(185,28,28,0.35)] transition duration-200 group-hover:drop-shadow-[0_10px_34px_rgba(185,28,28,0.5)] sm:h-36 sm:w-36"
+              src="/images/yakbang-gwanggaeto-stamp.png"
+            />
+            <span className="sr-only">{t.enterGwanggaeto}</span>
           </a>
 
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="mt-6 flex items-center justify-center gap-3">
             <button
               className="inline-flex items-center gap-1 rounded-full border border-yakbangGold/50 px-5 py-2.5 text-sm font-bold text-yakbangPaper/85 transition hover:border-yakbangGold hover:text-yakbangGold focus:outline-none focus:ring-2 focus:ring-yakbangGold"
               onClick={scrollToTop}
