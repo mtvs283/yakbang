@@ -28,6 +28,12 @@ const CATEGORY_ORDER: RemedyCategory[] = [
   "royal"
 ];
 
+// 실제로 렌더되는 카테고리 중 마지막. 마지막 섹션은 한-화면 강제 없이 박스 뒤에서 끝낸다.
+const RENDERED_CATEGORIES = CATEGORY_ORDER.filter((category) =>
+  remedies.some((remedy) => remedy.category === category)
+);
+const LAST_CATEGORY = RENDERED_CATEGORIES[RENDERED_CATEGORIES.length - 1];
+
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -82,9 +88,13 @@ export default function RemedyCatalog() {
           // 소제목마다 한 페이지를 채우도록 '출시예정' 빈 박스로 채움 (3열 기준 최소 9칸)
           const targetCount = Math.max(9, Math.ceil(items.length / 3) * 3);
           const fillerCount = targetCount - items.length;
+          const isLast = category === LAST_CATEGORY;
           return (
             <section
-              className="flex scroll-mt-24 flex-col pb-8 pt-6 sm:scroll-mt-28"
+              className={[
+                "flex scroll-mt-24 flex-col pt-6 sm:scroll-mt-28",
+                isLast ? "pb-8" : "min-h-[100svh] pb-12"
+              ].join(" ")}
               id={`catalog-${category}`}
               key={category}
             >
