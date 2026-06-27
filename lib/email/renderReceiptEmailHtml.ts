@@ -49,10 +49,10 @@ export function renderReceiptEmailHtml(params: ReceiptEmailParams): string {
                   <td style="vertical-align:top;">
                     <p style="margin:0;font-family:Georgia,serif;font-size:13px;letter-spacing:0.35em;color:#a83232;">朱印</p>
                     <h1 style="margin:6px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:28px;color:#a83232;letter-spacing:0.12em;">領收證</h1>
-                    <p style="margin:4px 0 0;font-family:Georgia,serif;font-size:12px;color:#6b5b3f;letter-spacing:0.2em;">約房廣開土</p>
+                    <p style="margin:4px 0 0;font-family:Georgia,serif;font-size:12px;color:#6b5b3f;letter-spacing:0.2em;">광개토약방</p>
                   </td>
                   <td align="right" style="vertical-align:top;width:88px;">
-                    <img src="${RECEIPT_SEAL_IMAGE}" alt="온마음한국어" width="72" height="72" style="display:block;border-radius:4px;"/>
+                    <img src="${RECEIPT_SEAL_IMAGE}" alt="광개토약방" width="72" height="72" style="display:block;border-radius:4px;"/>
                   </td>
                 </tr>
               </table>
@@ -92,8 +92,8 @@ export function renderReceiptEmailHtml(params: ReceiptEmailParams): string {
                   </td>
                 </tr>
               </table>
-              <p style="margin:24px 0 8px;text-align:center;font-size:14px;color:#8b6f47;letter-spacing:0.15em;">─ 약방광개토 의원 ─</p>
-              <p style="margin:0;text-align:center;font-size:12px;color:#a89580;line-height:1.6;">本 영수증은 약방광개토에서 자동 발송된 서신이오. 회신은 받지 아니하오.</p>
+              <p style="margin:24px 0 8px;text-align:center;font-size:14px;color:#8b6f47;letter-spacing:0.15em;">─ 광개토약방 ─</p>
+              <p style="margin:0;text-align:center;font-size:12px;color:#a89580;line-height:1.6;">本 영수증은 광개토약방에서 자동 발송된 서신이오. 회신은 받지 아니하오.</p>
             </td>
           </tr>
         </table>

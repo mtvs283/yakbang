@@ -86,7 +86,7 @@ export async function POST(request: Request) {
     });
 
     const resend = new Resend(apiKey);
-    const subject = `[약방광개토] ${row.receipt_data.remedyName} 영수증`;
+    const subject = `[광개토약방] ${row.receipt_data.remedyName} 영수증`;
     const { data: sent, error: sendError } = await resend.emails.send({
       from: RECEIPT_FROM,
       to: row.recipient_email.trim(),

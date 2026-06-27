@@ -11,7 +11,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY")!;
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SERVICE_ROLE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-const FROM = Deno.env.get("DELIVERY_FROM") ?? "약방광개토 <noreply@yakbang.example>";
+const FROM = Deno.env.get("DELIVERY_FROM") ?? "광개토약방 <noreply@yakbang.example>";
 
 type TemplateType = "shipped" | "arrived" | "reminder";
 
@@ -20,17 +20,17 @@ function buildEmail(type: TemplateType, ctx: { name: string; remedy?: string }) 
     case "shipped":
       return {
         subject: `약방에서 서신을 보냈소이다 — ${ctx.remedy ?? "약"} 배달 시작`,
-        html: `<p>환자 ${ctx.name}이시여,</p><p>주문하신 <b>${ctx.remedy ?? "약"}</b>을 약방에서 보냈소이다. 배달이 시작되었으니 곧 거처에 닿을 것이오.</p><p>— 약방광개토</p>`
+        html: `<p>환자 ${ctx.name}이시여,</p><p>주문하신 <b>${ctx.remedy ?? "약"}</b>을 약방에서 보냈소이다. 배달이 시작되었으니 곧 거처에 닿을 것이오.</p><p>— 광개토약방</p>`
       };
     case "arrived":
       return {
         subject: "약이 거처에 도착하였소이다",
-        html: `<p>환자 ${ctx.name}이시여,</p><p>약이 거처에 무사히 도착하였소이다. 처방대로 드시고 한국어에 밝아지시오.</p><p>— 약방광개토</p>`
+        html: `<p>환자 ${ctx.name}이시여,</p><p>약이 거처에 무사히 도착하였소이다. 처방대로 드시고 한국어에 밝아지시오.</p><p>— 광개토약방</p>`
       };
     case "reminder":
       return {
         subject: `환자 ${ctx.name}, 잘 지내시오?`,
-        html: `<p>환자 ${ctx.name}이시여, 그간 잘 지내셨소? 약방에서 새 약이 나왔소이다. 한번 들르시오.</p><p>— 약방광개토</p>`
+        html: `<p>환자 ${ctx.name}이시여, 그간 잘 지내셨소? 약방에서 새 약이 나왔소이다. 한번 들르시오.</p><p>— 광개토약방</p>`
       };
   }
 }
