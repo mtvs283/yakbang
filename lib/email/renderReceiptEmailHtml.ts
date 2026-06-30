@@ -1,5 +1,9 @@
 import { formatReceiptIssuedAtKST } from "./formatReceiptIssuedAt";
-import { RECEIPT_SEAL_IMAGE, SITE_URL } from "./receiptEmailConfig";
+import {
+  RECEIPT_SEAL_IMAGE,
+  SITE_DISPLAY_HOST,
+  SITE_URL,
+} from "./receiptEmailConfig";
 
 export interface ReceiptEmailParams {
   recipientName: string | null;
@@ -94,7 +98,7 @@ export function renderReceiptEmailHtml(params: ReceiptEmailParams): string {
               </table>
               <p style="margin:24px 0 8px;text-align:center;font-size:14px;color:#8b6f47;letter-spacing:0.15em;">─ 광개토약방 ─</p>
               <p style="margin:0 0 8px;text-align:center;font-size:12px;color:#a89580;line-height:1.6;">
-                <a href="${SITE_URL}" style="color:#8b6f47;text-decoration:none;">yakbang.kr</a>
+                <a href="${SITE_URL}" style="color:#8b6f47;text-decoration:none;">${SITE_DISPLAY_HOST}</a>
               </p>
               <p style="margin:0;text-align:center;font-size:12px;color:#a89580;line-height:1.6;">本 영수증은 광개토약방에서 자동 발송된 서신이오. 회신은 받지 아니하오.</p>
             </td>

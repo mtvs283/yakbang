@@ -24,7 +24,7 @@ Dashboard → Authentication → Providers:
 - **Email** 사용 설정 ON (환자 등록 / 광개토 격상)
   - 개발 편의상 "Confirm email" OFF 가능 (운영은 ON 권장)
 
-Authentication → URL Configuration: Site URL에 배포 도메인(예: `https://yakbang.kr`) 추가.
+Authentication → URL Configuration: Site URL에 배포 도메인(예: `https://약방.kr`) 추가.
 
 ## 3. 마이그레이션 실행
 
@@ -55,10 +55,11 @@ supabase db push
 supabase functions deploy send-delivery-email
 supabase secrets set RESEND_API_KEY=re_xxx
 # (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY는 보통 자동 주입)
-supabase secrets set DELIVERY_FROM="광개토약방 <noreply@yakbang.kr>"
+supabase secrets set DELIVERY_FROM="광개토약방 <noreply@xn--vh3bp4o.kr>"
 ```
 
 - Resend(https://resend.com) 가입 + 도메인 인증 후 API 키 발급
+- 한글 도메인 `약방.kr`은 DNS/Resend에서 `xn--vh3bp4o.kr`로 보일 수 있음
 - **cron 스케줄:** Dashboard → Edge Functions → `send-delivery-email` → Schedule → 매일 1회 (예: `0 0 * * *`)
 - `delivery_emails` 의 `status='pending'` & `scheduled_at <= now()` 건을 처리
 
