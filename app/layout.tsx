@@ -6,7 +6,7 @@ import { UserProvider } from "../components/membership/UserProvider";
 
 export const metadata: Metadata = {
   title: "광개토약방",
-  description: "왕실 비방 한정 진상품을 품은 약방광개토 MVP"
+  description: "왕실 비방 한정 진상품을 품은 광개토약방 MVP"
 };
 
 export default function RootLayout({
