@@ -1,6 +1,6 @@
 export const RECEIPT_FROM =
   process.env.RECEIPT_FROM?.trim().replace(/[""]/g, '"') ??
-  "광개토약방 <noreply@xn--vh3bp4o.kr>";
+  "광개토약방 <noreply@onmaeumkr.com>";
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://약방.kr";

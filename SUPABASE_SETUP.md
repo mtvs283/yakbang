@@ -55,11 +55,11 @@ supabase db push
 supabase functions deploy send-delivery-email
 supabase secrets set RESEND_API_KEY=re_xxx
 # (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY는 보통 자동 주입)
-supabase secrets set DELIVERY_FROM="광개토약방 <noreply@xn--vh3bp4o.kr>"
+supabase secrets set DELIVERY_FROM="광개토약방 <noreply@onmaeumkr.com>"
 ```
 
 - Resend(https://resend.com) 가입 + 도메인 인증 후 API 키 발급
-- 한글 도메인 `약방.kr`은 DNS/Resend에서 `xn--vh3bp4o.kr`로 보일 수 있음
+- 영수증 메일 발신은 `onmaeumkr.com`(Resend 인증 도메인) 사용. 사이트 링크는 `약방.kr`
 - **cron 스케줄:** Dashboard → Edge Functions → `send-delivery-email` → Schedule → 매일 1회 (예: `0 0 * * *`)
 - `delivery_emails` 의 `status='pending'` & `scheduled_at <= now()` 건을 처리
 
