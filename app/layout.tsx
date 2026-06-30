@@ -5,7 +5,7 @@ import SupabaseProvider from "../components/membership/SupabaseProvider";
 import { UserProvider } from "../components/membership/UserProvider";
 
 export const metadata: Metadata = {
-  title: "약방광개토",
+  title: "광개토약방",
   description: "왕실 비방 한정 진상품을 품은 약방광개토 MVP"
 };
 
