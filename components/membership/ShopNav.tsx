@@ -47,9 +47,6 @@ export default function ShopNav() {
   return (
     <>
       <div className="absolute left-4 top-4 z-40 flex flex-col items-start gap-2 sm:fixed">
-        <a className={PILL} href={GWANGGAETO_URL}>
-          <span aria-hidden="true">⚜</span> 광개토로
-        </a>
         {isRegistered ? (
           <button className={PILL} onClick={handleLogout} type="button">
             나가기
@@ -126,6 +123,12 @@ export default function ShopNav() {
         >
           약방 품계도
         </button>
+        <a
+          className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border-2 border-red-500/80 bg-red-700/85 px-4 py-2.5 text-lg font-bold text-yakbangGold backdrop-blur transition hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+          href={GWANGGAETO_URL}
+        >
+          <span aria-hidden="true">⚜</span> 광개토로
+        </a>
       </div>
 
       {showLogin ? (
