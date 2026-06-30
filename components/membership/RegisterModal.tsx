@@ -189,6 +189,19 @@ export default function RegisterModal({
           >
             {loading ? "접수 중…" : "진료 등록하기"}
           </button>
+
+          {onSwitchToLogin ? (
+            <p className="pt-1 text-center font-script text-sm text-[#7a4f28]">
+              이미 등록했소?{" "}
+              <button
+                className="font-bold underline underline-offset-2 transition hover:text-[#8a3a1a]"
+                onClick={() => onSwitchToLogin(email.trim())}
+                type="button"
+              >
+                재진 입장
+              </button>
+            </p>
+          ) : null}
         </form>
       </section>
     </div>,
