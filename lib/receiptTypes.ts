@@ -24,23 +24,28 @@ export interface UserReceiptRow {
 }
 
 export const H_PRON_RECEIPT_SLUG = "h-pron";
-export const H_PRON_PRICE = 500;
 
 export function buildPaidReceiptData(
   remedyName: string,
-  balance: number
+  balance: number,
+  price: number
 ): ReceiptData {
+  const fmt = (n: number) => n.toLocaleString("ko-KR");
+  const gimbapDoses = price > 0 ? (3500 / price).toFixed(1).replace(/\.0$/, "") : "7";
+  const triangleDoses = price > 0 ? (1500 / price).toFixed(1).replace(/\.0$/, "") : "3";
+  const coffeeDoses = price > 0 ? (700 / price).toFixed(1).replace(/\.0$/, "") : "1.4";
+
   return {
     remedyName,
-    amount: H_PRON_PRICE,
+    amount: price,
     balance,
     kimchiGuide: {
-      perDose: H_PRON_PRICE,
+      perDose: price,
       lines: [
-        "※ 이 약 한 첩(500원) 기준",
-        "김밥 한 줄 = 7첩 (3,500원)",
-        "삼각김밥 = 3첩 (1,500원)",
-        "자판기 커피 = 1.4첩 (700원)"
+        `※ 이 약 한 첩(${fmt(price)}원) 기준`,
+        `김밥 한 줄 = ${gimbapDoses}첩 (3,500원)`,
+        `삼각김밥 = ${triangleDoses}첩 (1,500원)`,
+        `자판기 커피 = ${coffeeDoses}첩 (700원)`
       ]
     }
   };

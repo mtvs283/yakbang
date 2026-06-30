@@ -4,14 +4,17 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { getRemedyText } from "../data/i18n";
 import { formatPrice, type Remedy } from "../data/remedies";
+import {
+  remedyIdToSlug,
+  remedyPriceInWon
+} from "../data/prescriptionSlugs";
 import { chargePrescription, getPointBalance } from "../lib/chargePrescription";
 import { recordPrescriptionComplete } from "../lib/recordPrescriptionComplete";
 import { recordUserReceipt } from "../lib/recordUserReceipt";
 import { requestReceiptEmail } from "../lib/sendReceiptEmail";
 import {
   buildFreeReceiptData,
-  buildPaidReceiptData,
-  H_PRON_RECEIPT_SLUG
+  buildPaidReceiptData
 } from "../lib/receiptTypes";
 import InsufficientBalanceModal from "./payment/InsufficientBalanceModal";
 import PaymentConfirmModal from "./payment/PaymentConfirmModal";
@@ -20,9 +23,6 @@ import ReceiptModal from "./payment/ReceiptModal";
 import TreatmentConfirmModal from "./payment/TreatmentConfirmModal";
 import { useLocale } from "./LocaleProvider";
 import { useUser } from "../lib/hooks/useUser";
-
-const H_PRON_SLUG = H_PRON_RECEIPT_SLUG;
-const H_PRON_PRICE = 500;
 
 type PaymentPhase =
   | "quiz"
@@ -80,8 +80,10 @@ export default function PrescriptionModal({
   const text = getRemedyText(remedy, locale);
   const quiz = remedy.prescription.quiz;
   const isUnavailable = remedy.status === "unavailable";
-  const requiresPayment =
-    isRegistered && remedy.id === "h-pronunciation";
+  const hasQuiz = quiz.length > 0 && !isUnavailable;
+  const prescriptionSlug = remedyIdToSlug(remedy.id);
+  const prescriptionPrice = remedyPriceInWon(remedy);
+  const requiresPayment = isRegistered && hasQuiz && prescriptionPrice > 0;
 
   const correctness = useMemo(
     () =>
@@ -112,7 +114,7 @@ export default function PrescriptionModal({
   async function saveVisitorReceipt() {
     setReceiptError(null);
     const result = await recordUserReceipt({
-      prescriptionSlug: H_PRON_SLUG,
+      prescriptionSlug,
       receiptData: buildFreeReceiptData(text.name),
       recipientEmail: null
     });
@@ -157,7 +159,7 @@ export default function PrescriptionModal({
   async function handlePay() {
     setPaymentError(null);
     setPaying(true);
-    const result = await chargePrescription(H_PRON_SLUG, H_PRON_PRICE);
+    const result = await chargePrescription(prescriptionSlug, prescriptionPrice);
     setPaying(false);
     if ("error" in result) {
       if (result.error === "insufficient") {
@@ -170,8 +172,12 @@ export default function PrescriptionModal({
     }
     setReceiptBalance(result.newBalance);
     const receipt = await recordUserReceipt({
-      prescriptionSlug: H_PRON_SLUG,
-      receiptData: buildPaidReceiptData(text.name, result.newBalance)
+      prescriptionSlug,
+      receiptData: buildPaidReceiptData(
+        text.name,
+        result.newBalance,
+        prescriptionPrice
+      )
     });
     if (!receipt.ok) {
       console.error("[paid receipt]", receipt);
@@ -195,11 +201,10 @@ export default function PrescriptionModal({
 
   // 전부 정답 → 학습 기록 (실패해도 UI는 그대로)
   useEffect(() => {
-    if (!allCorrect || recordedRef.current) return;
-    if (remedy.id !== "h-pronunciation") return;
+    if (!allCorrect || recordedRef.current || !hasQuiz) return;
     recordedRef.current = true;
-    void recordPrescriptionComplete(H_PRON_SLUG);
-  }, [allCorrect, remedy.id]);
+    void recordPrescriptionComplete(prescriptionSlug);
+  }, [allCorrect, hasQuiz, prescriptionSlug]);
 
   // 가입 환자: 풀이 완료 → 치료 확인 모달 (답 확인 후 [확인] → 결제)
   useEffect(() => {
@@ -210,7 +215,7 @@ export default function PrescriptionModal({
   // 비회원: 세션 준비 후 영수증 기록 → 발급 모달 → 가입 유도
   useEffect(() => {
     if (userLoading || !userId) return;
-    if (!allCorrect || requiresPayment || remedy.id !== "h-pronunciation") {
+    if (!allCorrect || requiresPayment || !hasQuiz) {
       return;
     }
     if (receiptPendingRef.current) return;
@@ -222,7 +227,7 @@ export default function PrescriptionModal({
         receiptPendingRef.current = false;
       }
     })();
-  }, [allCorrect, requiresPayment, remedy.id, text.name, userLoading, userId]);
+  }, [allCorrect, requiresPayment, hasQuiz, text.name, userLoading, userId]);
 
   async function handleReceiptRetry() {
     setReceiptRetrying(true);
@@ -528,7 +533,7 @@ export default function PrescriptionModal({
           onClose={dismissPaymentFlow}
           onPay={handlePay}
           paying={paying}
-          price={H_PRON_PRICE}
+          price={prescriptionPrice}
           remedyName={text.name}
           error={paymentError}
         />
@@ -539,7 +544,7 @@ export default function PrescriptionModal({
           balance={receiptBalance}
           isRegisteredPatient
           onClose={() => setPhase("stamped")}
-          price={H_PRON_PRICE}
+          price={prescriptionPrice}
           remedyName={text.name}
         />
       ) : null}
