@@ -24,7 +24,7 @@ Dashboard → Authentication → Providers:
 - **Email** 사용 설정 ON (환자 등록 / 광개토 격상)
   - 개발 편의상 "Confirm email" OFF 가능 (운영은 ON 권장)
 
-Authentication → URL Configuration: Site URL에 배포 도메인(예: `https://yakbang-two.vercel.app`) 추가.
+Authentication → URL Configuration: Site URL에 배포 도메인(예: `https://yakbang.kr`) 추가.
 
 ## 3. 마이그레이션 실행
 
@@ -55,7 +55,7 @@ supabase db push
 supabase functions deploy send-delivery-email
 supabase secrets set RESEND_API_KEY=re_xxx
 # (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY는 보통 자동 주입)
-supabase secrets set DELIVERY_FROM="약방광개토 <noreply@도메인>"
+supabase secrets set DELIVERY_FROM="광개토약방 <noreply@yakbang.kr>"
 ```
 
 - Resend(https://resend.com) 가입 + 도메인 인증 후 API 키 발급
