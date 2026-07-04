@@ -51,6 +51,83 @@ export interface PumgyeCopy {
   footnote2?: string;
 }
 
+export interface RegisterModalCopy {
+  closeAria: string;
+  eyebrow: string;
+  title: string;
+  introBeforeTerm: string;
+  introAfterTerm: string;
+  nameLabelAfterTerm: string;
+  namePlaceholder: string;
+  genderLabel: string;
+  genderMale: string;
+  genderFemale: string;
+  ageLabel: string;
+  agePlaceholder: string;
+  emailLabelAfterTerm: string;
+  emailPlaceholder: string;
+  passwordLabel: string;
+  passwordHint: string;
+  passwordPlaceholder: string;
+  passwordTooShort: string;
+  submitting: string;
+  submit: string;
+  alreadyRegisteredError: string;
+  alreadyRegisteredCta: string;
+  genericError: string;
+  switchToLoginQuestion: string;
+  switchToLoginCta: string;
+}
+
+export interface RegisterPromptCopy {
+  lockedIcon: string;
+  lockedTitle: string;
+  lockedBody: string;
+  completedIcon: string;
+  completedTitle: string;
+  completedBody: string;
+  registerCta: string;
+  closeCta: string;
+}
+
+export interface LoginModalCopy {
+  closeAria: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  emailLabel: string;
+  emailPlaceholder: string;
+  passwordLabel: string;
+  passwordPlaceholder: string;
+  invalidCredentials: string;
+  emailNotConfirmed: string;
+  loginFailedPrefix: string;
+  loginFailedUnknown: string;
+  submitting: string;
+  submit: string;
+  newHereCta: string;
+}
+
+export interface UpgradeModalCopy {
+  closeAria: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  passwordLabel: string;
+  confirmLabel: string;
+  passwordTooShort: string;
+  passwordMismatch: string;
+  submitting: string;
+  submit: string;
+}
+
+export interface AuthCopy {
+  register: RegisterModalCopy;
+  registerPrompt: RegisterPromptCopy;
+  login: LoginModalCopy;
+  upgrade: UpgradeModalCopy;
+}
+
 export interface UIMessages {
   catalogTitle: string;
   catalogSubtitle: string;
@@ -78,6 +155,7 @@ export interface UIMessages {
   stockLabel: (count: number) => string;
   pharmacyGuide: PharmacyGuideCopy;
   pumgye: PumgyeCopy;
+  auth: AuthCopy;
 }
 
 export interface RemedyText {
@@ -90,6 +168,6 @@ export interface RemedyText {
 }
 
 export interface LocaleData {
-  ui: Omit<UIMessages, "pharmacyGuide" | "pumgye">;
+  ui: Omit<UIMessages, "pharmacyGuide" | "pumgye" | "auth">;
   remedies: Record<string, RemedyText>;
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { loginWithPassword } from "../../lib/supabase/auth";
+import { useLocale } from "../LocaleProvider";
 
 interface Props {
   onClose: () => void;
@@ -16,6 +17,8 @@ export default function ReturnLoginModal({
   initialEmail,
   onNewRegister
 }: Props) {
+  const { t } = useLocale();
+  const copy = t.auth.login;
   const [email, setEmail] = useState(initialEmail ?? "");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,10 +36,10 @@ export default function ReturnLoginModal({
       const msg = err instanceof Error ? err.message : "";
       setError(
         /invalid login|invalid credentials|password/i.test(msg)
-          ? "이메일 또는 비밀번호가 맞지 않소이다."
+          ? copy.invalidCredentials
           : /not confirmed/i.test(msg)
-            ? "거처(이메일) 인증이 안 됐소. 관리자에게 청하시오."
-            : `입장 실패: ${msg || "원인 불명"}`
+            ? copy.emailNotConfirmed
+            : `${copy.loginFailedPrefix}${msg || copy.loginFailedUnknown}`
       );
       setLoading(false);
     }
@@ -54,7 +57,7 @@ export default function ReturnLoginModal({
         onMouseDown={(e) => e.stopPropagation()}
       >
         <button
-          aria-label="닫기"
+          aria-label={copy.closeAria}
           className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#7a4f28]/60 text-xl leading-none text-[#7a4f28] transition hover:bg-[#7a4f28] hover:text-[#f5e6c8]"
           onClick={onClose}
           type="button"
@@ -64,36 +67,36 @@ export default function ReturnLoginModal({
 
         <header className="mb-5 border-b-2 border-dashed border-[#7a4f28]/40 pb-4">
           <p className="mb-1 text-xs font-bold tracking-[0.2em] text-[#7a4f28]">
-            재 진 입 장
+            {copy.eyebrow}
           </p>
-          <h1 className="font-script text-3xl font-bold">재진 입장</h1>
+          <h1 className="font-script text-3xl font-bold">{copy.title}</h1>
           <p className="mt-2 font-script text-base leading-relaxed">
-            전에 등록하신 거처(이메일)와 비밀번호로 드시오.
+            {copy.intro}
           </p>
         </header>
 
         <form className="space-y-4" onSubmit={submit}>
           <label className="block">
             <span className="mb-1 block font-script text-sm font-bold text-[#7a4f28]">
-              등록 이메일
+              {copy.emailLabel}
             </span>
             <input
               autoFocus
               className="w-full rounded-md border-2 border-[#7a4f28]/40 bg-white/70 px-3 py-2 text-base outline-none focus:border-[#7a4f28] focus:ring-2 focus:ring-[#7a4f28]/40"
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="등록한 이메일을 적으시오"
+              placeholder={copy.emailPlaceholder}
               type="email"
               value={email}
             />
           </label>
           <label className="block">
             <span className="mb-1 block font-script text-sm font-bold text-[#7a4f28]">
-              비밀번호
+              {copy.passwordLabel}
             </span>
             <input
               className="w-full rounded-md border-2 border-[#7a4f28]/40 bg-white/70 px-3 py-2 text-base outline-none focus:border-[#7a4f28] focus:ring-2 focus:ring-[#7a4f28]/40"
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="비밀번호를 적으시오"
+              placeholder={copy.passwordPlaceholder}
               type="password"
               value={password}
             />
@@ -108,7 +111,7 @@ export default function ReturnLoginModal({
             disabled={loading}
             type="submit"
           >
-            {loading ? "입장 중…" : "입장하기"}
+            {loading ? copy.submitting : copy.submit}
           </button>
 
           {onNewRegister ? (
@@ -118,7 +121,7 @@ export default function ReturnLoginModal({
               onClick={onNewRegister}
               type="button"
             >
-              처음 오셨소? 새 환자 등록
+              {copy.newHereCta}
             </button>
           ) : null}
         </form>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { formatStageMessage, stageMessages } from "../../data/membership";
 import { useUpgrade } from "../../lib/hooks/useUpgrade";
+import { useLocale } from "../LocaleProvider";
 
 interface Props {
   name: string;
@@ -12,6 +13,8 @@ interface Props {
 }
 
 export default function UpgradeModal({ name, onClose, onDone }: Props) {
+  const { t } = useLocale();
+  const copy = t.auth.upgrade;
   const { upgrade, loading, error } = useUpgrade();
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -21,11 +24,11 @@ export default function UpgradeModal({ name, onClose, onDone }: Props) {
     e.preventDefault();
     setLocalError(null);
     if (password.length < 6) {
-      setLocalError("암호는 6자 이상이어야 하오.");
+      setLocalError(copy.passwordTooShort);
       return;
     }
     if (password !== confirm) {
-      setLocalError("암호가 서로 다르오.");
+      setLocalError(copy.passwordMismatch);
       return;
     }
     try {
@@ -48,7 +51,7 @@ export default function UpgradeModal({ name, onClose, onDone }: Props) {
         onMouseDown={(e) => e.stopPropagation()}
       >
         <button
-          aria-label="닫기"
+          aria-label={copy.closeAria}
           className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-yakbangGold/60 text-xl leading-none text-yakbangGold transition hover:bg-yakbangGold hover:text-black"
           onClick={onClose}
           type="button"
@@ -58,21 +61,20 @@ export default function UpgradeModal({ name, onClose, onDone }: Props) {
 
         <header className="mb-5 border-b border-yakbangGold/30 pb-4">
           <p className="mb-1 text-xs font-bold tracking-[0.2em] text-yakbangGold">
-            광 개 토 화 랑 도
+            {copy.eyebrow}
           </p>
           <h1 className="font-script text-3xl font-bold text-yakbangGold">
-            광개토 회원 격상
+            {copy.title}
           </h1>
           <p className="mt-2 font-script text-base leading-relaxed text-yakbangPaper/90">
-            암호를 정하여 광개토 낭도로 입문하시오. 약방 적립금은 그대로
-            이어지고, 가입 보너스 5,000원 + 이사 보너스 3,000원을 드리오.
+            {copy.intro}
           </p>
         </header>
 
         <form className="space-y-4" onSubmit={submit}>
           <label className="block">
             <span className="mb-1 block font-script text-sm font-bold text-yakbangGold">
-              암호 (6자 이상)
+              {copy.passwordLabel}
             </span>
             <input
               className="w-full rounded-md border border-yakbangGold/40 bg-black/40 px-3 py-2 text-base text-yakbangPaper outline-none focus:border-yakbangGold focus:ring-2 focus:ring-yakbangGold/40"
@@ -83,7 +85,7 @@ export default function UpgradeModal({ name, onClose, onDone }: Props) {
           </label>
           <label className="block">
             <span className="mb-1 block font-script text-sm font-bold text-yakbangGold">
-              암호 확인
+              {copy.confirmLabel}
             </span>
             <input
               className="w-full rounded-md border border-yakbangGold/40 bg-black/40 px-3 py-2 text-base text-yakbangPaper outline-none focus:border-yakbangGold focus:ring-2 focus:ring-yakbangGold/40"
@@ -104,7 +106,7 @@ export default function UpgradeModal({ name, onClose, onDone }: Props) {
             disabled={loading}
             type="submit"
           >
-            {loading ? "격상 중…" : "광개토 낭도로 격상"}
+            {loading ? copy.submitting : copy.submit}
           </button>
         </form>
 

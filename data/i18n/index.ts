@@ -17,6 +17,7 @@ import { ky } from "./ky";
 import { mn } from "./mn";
 import { my } from "./my";
 import { ne } from "./ne";
+import { AUTH_COPY } from "./auth";
 import { PHARMACY_GUIDE } from "./pharmacyGuide";
 import { PUMGYE_RANKS } from "./pumgyeRanks";
 import { ru } from "./ru";
@@ -29,6 +30,7 @@ import { zhTW } from "./zh-TW";
 import type { Locale, LocaleData, RemedyText, UIMessages } from "./types";
 
 export type {
+  AuthCopy,
   Locale,
   LocaleData,
   PharmacyGuideCopy,
@@ -130,7 +132,8 @@ export const messages: Record<Locale, UIMessages> = Object.fromEntries(
     {
       ...DATA[locale].ui,
       pharmacyGuide: PHARMACY_GUIDE[locale],
-      pumgye: PUMGYE_RANKS[locale]
+      pumgye: PUMGYE_RANKS[locale],
+      auth: AUTH_COPY[locale]
     }
   ])
 ) as Record<Locale, UIMessages>;
