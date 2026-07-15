@@ -82,6 +82,9 @@ export async function recordUserReceipt(
 
     stashReceiptId(data.id);
     stashReceiptOwnerId(user.id);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("yakbang:receipt-recorded"));
+    }
     console.info("[user_receipts] insert ok", { id: data.id, userId: user.id });
     return { ok: true, id: data.id };
   } catch (e) {

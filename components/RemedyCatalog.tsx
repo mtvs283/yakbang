@@ -198,7 +198,7 @@ export default function RemedyCatalog() {
       </div>
 
       {showTop ? (
-        <div className="fixed bottom-24 right-4 z-[35] sm:bottom-28 sm:right-5">
+        <div className="fixed bottom-[168px] right-4 z-40 sm:bottom-[198px] sm:right-5 lg:bottom-[100px]">
           <button
             aria-label={t.toTop}
             className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-yakbangGold/70 bg-yakbangBlack/80 text-xl font-bold text-yakbangGold shadow-[0_0_20px_rgba(212,175,55,0.3)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold"

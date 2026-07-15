@@ -81,7 +81,7 @@ export default function AmbientAudio() {
       <audio ref={audioRef} loop preload="auto" src="/audio/yakbang-ambient.mp3" />
       <button
         aria-label={`배경음악 음량: ${LABEL[level]}. 눌러서 변경`}
-        className="fixed bottom-[94px] right-3 z-40 flex min-w-[58px] flex-col items-center rounded-md border-2 border-[#b48a50] bg-gradient-to-b from-[#765031] to-[#321d11] px-2 py-1.5 font-script font-bold text-[#f4dfb0] shadow-[0_5px_18px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,235,181,0.22)] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-yakbangGold sm:bottom-[112px] sm:right-5 sm:min-w-[68px] sm:py-2"
+        className="fixed bottom-[108px] right-3 z-40 flex min-w-[58px] flex-col items-center rounded-md border-2 border-[#b48a50] bg-gradient-to-b from-[#765031] to-[#321d11] px-2 py-1.5 font-script font-bold text-[#f4dfb0] shadow-[0_5px_18px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,235,181,0.22)] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-yakbangGold sm:bottom-[126px] sm:right-5 sm:min-w-[68px] sm:py-2 lg:bottom-4"
         onClick={cycleVolume}
         title={`배경음악 · ${LABEL[level]}`}
         type="button"
