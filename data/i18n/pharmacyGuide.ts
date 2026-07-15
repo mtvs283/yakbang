@@ -2,7 +2,7 @@ import type { Locale, PharmacyGuideCopy } from "./types";
 
 export const PHARMACY_GUIDE: Record<Locale, PharmacyGuideCopy> = {
   ko: {
-    button: "약방 이용법",
+    button: "이용법",
     title: "약방 이용법",
     step1: "一. 매일 약방에 들러 입원하시오",
     step1Note: "(입원하면 출석금 300원이 쌓이오)",

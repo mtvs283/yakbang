@@ -1,36 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { tiers, type Tier } from "../../data/membership";
+import type { Tier } from "../../data/membership";
 import { useDailyAttendance } from "../../lib/hooks/useDailyAttendance";
 import { hasStoredAccountHint, prepareNewPatientRegistration } from "../../lib/supabase/auth";
 import { useUser } from "../../lib/hooks/useUser";
 import { useShopUi } from "../ShopUiProvider";
 import RegisterModal from "./RegisterModal";
 import ReturnLoginModal from "./ReturnLoginModal";
-import StageBadge from "./StageBadge";
 import StageUpgradeNotification from "./StageUpgradeNotification";
-import UpgradeModal from "./UpgradeModal";
-
-function formatStatusLine(
-  isRegistered: boolean,
-  tier: Tier,
-  dailyNumber: number | null | undefined,
-  admissionDays: number | null,
-  points: number
-): string {
-  if (!isRegistered) return "방문객";
-  const tierLabel = tiers[tier].ko;
-  const number = dailyNumber != null ? ` ${dailyNumber}` : "";
-  const admission =
-    admissionDays != null ? ` · 입원 ${admissionDays}일째` : "";
-  const balance = ` · ${points.toLocaleString("ko-KR")}원`;
-  return `${tierLabel}${number}${admission}${balance}`;
-}
 
 export default function PharmacyHeader() {
-  const { profile, refresh, isRegistered, userId, loading, admissionDays } =
-    useUser();
+  const { refresh, isRegistered } = useUser();
   const { prescriptionOpen } = useShopUi();
   const { checked } = useDailyAttendance(); // 약방 진입 시 당일 자동 출석
 
@@ -41,19 +22,7 @@ export default function PharmacyHeader() {
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [loginEmail, setLoginEmail] = useState("");
-  const [showUpgrade, setShowUpgrade] = useState(false);
   const [notif, setNotif] = useState<{ from: Tier; to: Tier } | null>(null);
-
-  const tier: Tier = profile?.tier ?? "visitor";
-  const name = profile?.display_name ?? "";
-  const statusLine = formatStatusLine(
-    isRegistered,
-    tier,
-    profile?.daily_number,
-    admissionDays,
-    profile?.points ?? 0
-  );
-  const showStatusWidget = !loading && Boolean(userId);
 
   // 진료등록 클릭: 재방문(이 브라우저에서 등록 이력/로그인)이면 재진 입장, 아니면 신규 등록
   function handleEnter() {
@@ -83,27 +52,6 @@ export default function PharmacyHeader() {
       </div>
       ) : null}
 
-      {/* 좌상단 메뉴 아래: 회원/방문자 상태 */}
-      {showStatusWidget ? (
-        <div className="absolute left-4 top-28 z-40 flex max-w-[min(100vw-2rem,22rem)] flex-col items-start gap-2 rounded-2xl border border-yakbangGold/40 bg-yakbangBlack/80 px-5 py-2.5 backdrop-blur sm:fixed sm:max-w-none sm:px-6 sm:py-3">
-          <div className="flex items-center gap-2.5">
-            {isRegistered ? <StageBadge size={26} tier={tier} /> : null}
-            <span className="font-script text-base font-bold leading-snug text-yakbangGold sm:text-[17px]">
-              {statusLine}
-            </span>
-          </div>
-          {isRegistered && tier === "patient" ? (
-            <button
-              className="self-stretch rounded-full border border-yakbangGold/70 px-3.5 py-1.5 text-center font-script text-sm font-bold text-yakbangGold transition hover:bg-yakbangGold hover:text-black"
-              onClick={() => setShowUpgrade(true)}
-              type="button"
-            >
-              광개토 회원 격상
-            </button>
-          ) : null}
-        </div>
-      ) : null}
-
       {showRegister ? (
         <RegisterModal
           onClose={() => setShowRegister(false)}
@@ -128,22 +76,10 @@ export default function PharmacyHeader() {
         />
       ) : null}
 
-      {showUpgrade ? (
-        <UpgradeModal
-          name={name}
-          onClose={() => setShowUpgrade(false)}
-          onDone={async () => {
-            setShowUpgrade(false);
-            await refresh();
-            setNotif({ from: "patient", to: "nangdo" });
-          }}
-        />
-      ) : null}
-
       {notif ? (
         <StageUpgradeNotification
           fromTier={notif.from}
-          name={name}
+          name=""
           onDismiss={() => setNotif(null)}
           toTier={notif.to}
         />

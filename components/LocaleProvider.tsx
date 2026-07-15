@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode
 } from "react";
+import { usePathname } from "next/navigation";
 import {
   LOCALES,
   LOCALE_LABELS,
@@ -57,7 +58,12 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
 function LanguageToggle() {
   const { locale, setLocale } = useLocale();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  if (pathname === "/shop" || pathname === "/receipts") {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-4 left-1/2 z-40 -translate-x-1/2">

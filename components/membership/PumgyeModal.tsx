@@ -5,7 +5,12 @@ import { createPortal } from "react-dom";
 import { useLocale } from "../LocaleProvider";
 
 interface Props {
+  canUpgrade?: boolean;
+  isRegistered?: boolean;
   onClose: () => void;
+  onLogin?: () => void;
+  onLogout?: () => void;
+  onUpgrade?: () => void;
 }
 
 interface Rank {
@@ -39,7 +44,14 @@ const RANK_STYLES: Omit<Rank, "stamp" | "desc">[] = [
   }
 ];
 
-export default function PumgyeModal({ onClose }: Props) {
+export default function PumgyeModal({
+  canUpgrade = false,
+  isRegistered = false,
+  onClose,
+  onLogin,
+  onLogout,
+  onUpgrade
+}: Props) {
   const { t } = useLocale();
   const p = t.pumgye;
   const ranks: Rank[] = [
@@ -145,6 +157,36 @@ export default function PumgyeModal({ onClose }: Props) {
                 {p.footnote2 ?? null}
               </div>
             ) : null}
+
+            <div className="mt-[0.65em] flex shrink-0 flex-wrap gap-[0.45em] border-t border-[#8B6F3A]/50 pt-[0.55em]">
+              {canUpgrade && onUpgrade ? (
+                <button
+                  className="rounded border border-[#8B6F3A] bg-[#6f4a2d] px-[0.8em] py-[0.35em] font-bold text-[#fff3d2]"
+                  onClick={onUpgrade}
+                  type="button"
+                >
+                  광개토 회원 격상
+                </button>
+              ) : null}
+              {!isRegistered && onLogin ? (
+                <button
+                  className="rounded border border-[#8B6F3A] bg-[#6f4a2d] px-[0.8em] py-[0.35em] font-bold text-[#fff3d2]"
+                  onClick={onLogin}
+                  type="button"
+                >
+                  재진 입장
+                </button>
+              ) : null}
+              {isRegistered && onLogout ? (
+                <button
+                  className="rounded border border-[#8B6F3A]/70 px-[0.8em] py-[0.35em] font-bold text-[#5A3A22]"
+                  onClick={onLogout}
+                  type="button"
+                >
+                  나가기
+                </button>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

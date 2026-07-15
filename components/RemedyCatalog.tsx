@@ -184,28 +184,21 @@ export default function RemedyCatalog() {
         })}
 
         {/* 광개토 안내 문구 */}
-        <div className="mt-2 border-t border-yakbangGold/20 pb-16 pt-8 text-center">
+        <div className="mt-2 border-t border-yakbangGold/20 pb-28 pt-8 text-center">
           <p className="font-script text-lg text-yakbangPaper/75">
             {t.footerLead}
           </p>
+          <a
+            className="mt-4 inline-flex border border-yakbangGold/60 bg-[#3a2415] px-5 py-2 font-script font-bold text-yakbangGold transition hover:bg-yakbangGold hover:text-yakbangBlack"
+            href={GWANGGAETO_URL}
+          >
+            {t.enterGwanggaeto}
+          </a>
         </div>
       </div>
 
-      {/* 우하단 고정: 광개토 도장 + 맨 위로 */}
-      <div className="fixed bottom-5 right-5 z-[35] flex items-center gap-2">
-        <a
-          aria-label={t.enterGwanggaeto}
-          className="group inline-flex shrink-0 items-center justify-center rounded-2xl transition duration-200 hover:-translate-y-0.5 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yakbangGold focus:ring-offset-2 focus:ring-offset-[#100b07]"
-          href={GWANGGAETO_URL}
-        >
-          <img
-            alt=""
-            aria-hidden="true"
-            className="h-16 w-16 drop-shadow-[0_8px_28px_rgba(185,28,28,0.35)] transition duration-200 group-hover:drop-shadow-[0_10px_34px_rgba(185,28,28,0.5)] sm:h-20 sm:w-20"
-            src="/images/yakbang-gwanggaeto-stamp.png"
-          />
-        </a>
-        {showTop ? (
+      {showTop ? (
+        <div className="fixed bottom-24 right-4 z-[35] sm:bottom-28 sm:right-5">
           <button
             aria-label={t.toTop}
             className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-yakbangGold/70 bg-yakbangBlack/80 text-xl font-bold text-yakbangGold shadow-[0_0_20px_rgba(212,175,55,0.3)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-yakbangGold hover:text-yakbangBlack focus:outline-none focus:ring-2 focus:ring-yakbangGold"
@@ -214,8 +207,8 @@ export default function RemedyCatalog() {
           >
             ↑
           </button>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
 
       {selected ? (
         <PrescriptionModal
