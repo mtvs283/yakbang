@@ -188,12 +188,12 @@ export default function PharmacyScene() {
                 onClick={() => handleAction(h)}
                 type="button"
               >
-                <span
+                <img
+                  alt=""
                   aria-hidden="true"
-                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm bg-yakbangGold text-sm font-black text-[#8a1a1a]"
-                >
-                  印
-                </span>
+                  className="h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12"
+                  src="/images/yakbang-gwanggaeto-stamp.png"
+                />
                 {label}
               </button>
             ) : null}
