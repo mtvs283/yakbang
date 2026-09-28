@@ -26,7 +26,7 @@ export interface Hotspot {
 // 실제 카탈로그 카테고리: pronunciation / phonological-rule / grammar / royal
 // (스펙의 상비약/특수약/보충제는 예시였고, 실제 데이터에 맞춰 매핑)
 export const pharmacyScene: { background: string; hotspots: Hotspot[] } = {
-  background: "/images/pharmacy-scene-bg.png",
+  background: "/images/pharmacy-scene-bg-watercolor.png",
   hotspots: [
     {
       // 상단 간판: 한국어만 (번역 X), 검정 글씨. 모든 언어에서 ko로 표시
@@ -54,7 +54,7 @@ export const pharmacyScene: { background: string; hotspots: Hotspot[] } = {
       y: "44.9%",
       style: "speech-bubble",
       text: {
-        ko: "어서오시오~ 어디가 아프오?",
+        ko: "어서오시오~\n어디가 아프오?",
         en: "Welcome~ what ails you?",
         ja: "ようこそ〜 どこがお悪いのじゃ？",
         "zh-CN": "欢迎光临～ 哪里不舒服啊？",
