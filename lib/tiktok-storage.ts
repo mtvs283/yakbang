@@ -22,7 +22,7 @@ export async function ensureBucket() {
 }
 export async function cleanOldImages(owner: string) {
   const bucket = storage().from(BUCKET);
-  const { data } = await bucket.list(owner, { limit: 100, sortBy: { column: "created_at", order: "asc" } });
+  const { data } = await bucket.list(owner, { limit: 100, search: ".jpg", sortBy: { column: "created_at", order: "asc" } });
   const expired = (data || []).filter(x => x.name.endsWith(".jpg") && x.created_at && Date.parse(x.created_at) < Date.now() - 86400000);
   if (expired.length) await bucket.remove(expired.map(x => `${owner}/${x.name}`));
 }

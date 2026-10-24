@@ -2,15 +2,22 @@
 <h1>개인정보처리방침 (Privacy Policy)</h1>
 <p>시행일: 2026-10-24</p>
 <h2>1. 수집하는 정보</h2>
-<p>'TKssam Cardnews'는 일반 이용자의 개인정보를 수집하지 않습니다. 운영자 본인의 TikTok 계정 인증 정보(액세스 토큰)만 게시를 위해 사용합니다.</p>
+<p>'TKssam Cardnews'는 일반 이용자에게 제공되는 회원가입형 서비스가 아닙니다. 운영자 본인의 TikTok 계정 인증 정보(액세스 토큰·갱신 토큰·계정 식별자·동의한 권한), 운영자가 선택한 카드뉴스 이미지, 입력한 제목·설명·게시 설정을 처리합니다.</p>
 <h2>2. 이용 목적</h2>
-<p>운영자 본인의 TikTok 계정에 카드뉴스를 게시하는 목적으로만 사용합니다.</p>
+<p>운영자 본인의 TikTok 계정 연결, 카드뉴스 미리보기와 게시, 게시 결과 확인 및 중복 게시 방지를 위해 사용합니다.</p>
 <h2>3. 보관 및 제3자 제공</h2>
-<p>토큰은 운영자만 접근할 수 있는 곳에 보관하며 제3자에게 제공하거나 판매하지 않습니다. 필요 시 운영자가 언제든 삭제하거나 TikTok 설정에서 연결을 해제할 수 있습니다.</p>
+<p>인증 정보는 암호화한 서버 처리용 HttpOnly 쿠키에 최대 30일 보관하며, 연결 해제 시 해당 브라우저의 인증 정보를 삭제하고 TikTok 권한 철회를 요청합니다. 철회 요청이 실패하면 TikTok 앱 설정에서 직접 연결을 해제할 수 있습니다.</p>
+<p>게시용 이미지는 Supabase의 전용 비공개 저장소에 임시 보관합니다. 제목·설명·게시 설정과 이미지 내용은 게시를 위해 TikTok에 전달하며, 이미지 전달용 읽기 주소는 24시간 후 만료됩니다. 제목·설명은 게시 기록에 별도로 저장하지 않습니다.</p>
+<p>TikTok 게시 결과의 완료 또는 실패를 조회하면 임시 이미지 삭제를 시도합니다. 남아 있는 임시 이미지는 24시간 경과 후 다음 업로드 때 오래된 이미지부터 최대 100개씩 정리합니다. 따라서 정기적으로 실행되는 24시간 자동 삭제 방식은 아닙니다.</p>
+<p>중복 게시 방지와 결과 확인을 위한 게시 요청 번호·TikTok 게시 접수 번호·이미지 경로·처리 상태는 전용 비공개 저장소에 보관하며 자동 삭제하지 않습니다. 운영자는 Supabase 관리 화면에서 기록을 삭제할 수 있습니다. 마지막 게시 요청 번호는 해당 브라우저 탭의 sessionStorage에도 보관합니다. 처리 정보를 판매하지 않습니다.</p>
 <h2>4. 문의</h2>
 <p>kodak2133@gmail.com</p>
 <hr>
 <h1>Privacy Policy</h1>
 <p>Effective: 2026-10-24</p>
-<p>TKssam Cardnews does not collect personal information from the public. It uses only the operator's own TikTok authorization token to publish content to the operator's own account. The token is stored privately, is not shared with or sold to third parties, and can be deleted or revoked at any time in TikTok settings. Contact: kodak2133@gmail.com</p>
+<p>TKssam Cardnews is an operator-only tool, not a public sign-up service. It processes the operator's TikTok access and refresh tokens, account identifier and granted scopes, selected card images, titles, descriptions and publishing settings for account connection, previews, publishing, status checks and duplicate prevention.</p>
+<p>Authorization data is encrypted in a server-readable HttpOnly browser cookie for up to 30 days. Disconnection clears that browser's credentials and requests TikTok revocation. If revocation fails, the operator can revoke access in TikTok settings.</p>
+<p>Publishing images are temporarily stored in a dedicated private Supabase bucket and delivered to TikTok using read URLs that expire after 24 hours. Titles, descriptions and settings are sent to TikTok for publishing; titles and descriptions are not separately stored in publishing records.</p>
+<p>Image deletion is attempted when a completed or failed TikTok publishing status is checked. Remaining images older than 24 hours are cleaned up on subsequent uploads, up to 100 oldest images per upload; deletion is not a scheduled 24-hour guarantee.</p>
+<p>Request identifiers, TikTok publishing identifiers, image paths and processing state remain in the private bucket for duplicate prevention and status checks until the operator deletes them through the Supabase dashboard. The latest request identifier is also kept in the browser tab's sessionStorage. Processing information is not sold. Contact: kodak2133@gmail.com</p>
 </body></html>
