@@ -1,5 +1,7 @@
 import { cookies } from "next/headers";
 import { config, readSession, SESSION_COOKIE } from "../../lib/tiktok";
+import PhotoStudio from "./PhotoStudio";
+import "./studio.css";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -20,7 +22,7 @@ export default function TikTokPage({ searchParams }: { searchParams: { result?: 
   try { const cfg = config(); ready = true; session = readSession(cookies().get(SESSION_COOKIE)?.value, cfg.secret); } catch { /* Show configuration state without exposing credentials. */ }
   const message = typeof searchParams.result === "string" ? messages[searchParams.result] : null;
   const button = { background: "#171717", color: "white", padding: "12px 20px", borderRadius: 8, cursor: "pointer" };
-  return <main style={{ maxWidth: 640, margin: "64px auto", padding: 24, lineHeight: 1.8 }}>
+  return <main className="tiktok-page" style={{ maxWidth: 960, margin: "40px auto", padding: 24, lineHeight: 1.8 }}>
     <h1 style={{ fontSize: 28, fontWeight: 700 }}>TKssam Cardnews</h1>
     <p>운영자 틱톡 계정 연결</p>
     {message && <p role="status" style={{ padding: 16, background: "#f2f2f2", margin: "20px 0" }}>{message}</p>}
@@ -30,13 +32,14 @@ export default function TikTokPage({ searchParams }: { searchParams: { result?: 
       <p>직접 게시 권한: {session.scope.split(",").includes("video.publish") ? "동의됨" : "동의되지 않음"}</p>
       <form action="/api/tiktok/refresh" method="post"><button style={button}>연결 갱신</button></form>
       <form action="/api/tiktok/disconnect" method="post" style={{ marginTop: 16 }}><button style={button}>틱톡 연결 해제</button></form>
+      {session.scope.split(",").includes("video.publish") && <PhotoStudio />}
     </section> : <form action="/api/tiktok/connect" method="post" style={{ marginTop: 24 }}>
       <label htmlFor="password">운영자 연결 비밀번호</label>
       <input id="password" name="password" type="password" required minLength={16} maxLength={256} autoComplete="current-password"
         style={{ display: "block", width: "100%", padding: 12, border: "1px solid #aaa", borderRadius: 8, margin: "8px 0 20px" }} />
       <button style={button}>TikTok 계정 연결</button>
     </form>}
-    <p style={{ marginTop: 24 }}>계정 연결만으로 게시물이 올라가지는 않아요.</p>
+    <p style={{ marginTop: 24 }}>게시 전 이미지와 공개 범위를 확인하고 게시 버튼을 눌러 주세요.</p>
     <footer style={{ marginTop: 32 }}><a href="/terms.html">이용약관</a> · <a href="/privacy.html">개인정보처리방침</a></footer>
   </main>;
 }
